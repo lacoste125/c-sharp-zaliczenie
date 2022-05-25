@@ -1,7 +1,9 @@
 ﻿
+using System.Windows.Forms;
+
 namespace _58873_IV_
 {
-    partial class Form1
+    partial class ProjektZaliczeniowy
     {
         /// <summary>
         ///  Required designer variable.
@@ -29,10 +31,23 @@ namespace _58873_IV_
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // ProjektZaliczeniowy
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form1";
+            this.Name = "ProjektZaliczeniowy";
+            this.Text = "Projekt Zaliczeniowy";
+            //usunięcie przycisku maksymalizowania okienka
+            this.MaximizeBox = false;
+            //usunięcie przycisku minimalizowania okienka
+            this.MinimizeBox = false;
+            //zablokowanie możliwość zmiany wielkości okna za pomocą myszki
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.ResumeLayout(false);
+
         }
 
         #endregion
