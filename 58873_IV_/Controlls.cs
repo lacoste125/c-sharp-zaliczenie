@@ -64,7 +64,7 @@ namespace _58873_IV_
 
         //metoda tworząca labelkę
         //metoda dostarczona przez wykładowcę
-        public Label MI_58873_createLabel(string MI_58873_name, Point MI_58873_location, Font MI_58873_font, Color MI_58873_backColor, Color MI_58873_foreColor, int MI_58873_width, int MI_58873_height, string MI_58873_text)
+        public Label MI_58873_createLabel(string MI_58873_name, Point MI_58873_location, Font MI_58873_font, Color MI_58873_backColor, Color MI_58873_foreColor, int MI_58873_width, int MI_58873_height, string MI_58873_text, BorderStyle MI_58873_borderStyle, ContentAlignment MI_58873_textAlign)
         {
             Label MI_58873_element = new Label
             {
@@ -76,7 +76,9 @@ namespace _58873_IV_
                 ForeColor = MI_58873_foreColor,
                 Name = MI_58873_name,
                 Text = MI_58873_text,
-                AutoSize = false
+                AutoSize = false,
+                BorderStyle = MI_58873_borderStyle,
+                TextAlign = MI_58873_textAlign
             };
 
             return MI_58873_element;

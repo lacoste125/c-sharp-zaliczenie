@@ -97,7 +97,7 @@ namespace _58873_IV_
 
             Font footerFont = new Font("Microsoft Sans Serif", 28, FontStyle.Bold);
             //string MI_58873_name, Point MI_58873_location, Font MI_58873_font, Color MI_58873_backColor, Color MI_58873_foreColor, int MI_58873_width, int MI_58873_height, string MI_58873_text
-            Label personalData = MI_58873_ctrl.MI_58873_createLabel("personalData", new Point(100,25), footerFont, backColor, Color.Red, 750, 45, "Mariusz Iwański, Index: 58873, Grupa IV");
+            Label personalData = MI_58873_ctrl.MI_58873_createLabel("personalData", new Point(100,25), footerFont, backColor, Color.Red, 750, 45, "Mariusz Iwański, Index: 58873, Grupa IV", BorderStyle.None, ContentAlignment.MiddleLeft);
             footerBox.Controls.Add(personalData);
         }
 
@@ -111,10 +111,10 @@ namespace _58873_IV_
         {
             clearResultPanel();
             MI_58873_changeVisibilityButtons(false);
-            buildResultPanel();
+            buildMatrix();
         }
 
-        private void buildResultPanel()
+        private void buildMatrix()
         {
             Font labelFont = new Font("Times New Roman", 120, FontStyle.Regular, GraphicsUnit.Pixel);
             Font operatorFont = new Font("Times New Roman", 60, FontStyle.Regular, GraphicsUnit.Pixel);
@@ -122,106 +122,168 @@ namespace _58873_IV_
             Font buttonsFont = new Font("Microsoft Sans Serif", 9, FontStyle.Bold);
             Color backColor = Color.FromKnownColor(KnownColor.Control);
 
-            Label aBracketL = MI_58873_ctrl.MI_58873_createLabel("aBracketL", new Point(10, 20), labelFont, backColor, Color.Black, 60, 135, "[");
-            TextBox aFirstDigit = MI_58873_ctrl.createTextField("oneOne", new Point(70, 55), 25, 25, inputFont, Color.White, Color.Black);
-            TextBox aSecondDigit = MI_58873_ctrl.createTextField("oneTwo", new Point(70, 83), 25, 25, inputFont, Color.White, Color.Black);
-            TextBox aThirdDigit = MI_58873_ctrl.createTextField("oneThree", new Point(70, 111), 25, 25, inputFont, Color.White, Color.Black);
-            TextBox aFourthDigit = MI_58873_ctrl.createTextField("oneFour", new Point(100, 55), 25, 25, inputFont, Color.White, Color.Black);
-            TextBox aFifthDigit = MI_58873_ctrl.createTextField("oneFive", new Point(100, 83), 25, 25, inputFont, Color.White, Color.Black);
-            TextBox aSixthDigit = MI_58873_ctrl.createTextField("oneSix", new Point(100, 111), 25, 25, inputFont, Color.White, Color.Black);
-            TextBox aSeventhDigit = MI_58873_ctrl.createTextField("oneSeven", new Point(130, 55), 25, 25, inputFont, Color.White, Color.Black);
-            TextBox aEighthDigit = MI_58873_ctrl.createTextField("oneEight", new Point(130, 83), 25, 25, inputFont, Color.White, Color.Black);
-            TextBox aNinethDigit = MI_58873_ctrl.createTextField("oneNine", new Point(130, 111), 25, 25, inputFont, Color.White, Color.Black);
-            Label aBracketR = MI_58873_ctrl.MI_58873_createLabel("aBracketR", new Point(128, 20), labelFont, backColor, Color.Black, 60, 135, "]");
+            Label leftBrackerL = MI_58873_ctrl.MI_58873_createLabel("leftBrackerL", new Point(10, 20), labelFont, backColor, Color.Black, 60, 135, "[", BorderStyle.None, ContentAlignment.MiddleLeft);
+            TextBox left00 = MI_58873_ctrl.createTextField("left00", new Point(70, 55), 25, 25, inputFont, Color.White, Color.Black);
+            TextBox left01 = MI_58873_ctrl.createTextField("left01", new Point(70, 83), 25, 25, inputFont, Color.White, Color.Black);
+            TextBox left02 = MI_58873_ctrl.createTextField("left02", new Point(70, 111), 25, 25, inputFont, Color.White, Color.Black);
+            TextBox left10 = MI_58873_ctrl.createTextField("left10", new Point(100, 55), 25, 25, inputFont, Color.White, Color.Black);
+            TextBox left11 = MI_58873_ctrl.createTextField("left11", new Point(100, 83), 25, 25, inputFont, Color.White, Color.Black);
+            TextBox left12 = MI_58873_ctrl.createTextField("left12", new Point(100, 111), 25, 25, inputFont, Color.White, Color.Black);
+            TextBox left20 = MI_58873_ctrl.createTextField("left20", new Point(130, 55), 25, 25, inputFont, Color.White, Color.Black);
+            TextBox left21 = MI_58873_ctrl.createTextField("left21", new Point(130, 83), 25, 25, inputFont, Color.White, Color.Black);
+            TextBox left22 = MI_58873_ctrl.createTextField("left22", new Point(130, 111), 25, 25, inputFont, Color.White, Color.Black);
+            Label leftBracketR = MI_58873_ctrl.MI_58873_createLabel("leftBracketR", new Point(128, 20), labelFont, backColor, Color.Black, 60, 135, "]", BorderStyle.None, ContentAlignment.MiddleLeft);
 
-            Label xChar = MI_58873_ctrl.MI_58873_createLabel("xChar", new Point(185, 65), operatorFont, backColor, Color.Black, 60, 135, "X");
+            Label xChar = MI_58873_ctrl.MI_58873_createLabel("xChar", new Point(185, 35), operatorFont, backColor, Color.Black, 60, 135, "X", BorderStyle.None, ContentAlignment.MiddleLeft);
 
-            Label bBracketL = MI_58873_ctrl.MI_58873_createLabel("bBracketL", new Point(220, 20), labelFont, backColor, Color.Black, 60, 135, "[");
-            TextBox bFirstDigit = MI_58873_ctrl.createTextField("twoOne", new Point(280, 55), 25, 25, inputFont, Color.White, Color.Black);
-            TextBox bSecondDigit = MI_58873_ctrl.createTextField("twoTwo", new Point(280, 83), 25, 25, inputFont, Color.White, Color.Black);
-            TextBox bThirdDigit = MI_58873_ctrl.createTextField("twoThree", new Point(280, 111), 25, 25, inputFont, Color.White, Color.Black);
-            TextBox bFourthDigit = MI_58873_ctrl.createTextField("twoFour", new Point(310, 55), 25, 25, inputFont, Color.White, Color.Black);
-            TextBox bFifthDigit = MI_58873_ctrl.createTextField("twoFive", new Point(310, 83), 25, 25, inputFont, Color.White, Color.Black);
-            TextBox bSixthDigit = MI_58873_ctrl.createTextField("twoSix", new Point(310, 111), 25, 25, inputFont, Color.White, Color.Black);
-            TextBox bSeventhDigit = MI_58873_ctrl.createTextField("twoSeven", new Point(340, 55), 25, 25, inputFont, Color.White, Color.Black);
-            TextBox bEighthDigit = MI_58873_ctrl.createTextField("twoEight", new Point(340, 83), 25, 25, inputFont, Color.White, Color.Black);
-            TextBox vNinethDigit = MI_58873_ctrl.createTextField("twoNine", new Point(340, 111), 25, 25, inputFont, Color.White, Color.Black);
-            Label bBracketR = MI_58873_ctrl.MI_58873_createLabel("bBracketR", new Point(338, 20), labelFont, backColor, Color.Black, 60, 135, "]");
+            Label rightBracketL = MI_58873_ctrl.MI_58873_createLabel("rightBracketL", new Point(220, 20), labelFont, backColor, Color.Black, 60, 135, "[", BorderStyle.None, ContentAlignment.MiddleLeft);
+            TextBox right00 = MI_58873_ctrl.createTextField("right00", new Point(280, 55), 25, 25, inputFont, Color.White, Color.Black);
+            TextBox right01 = MI_58873_ctrl.createTextField("right01", new Point(280, 83), 25, 25, inputFont, Color.White, Color.Black);
+            TextBox right02 = MI_58873_ctrl.createTextField("right02", new Point(280, 111), 25, 25, inputFont, Color.White, Color.Black);
+            TextBox right10 = MI_58873_ctrl.createTextField("right10", new Point(310, 55), 25, 25, inputFont, Color.White, Color.Black);
+            TextBox right11 = MI_58873_ctrl.createTextField("right11", new Point(310, 83), 25, 25, inputFont, Color.White, Color.Black);
+            TextBox right12 = MI_58873_ctrl.createTextField("right12", new Point(310, 111), 25, 25, inputFont, Color.White, Color.Black);
+            TextBox right20 = MI_58873_ctrl.createTextField("right20", new Point(340, 55), 25, 25, inputFont, Color.White, Color.Black);
+            TextBox right21 = MI_58873_ctrl.createTextField("right21", new Point(340, 83), 25, 25, inputFont, Color.White, Color.Black);
+            TextBox right22 = MI_58873_ctrl.createTextField("right22", new Point(340, 111), 25, 25, inputFont, Color.White, Color.Black);
+            Label rightBracketR = MI_58873_ctrl.MI_58873_createLabel("rightBracketR", new Point(338, 20), labelFont, backColor, Color.Black, 60, 135, "]", BorderStyle.None, ContentAlignment.MiddleLeft);
 
-            Label equalChar = MI_58873_ctrl.MI_58873_createLabel("equalChar", new Point(392, 65), operatorFont, backColor, Color.Black, 60, 135, "=");
+            Label equalChar = MI_58873_ctrl.MI_58873_createLabel("equalChar", new Point(392, 35), operatorFont, backColor, Color.Black, 60, 135, "=", BorderStyle.None, ContentAlignment.MiddleLeft);
 
             Button countButton = MI_58873_ctrl.MI_58873_createButton("countButton", 25, 200, 145, 50, buttonsFont, Color.Black, backColor, "OBLICZ");
-            //przypisuję do niego metodę wywoływaną po kliknięciu
-            countButton.Click += new EventHandler(countButton_Button_Click);
-            //przypisuję metodę wywoływaną gdy najedziemy na przycisk myszką
-            countButton.MouseHover += new EventHandler(MI_58873_MouseHover);
-            //przypisuję metodę wywoływaną gdy z elkementu zjedziemy myszką
-            countButton.MouseLeave += new EventHandler(MI_58873_MouseLeave);
             Button clearButton = MI_58873_ctrl.MI_58873_createButton("clearResultPanel", 175, 200, 145, 50, buttonsFont, Color.Black, backColor, "WYCZYŚĆ");
-            //przypisuję do niego metodę wywoływaną po kliknięciu
+
+            //.KeyPress += new KeyPressEventHandler(MI_58873_keyPress);
+
+            countButton.Click += new EventHandler(countButton_Button_Click);
             clearButton.Click += new EventHandler(clearResultPanel_Button_Click);
-            //przypisuję metodę wywoływaną gdy najedziemy na przycisk myszką
+
+            countButton.MouseHover += new EventHandler(MI_58873_MouseHover);
             clearButton.MouseHover += new EventHandler(MI_58873_MouseHover);
-            //przypisuję metodę wywoływaną gdy z elkementu zjedziemy myszką
+
+            countButton.MouseLeave += new EventHandler(MI_58873_MouseLeave);
             clearButton.MouseLeave += new EventHandler(MI_58873_MouseLeave);
 
-            resultBox.Controls.Add(aBracketL);
-            resultBox.Controls.Add(aFirstDigit);
-            resultBox.Controls.Add(aSecondDigit);
-            resultBox.Controls.Add(aThirdDigit);
-            resultBox.Controls.Add(aFourthDigit);
-            resultBox.Controls.Add(aFifthDigit);
-            resultBox.Controls.Add(aSixthDigit);
-            resultBox.Controls.Add(aSeventhDigit);
-            resultBox.Controls.Add(aEighthDigit);
-            resultBox.Controls.Add(aNinethDigit);
-            resultBox.Controls.Add(aBracketR);
+            resultBox.Controls.Add(leftBrackerL);
+            resultBox.Controls.Add(left00);
+            resultBox.Controls.Add(left01);
+            resultBox.Controls.Add(left02);
+            resultBox.Controls.Add(left10);
+            resultBox.Controls.Add(left11);
+            resultBox.Controls.Add(left12);
+            resultBox.Controls.Add(left20);
+            resultBox.Controls.Add(left21);
+            resultBox.Controls.Add(left22);
+            resultBox.Controls.Add(leftBracketR);
 
             resultBox.Controls.Add(xChar);
 
-            resultBox.Controls.Add(bBracketL);
-            resultBox.Controls.Add(bFirstDigit);
-            resultBox.Controls.Add(bSecondDigit);
-            resultBox.Controls.Add(bThirdDigit);
-            resultBox.Controls.Add(bFourthDigit);
-            resultBox.Controls.Add(bFifthDigit);
-            resultBox.Controls.Add(bSixthDigit);
-            resultBox.Controls.Add(bSeventhDigit);
-            resultBox.Controls.Add(bEighthDigit);
-            resultBox.Controls.Add(vNinethDigit);
-            resultBox.Controls.Add(bBracketR);
+            resultBox.Controls.Add(rightBracketL);
+            resultBox.Controls.Add(right00);
+            resultBox.Controls.Add(right01);
+            resultBox.Controls.Add(right02);
+            resultBox.Controls.Add(right10);
+            resultBox.Controls.Add(right11);
+            resultBox.Controls.Add(right12);
+            resultBox.Controls.Add(right20);
+            resultBox.Controls.Add(right21);
+            resultBox.Controls.Add(right22);
+            resultBox.Controls.Add(rightBracketR);
 
             resultBox.Controls.Add(equalChar);
 
             resultBox.Controls.Add(countButton);
             resultBox.Controls.Add(clearButton);
-
         }
 
         private void clearResultPanel_Button_Click(object sender, EventArgs e)
         {
             clearResultPanel();
-            buildResultPanel();
+            buildMatrix();
         }
 
         private void countButton_Button_Click(object sender, EventArgs e)
         {
-            obliczMacierz();
+            int[,] wynik = obliczMacierz();
+            printResult(wynik);
 
-            Button countButton = (Button)this.Controls.Find( "countButton", true)[0];
-            if (countButton != null) countButton.Enabled = false;
+ /*           Button countButton = (Button)this.Controls.Find( "countButton", true)[0];
+            if (countButton != null) countButton.Enabled = false;*/
         }
 
-        private void obliczMacierz()
+        private void printResult(int[,] wynik)
         {
-            buildTables();
+            createMatrixResultFields(wynik);
+        }
+
+        private void createMatrixResultFields(int[,] wynik)
+        {
+            Font labelFont = new Font("Times New Roman", 120, FontStyle.Regular, GraphicsUnit.Pixel);
+            Font resultFont = new Font("Times New Roman", 14, FontStyle.Bold, GraphicsUnit.Pixel);
+            Color backColor = Color.FromKnownColor(KnownColor.Control);
+            int szerokoscLabelki = 45;
+            int wysokoscLabelki = 25;
+
+            Label resultBracketL = MI_58873_ctrl.MI_58873_createLabel("resultBracketL", new Point(420, 20), labelFont, backColor, Color.Black, 60, 135, "[", BorderStyle.None, ContentAlignment.MiddleLeft);
+            Label result00 = MI_58873_ctrl.MI_58873_createLabel("result00", new Point(480, 55), resultFont, backColor, Color.Black, szerokoscLabelki, wysokoscLabelki, wynik[0, 0].ToString(), BorderStyle.FixedSingle, ContentAlignment.MiddleCenter);
+            Label result10 = MI_58873_ctrl.MI_58873_createLabel("result10", new Point(480, 83), resultFont, backColor, Color.Black, szerokoscLabelki, wysokoscLabelki, wynik[1, 0].ToString(), BorderStyle.FixedSingle, ContentAlignment.MiddleCenter);
+            Label result20 = MI_58873_ctrl.MI_58873_createLabel("result20", new Point(480, 111), resultFont, backColor, Color.Black, szerokoscLabelki, wysokoscLabelki, wynik[2, 0].ToString(), BorderStyle.FixedSingle, ContentAlignment.MiddleCenter);
+            Label result01 = MI_58873_ctrl.MI_58873_createLabel("result01", new Point(530, 55), resultFont, backColor, Color.Black, szerokoscLabelki, wysokoscLabelki, wynik[0, 1].ToString(), BorderStyle.FixedSingle, ContentAlignment.MiddleCenter);
+            Label result11 = MI_58873_ctrl.MI_58873_createLabel("result11", new Point(530, 83), resultFont, backColor, Color.Black, szerokoscLabelki, wysokoscLabelki, wynik[1, 1].ToString(), BorderStyle.FixedSingle, ContentAlignment.MiddleCenter);
+            Label result21 = MI_58873_ctrl.MI_58873_createLabel("result21", new Point(530, 111), resultFont, backColor, Color.Black, szerokoscLabelki, wysokoscLabelki, wynik[2, 1].ToString(), BorderStyle.FixedSingle, ContentAlignment.MiddleCenter);
+            Label result02 = MI_58873_ctrl.MI_58873_createLabel("result02", new Point(580, 55), resultFont, backColor, Color.Black, szerokoscLabelki, wysokoscLabelki, wynik[0, 2].ToString(), BorderStyle.FixedSingle, ContentAlignment.MiddleCenter);
+            Label result12 = MI_58873_ctrl.MI_58873_createLabel("result12", new Point(580, 83), resultFont, backColor, Color.Black, szerokoscLabelki, wysokoscLabelki, wynik[1, 2].ToString(), BorderStyle.FixedSingle, ContentAlignment.MiddleCenter);
+            Label result22 = MI_58873_ctrl.MI_58873_createLabel("result22", new Point(580, 111), resultFont, backColor, Color.Black, szerokoscLabelki, wysokoscLabelki, wynik[2, 2].ToString(), BorderStyle.FixedSingle, ContentAlignment.MiddleCenter);
+            Label resultBracketR = MI_58873_ctrl.MI_58873_createLabel("resultBracketR", new Point(650, 20), labelFont, backColor, Color.Black, 60, 135, "]", BorderStyle.None, ContentAlignment.MiddleLeft);
+
+            resultBox.Controls.Add(resultBracketL);
+            resultBox.Controls.Add(result00);
+            resultBox.Controls.Add(result10);
+            resultBox.Controls.Add(result20);
+            resultBox.Controls.Add(result01);
+            resultBox.Controls.Add(result11);
+            resultBox.Controls.Add(result21);
+            resultBox.Controls.Add(result02);
+            resultBox.Controls.Add(result12);
+            resultBox.Controls.Add(result22);
+            resultBox.Controls.Add(resultBracketR);
+        }
+
+        private int[,] obliczMacierz()
+        {
+            List<int[,]> macierze = buildTables();
+            int[,] X = macierze[0];
+            int[,] Y = macierze[1];
+
+            //deklaruję tablicę w której będę przechowywał wyniki mnożenia
+            //3x3 no bo wynik dzielenia dwóch macierzy 3x3 daje nam również macież 3x3
+            int[,] Z = new int[3,3];
+            
+            //iterowanie się po wierszach
+            for (int i = 0; i < 3; i++)
+            {
+                //iterowanie się po kolumnach
+                for (int j = 0; j < 3; j++)
+                {
+                    //inicjalnie wyliczony indeks tablicy wielowymiarowej musi mieć wartość 0 
+                    Z[i,j] = 0;
+                    //wykonanie mnożenia macierzy
+                    for (int k = 0; k < 3; k++)
+                    {
+                        //wszystkie elementy z pierwszego wiersza macierzy A pomnożone przez wszystkie elementy pierwszej kolumny macieży B
+                        //to wszystko razem ze sobą zsumowane dają nam wynikowy index macierzy result
+                        Z[i,j] += X[i,k] * Y[k,j];
+                    }
+                }   
+            }
+            return Z;
         }
 
         private List<int[,]> buildTables()
         {
             List<int[,]> list = new List<int[,]>();
-            int[,] pierwszaMacierz = pobierzWartosciMacierzy("one");
-            int[,] drugaMacierz = pobierzWartosciMacierzy("two"); ;
+            int[,] pierwszaMacierz = pobierzWartosciMacierzy("left");
+            int[,] drugaMacierz = pobierzWartosciMacierzy("right"); ;
 
             list.Add(pierwszaMacierz);
             list.Add(drugaMacierz);
@@ -231,46 +293,45 @@ namespace _58873_IV_
 
         private int[,] pobierzWartosciMacierzy(string matrix)
         {
-            //int[,] macierz = new int[3,3];
             TextBox textField;
 
-            int one = 0;
-            textField = (TextBox)resultBox.Controls.Find(matrix +"One", true)[0];
-            if (textField != null) one = getValue(textField);
+            int index00 = 0;
+            textField = (TextBox)resultBox.Controls.Find(matrix +"00", true)[0];
+            if (textField != null) index00 = getValue(textField);
 
-            int two = 0;
-            textField = (TextBox)this.Controls.Find(matrix + "Two", true)[0];
-            if (textField != null) two = getValue(textField);
+            int index01 = 0;
+            textField = (TextBox)this.Controls.Find(matrix + "01", true)[0];
+            if (textField != null) index01 = getValue(textField);
 
-            int three = 0;
-            textField = (TextBox)this.Controls.Find(matrix + "Three", true)[0];
-            if (textField != null) two = getValue(textField);
+            int index02 = 0;
+            textField = (TextBox)this.Controls.Find(matrix + "02", true)[0];
+            if (textField != null) index02 = getValue(textField);
 
-            int four = 0;
-            textField = (TextBox)this.Controls.Find(matrix + "Four", true)[0];
-            if (textField != null) four = getValue(textField);
+            int index10 = 0;
+            textField = (TextBox)this.Controls.Find(matrix + "10", true)[0];
+            if (textField != null) index10 = getValue(textField);
 
-            int five = 0;
-            textField = (TextBox)this.Controls.Find(matrix + "Five", true)[0];
-            if (textField != null) five = getValue(textField);
+            int index11 = 0;
+            textField = (TextBox)this.Controls.Find(matrix + "11", true)[0];
+            if (textField != null) index11 = getValue(textField);
 
-            int six = 0;
-            textField = (TextBox)this.Controls.Find(matrix + "Six", true)[0];
-            if (textField != null) six = getValue(textField);
+            int index12 = 0;
+            textField = (TextBox)this.Controls.Find(matrix + "12", true)[0];
+            if (textField != null) index12 = getValue(textField);
 
-            int seven = 0;
-            textField = (TextBox)this.Controls.Find(matrix + "Seven", true)[0];
-            if (textField != null) seven = getValue(textField);
+            int index20 = 0;
+            textField = (TextBox)this.Controls.Find(matrix + "20", true)[0];
+            if (textField != null) index20 = getValue(textField);
 
-            int eight = 0;
-            textField = (TextBox)this.Controls.Find(matrix + "Eight", true)[0];
-            if (textField != null) eight = getValue(textField);
+            int index21 = 0;
+            textField = (TextBox)this.Controls.Find(matrix + "21", true)[0];
+            if (textField != null) index21 = getValue(textField);
 
-            int nine = 0;
-            textField = (TextBox)this.Controls.Find(matrix + "Nine", true)[0];
-            if (textField != null) nine = getValue(textField);
+            int index22 = 0;
+            textField = (TextBox)this.Controls.Find(matrix + "22", true)[0];
+            if (textField != null) index22 = getValue(textField);
 
-            int[,] macierz = new int[3, 3] { { one, four, seven }, { two, five, eight }, { three, six, nine } };
+            int[,] macierz = new int[3, 3] { { index00, index10, index20 }, { index01, index11, index21 }, { index02, index12, index22 } };
 
             return macierz;
         }
@@ -281,12 +342,15 @@ namespace _58873_IV_
 
             if (returnNumber.Equals("") && showEmptyTextFieldWarning)
             {
-                MessageBox.Show("Jedno z pól jest puste", "Jedno z pól jest puste", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Jest 0 a go nie podałeś");
                 showEmptyTextFieldWarning = false;
             }
 
+            
+
             if (returnNumber == "")
             {
+                
                 returnNumber = "0";
             }
 
@@ -348,6 +412,19 @@ namespace _58873_IV_
             MI_58873_buttonAuto.Enabled = MI_58873_isVisible;
             MI_58873_mainMathButton.Enabled = MI_58873_isVisible;
             MI_58873_mainZipButton.Enabled = MI_58873_isVisible;
+        }
+
+        //metoda sprawdzająca czy wciśnięty klawisz jest cyfrą lub backspace
+        private void MI_58873_keyPress(object sender, KeyPressEventArgs e)
+        {
+            //jeśli wciśnięty klawisz jest cyfrą - isDigit
+            //lub jeśli jest klawiszem Backspace = '\b'
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b')
+            {
+                //przechwycenie i wyświetlenie odpowiedniego komunikatu dla usera
+                e.Handled = true;
+                MessageBox.Show("Proszę podać wartość typu int!", "Nieprawidłowy typ wejściowy", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         //metoda wywoływana po kliknięciu w przycisk EXIT
