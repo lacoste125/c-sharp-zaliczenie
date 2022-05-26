@@ -95,7 +95,9 @@ namespace _58873_IV_
                 Font = MI_58873_font,
                 BackColor = MI_58873_backColor,
                 ForeColor = MI_58873_foreColor,
-                BorderStyle = BorderStyle.FixedSingle
+                BorderStyle = BorderStyle.FixedSingle,
+                TextAlign = HorizontalAlignment.Center,
+                MaxLength = 2
             };
 
             return MI_58873_element;
