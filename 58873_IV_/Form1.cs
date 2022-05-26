@@ -16,6 +16,14 @@ namespace _58873_IV_
         GroupBox resultBox;
         bool showEmptyTextFieldWarning = true;
 
+        int lblWidth = 60;
+        int lblHeight = 135;
+        private Color panelColor = Color.FromKnownColor(KnownColor.Control);
+        private Color foreColor = Color.Black;
+        private Font buttonsFont = new Font("Microsoft Sans Serif", 9, FontStyle.Bold);
+        private BorderStyle laberBorder = BorderStyle.None;
+        ContentAlignment labelAlignement = ContentAlignment.MiddleLeft;
+
         public ProjektZaliczeniowy()
         {
             //metoda odpowiedzialna za start aplikacji
@@ -29,75 +37,62 @@ namespace _58873_IV_
 
         private void MI_58873_loadControlls()
         {
-            //tworze work panel w którem prezentowany będzie rezultat działania programu
+            //przydane zmienne
+            Font footerFont = new Font("Microsoft Sans Serif", 28, FontStyle.Bold);
+            int btnWidth = 145;
+            int btnHeight = 50;
+            int btnPositionX = 12;
+
+            //groupboxy
             resultBox = MI_58873_ctrl.MI_58873_createGroupBox(15, 10, 775, 450, "Panel Wyników", "GbResult");
-            MI_58873_workPanel.Controls.Add(resultBox);
-
-            //tworzę panel zawierający przyciski do zarządzania programem
             GroupBox buttonBox = MI_58873_ctrl.MI_58873_createGroupBox(800, 10, 170, 450, "Akcje", "GbManagement");
-            MI_58873_workPanel.Controls.Add(buttonBox);
-
-            //panel z moimi danymi
             GroupBox footerBox = MI_58873_ctrl.MI_58873_createGroupBox(15, 465, 955, 80, "Dane studenta", "GbStopka");
-            MI_58873_workPanel.Controls.Add(footerBox);
 
-            //ponizej właśniwości dla przycisków w sekcji po prawej stronie
-            Font buttonsFont = new Font("Microsoft Sans Serif", 9, FontStyle.Bold);
-            Color fontColor = Color.Black;
-            Color backColor = Color.FromKnownColor(KnownColor.Control);
+            //labelki
+            Label personalData = MI_58873_ctrl.MI_58873_createLabel("personalData", new Point(100, 25), footerFont, panelColor, Color.Red, 750, 45, "Mariusz Iwański, Index: 58873, Grupa IV", BorderStyle.None, ContentAlignment.MiddleLeft);
 
-            Button mainSortButton = MI_58873_ctrl.MI_58873_createButton("mainSortButton", 12, 25, 145, 50, buttonsFont, fontColor, backColor, "ALGORYTM SORTUJĄCY");
-            //przypisuję do niego metodę wywoływaną po kliknięciu
+            //buttony
+            Button mainSortButton = MI_58873_ctrl.MI_58873_createButton("mainSortButton", btnPositionX, 25, btnWidth, btnHeight, buttonsFont, foreColor, panelColor, "ALGORYTM SORTUJĄCY");
+            Button mainMathButton = MI_58873_ctrl.MI_58873_createButton("mainMathButton", btnPositionX, 85, btnWidth, btnHeight, buttonsFont, foreColor, panelColor, "ALGORYTM MATEMATYCZNY");
+            Button mainZipButton = MI_58873_ctrl.MI_58873_createButton("mainZipButton", btnPositionX, 140, btnWidth, btnHeight, buttonsFont, foreColor, panelColor, "ALGORYTM KOMPRESUJĄCY");
+            Button MI_58873_btnClear = MI_58873_ctrl.MI_58873_createButton("BtnClear", btnPositionX, 330, btnWidth, btnHeight, buttonsFont, foreColor, panelColor, "CLEAR");
+            Button MI_58873_btnExit = MI_58873_ctrl.MI_58873_createButton("BtnExit", btnPositionX, 385, btnWidth, btnHeight, buttonsFont, foreColor, panelColor, "EXIT");
+
+
+            //kliknięcie w buttony
             mainSortButton.Click += new EventHandler(mainSortButton_Click);
-            //przypisuję metodę wywoływaną gdy najedziemy na przycisk myszką
-            mainSortButton.MouseHover += new EventHandler(MI_58873_MouseHover);
-            //przypisuję metodę wywoływaną gdy z elkementu zjedziemy myszką
-            mainSortButton.MouseLeave += new EventHandler(MI_58873_MouseLeave);
-
-            Button mainMathButton = MI_58873_ctrl.MI_58873_createButton("mainMathButton", 12, 85, 145, 50, buttonsFont, fontColor, backColor, "ALGORYTM MATEMATYCZNY");
-            //przypisuję do niego metodę wywoływaną po kliknięciu
             mainMathButton.Click += new EventHandler(mainMathButton_Click);
-            //przypisuję metodę wywoływaną gdy najedziemy na przycisk myszką
-            mainMathButton.MouseHover += new EventHandler(MI_58873_MouseHover);
-            //przypisuję metodę wywoływaną gdy z elkementu zjedziemy myszką
-            mainMathButton.MouseLeave += new EventHandler(MI_58873_MouseLeave);
-
-            Button mainZipButton = MI_58873_ctrl.MI_58873_createButton("mainZipButton", 12, 140, 145, 50, buttonsFont, fontColor, backColor, "ALGORYTM KOMPRESUJĄCY");
-            //przypisuję do niego metodę wywoływaną po kliknięciu
             mainZipButton.Click += new EventHandler(mainZipButton_Click);
-            //przypisuję metodę wywoływaną gdy najedziemy na przycisk myszką
-            mainZipButton.MouseHover += new EventHandler(MI_58873_MouseHover);
-            //przypisuję metodę wywoływaną gdy z elkementu zjedziemy myszką
-            mainZipButton.MouseLeave += new EventHandler(MI_58873_MouseLeave);
-
-            //tworzę przycisk odpowiedzialny za wyczyszczenie ekranu - prezentacja ekrany jak podczas uruchomienia
-            Button MI_58873_btnClear = MI_58873_ctrl.MI_58873_createButton("BtnClear", 12, 330, 145, 50, buttonsFont, fontColor, backColor, "CLEAR");
-            //przypisuję do niego metodę wywoływaną po jego kliknięciu
             MI_58873_btnClear.Click += new EventHandler(MI_58873_btnClear_Click);
-            //przypisuję metodę wywoływaną gdy najedziemy na przycisk myszką
-            MI_58873_btnClear.MouseHover += new EventHandler(MI_58873_MouseHover);
-            //przypisuję metodę wywoływaną gdy z elkementu zjedziemy myszką
-            MI_58873_btnClear.MouseLeave += new EventHandler(MI_58873_MouseLeave);
-
-            //tworzę przycisk odpowiedzialny za zamknięcie aplikacji
-            Button MI_58873_btnExit = MI_58873_ctrl.MI_58873_createButton("BtnExit", 12, 385, 145, 50, buttonsFont, fontColor, backColor, "EXIT");
-            //przypisuję do niego metodę wywoływaną po kliknięciu
             MI_58873_btnExit.Click += new EventHandler(MI_58873_btnExit_Click);
-            //przypisuję metodę wywoływaną gdy najedziemy na przycisk myszką
+
+            //hoover
+            mainSortButton.MouseHover += new EventHandler(MI_58873_MouseHover);
+            mainMathButton.MouseHover += new EventHandler(MI_58873_MouseHover);
+            mainZipButton.MouseHover += new EventHandler(MI_58873_MouseHover);
+            MI_58873_btnClear.MouseHover += new EventHandler(MI_58873_MouseHover);
             MI_58873_btnExit.MouseHover += new EventHandler(MI_58873_MouseHover);
-            //przypisuję metodę wywoływaną gdy z elkementu zjedziemy myszką
+
+            //leave
+            mainSortButton.MouseLeave += new EventHandler(MI_58873_MouseLeave);
+            mainMathButton.MouseLeave += new EventHandler(MI_58873_MouseLeave);
+            mainZipButton.MouseLeave += new EventHandler(MI_58873_MouseLeave);
+            MI_58873_btnClear.MouseLeave += new EventHandler(MI_58873_MouseLeave);
             MI_58873_btnExit.MouseLeave += new EventHandler(MI_58873_MouseLeave);
 
-            //wszystkie wygenerowane powyżej kontrolki przypisuę do odpowiedniej sekcji w programie
+            //przypisanie groupBoxów do ekranu
+            MI_58873_workPanel.Controls.Add(resultBox);
+            MI_58873_workPanel.Controls.Add(buttonBox);
+            MI_58873_workPanel.Controls.Add(footerBox);
+
+            //przypisanie buttonów do panelu Akcje
             buttonBox.Controls.Add(mainSortButton);
             buttonBox.Controls.Add(mainMathButton);
             buttonBox.Controls.Add(mainZipButton);
             buttonBox.Controls.Add(MI_58873_btnExit);
             buttonBox.Controls.Add(MI_58873_btnClear);
 
-            Font footerFont = new Font("Microsoft Sans Serif", 28, FontStyle.Bold);
-            //string MI_58873_name, Point MI_58873_location, Font MI_58873_font, Color MI_58873_backColor, Color MI_58873_foreColor, int MI_58873_width, int MI_58873_height, string MI_58873_text
-            Label personalData = MI_58873_ctrl.MI_58873_createLabel("personalData", new Point(100,25), footerFont, backColor, Color.Red, 750, 45, "Mariusz Iwański, Index: 58873, Grupa IV", BorderStyle.None, ContentAlignment.MiddleLeft);
+            //usupełnienie sekcji dane studenta
             footerBox.Controls.Add(personalData);
         }
 
@@ -116,54 +111,85 @@ namespace _58873_IV_
 
         private void buildMatrix()
         {
+            //przydatne zmienne
+            int btnWidth = 145;
+            int btnHeight = 50;
+            int tbWidth = 25;
+            int tbHeight = 25;
+            int buttonsPositionY = 200;
+            Color tfBackColor = Color.White;
             Font labelFont = new Font("Times New Roman", 120, FontStyle.Regular, GraphicsUnit.Pixel);
             Font operatorFont = new Font("Times New Roman", 60, FontStyle.Regular, GraphicsUnit.Pixel);
             Font inputFont = new Font("Times New Roman", 15, FontStyle.Regular, GraphicsUnit.Pixel);
-            Font buttonsFont = new Font("Microsoft Sans Serif", 9, FontStyle.Bold);
-            Color backColor = Color.FromKnownColor(KnownColor.Control);
 
-            Label leftBrackerL = MI_58873_ctrl.MI_58873_createLabel("leftBrackerL", new Point(10, 20), labelFont, backColor, Color.Black, 60, 135, "[", BorderStyle.None, ContentAlignment.MiddleLeft);
-            TextBox left00 = MI_58873_ctrl.createTextField("left00", new Point(70, 55), 25, 25, inputFont, Color.White, Color.Black);
-            TextBox left01 = MI_58873_ctrl.createTextField("left01", new Point(70, 83), 25, 25, inputFont, Color.White, Color.Black);
-            TextBox left02 = MI_58873_ctrl.createTextField("left02", new Point(70, 111), 25, 25, inputFont, Color.White, Color.Black);
-            TextBox left10 = MI_58873_ctrl.createTextField("left10", new Point(100, 55), 25, 25, inputFont, Color.White, Color.Black);
-            TextBox left11 = MI_58873_ctrl.createTextField("left11", new Point(100, 83), 25, 25, inputFont, Color.White, Color.Black);
-            TextBox left12 = MI_58873_ctrl.createTextField("left12", new Point(100, 111), 25, 25, inputFont, Color.White, Color.Black);
-            TextBox left20 = MI_58873_ctrl.createTextField("left20", new Point(130, 55), 25, 25, inputFont, Color.White, Color.Black);
-            TextBox left21 = MI_58873_ctrl.createTextField("left21", new Point(130, 83), 25, 25, inputFont, Color.White, Color.Black);
-            TextBox left22 = MI_58873_ctrl.createTextField("left22", new Point(130, 111), 25, 25, inputFont, Color.White, Color.Black);
-            Label leftBracketR = MI_58873_ctrl.MI_58873_createLabel("leftBracketR", new Point(128, 20), labelFont, backColor, Color.Black, 60, 135, "]", BorderStyle.None, ContentAlignment.MiddleLeft);
+            //labelki
+            Label leftBrackerL = MI_58873_ctrl.MI_58873_createLabel("leftBrackerL", new Point(10, 20), labelFont, panelColor, foreColor, lblWidth, lblHeight, "[", laberBorder, labelAlignement);
+            Label leftBracketR = MI_58873_ctrl.MI_58873_createLabel("leftBracketR", new Point(128, 20), labelFont, panelColor, foreColor, lblWidth, lblHeight, "]", laberBorder, labelAlignement);
+            Label rightBracketL = MI_58873_ctrl.MI_58873_createLabel("rightBracketL", new Point(220, 20), labelFont, panelColor, foreColor, lblWidth, lblHeight, "[", laberBorder, labelAlignement);
+            Label rightBracketR = MI_58873_ctrl.MI_58873_createLabel("rightBracketR", new Point(338, 20), labelFont, panelColor, foreColor, lblWidth, lblHeight, "]", laberBorder, labelAlignement);
+            Label xChar = MI_58873_ctrl.MI_58873_createLabel("xChar", new Point(185, 35), operatorFont, panelColor, foreColor, lblWidth, lblHeight, "X", laberBorder, labelAlignement);
+            Label equalChar = MI_58873_ctrl.MI_58873_createLabel("equalChar", new Point(392, 35), operatorFont, panelColor, foreColor, lblWidth, lblHeight, "=", laberBorder, labelAlignement);
 
-            Label xChar = MI_58873_ctrl.MI_58873_createLabel("xChar", new Point(185, 35), operatorFont, backColor, Color.Black, 60, 135, "X", BorderStyle.None, ContentAlignment.MiddleLeft);
+            //textboxy
+            TextBox left00 = MI_58873_ctrl.createTextField("left00", new Point(70, 55), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
+            TextBox left01 = MI_58873_ctrl.createTextField("left01", new Point(70, 83), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
+            TextBox left02 = MI_58873_ctrl.createTextField("left02", new Point(70, 111), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
+            TextBox left10 = MI_58873_ctrl.createTextField("left10", new Point(100, 55), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
+            TextBox left11 = MI_58873_ctrl.createTextField("left11", new Point(100, 83), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
+            TextBox left12 = MI_58873_ctrl.createTextField("left12", new Point(100, 111), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
+            TextBox left20 = MI_58873_ctrl.createTextField("left20", new Point(130, 55), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
+            TextBox left21 = MI_58873_ctrl.createTextField("left21", new Point(130, 83), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
+            TextBox left22 = MI_58873_ctrl.createTextField("left22", new Point(130, 111), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
+            TextBox right00 = MI_58873_ctrl.createTextField("right00", new Point(280, 55), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
+            TextBox right01 = MI_58873_ctrl.createTextField("right01", new Point(280, 83), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
+            TextBox right02 = MI_58873_ctrl.createTextField("right02", new Point(280, 111), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
+            TextBox right10 = MI_58873_ctrl.createTextField("right10", new Point(310, 55), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
+            TextBox right11 = MI_58873_ctrl.createTextField("right11", new Point(310, 83), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
+            TextBox right12 = MI_58873_ctrl.createTextField("right12", new Point(310, 111), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
+            TextBox right20 = MI_58873_ctrl.createTextField("right20", new Point(340, 55), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
+            TextBox right21 = MI_58873_ctrl.createTextField("right21", new Point(340, 83), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
+            TextBox right22 = MI_58873_ctrl.createTextField("right22", new Point(340, 111), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
 
-            Label rightBracketL = MI_58873_ctrl.MI_58873_createLabel("rightBracketL", new Point(220, 20), labelFont, backColor, Color.Black, 60, 135, "[", BorderStyle.None, ContentAlignment.MiddleLeft);
-            TextBox right00 = MI_58873_ctrl.createTextField("right00", new Point(280, 55), 25, 25, inputFont, Color.White, Color.Black);
-            TextBox right01 = MI_58873_ctrl.createTextField("right01", new Point(280, 83), 25, 25, inputFont, Color.White, Color.Black);
-            TextBox right02 = MI_58873_ctrl.createTextField("right02", new Point(280, 111), 25, 25, inputFont, Color.White, Color.Black);
-            TextBox right10 = MI_58873_ctrl.createTextField("right10", new Point(310, 55), 25, 25, inputFont, Color.White, Color.Black);
-            TextBox right11 = MI_58873_ctrl.createTextField("right11", new Point(310, 83), 25, 25, inputFont, Color.White, Color.Black);
-            TextBox right12 = MI_58873_ctrl.createTextField("right12", new Point(310, 111), 25, 25, inputFont, Color.White, Color.Black);
-            TextBox right20 = MI_58873_ctrl.createTextField("right20", new Point(340, 55), 25, 25, inputFont, Color.White, Color.Black);
-            TextBox right21 = MI_58873_ctrl.createTextField("right21", new Point(340, 83), 25, 25, inputFont, Color.White, Color.Black);
-            TextBox right22 = MI_58873_ctrl.createTextField("right22", new Point(340, 111), 25, 25, inputFont, Color.White, Color.Black);
-            Label rightBracketR = MI_58873_ctrl.MI_58873_createLabel("rightBracketR", new Point(338, 20), labelFont, backColor, Color.Black, 60, 135, "]", BorderStyle.None, ContentAlignment.MiddleLeft);
+            //buttony
+            Button countButton = MI_58873_ctrl.MI_58873_createButton("countButton", 25, buttonsPositionY, btnWidth, btnHeight, buttonsFont, foreColor, panelColor, "OBLICZ");
+            Button clearButton = MI_58873_ctrl.MI_58873_createButton("clearResultPanel", 175, buttonsPositionY, btnWidth, btnHeight, buttonsFont, foreColor, panelColor, "WYCZYŚĆ");
+            Button randomButton = MI_58873_ctrl.MI_58873_createButton("randomButton", 325, buttonsPositionY, btnWidth, btnHeight, buttonsFont, foreColor, panelColor, "LOSUJ");
 
-            Label equalChar = MI_58873_ctrl.MI_58873_createLabel("equalChar", new Point(392, 35), operatorFont, backColor, Color.Black, 60, 135, "=", BorderStyle.None, ContentAlignment.MiddleLeft);
+            //wciśnięcie klawisza
+            left00.KeyPress += new KeyPressEventHandler(MI_58873_keyPress);
+            left01.KeyPress += new KeyPressEventHandler(MI_58873_keyPress);
+            left02.KeyPress += new KeyPressEventHandler(MI_58873_keyPress);
+            left10.KeyPress += new KeyPressEventHandler(MI_58873_keyPress);
+            left11.KeyPress += new KeyPressEventHandler(MI_58873_keyPress);
+            left12.KeyPress += new KeyPressEventHandler(MI_58873_keyPress);
+            left20.KeyPress += new KeyPressEventHandler(MI_58873_keyPress);
+            left21.KeyPress += new KeyPressEventHandler(MI_58873_keyPress);
+            left22.KeyPress += new KeyPressEventHandler(MI_58873_keyPress);
+            right00.KeyPress += new KeyPressEventHandler(MI_58873_keyPress);
+            right01.KeyPress += new KeyPressEventHandler(MI_58873_keyPress);
+            right02.KeyPress += new KeyPressEventHandler(MI_58873_keyPress);
+            right10.KeyPress += new KeyPressEventHandler(MI_58873_keyPress);
+            right11.KeyPress += new KeyPressEventHandler(MI_58873_keyPress);
+            right12.KeyPress += new KeyPressEventHandler(MI_58873_keyPress);
+            right20.KeyPress += new KeyPressEventHandler(MI_58873_keyPress);
+            right21.KeyPress += new KeyPressEventHandler(MI_58873_keyPress);
+            right22.KeyPress += new KeyPressEventHandler(MI_58873_keyPress);
 
-            Button countButton = MI_58873_ctrl.MI_58873_createButton("countButton", 25, 200, 145, 50, buttonsFont, Color.Black, backColor, "OBLICZ");
-            Button clearButton = MI_58873_ctrl.MI_58873_createButton("clearResultPanel", 175, 200, 145, 50, buttonsFont, Color.Black, backColor, "WYCZYŚĆ");
-
-            //.KeyPress += new KeyPressEventHandler(MI_58873_keyPress);
-
+            //kliknięcie w button
             countButton.Click += new EventHandler(countButton_Button_Click);
             clearButton.Click += new EventHandler(clearResultPanel_Button_Click);
 
+            //hover
             countButton.MouseHover += new EventHandler(MI_58873_MouseHover);
             clearButton.MouseHover += new EventHandler(MI_58873_MouseHover);
+            randomButton.MouseHover += new EventHandler(MI_58873_MouseHover);
 
+            //leave
             countButton.MouseLeave += new EventHandler(MI_58873_MouseLeave);
             clearButton.MouseLeave += new EventHandler(MI_58873_MouseLeave);
+            randomButton.MouseLeave += new EventHandler(MI_58873_MouseLeave);
 
+            //przypisanie klawiszy do panelu wyników
             resultBox.Controls.Add(leftBrackerL);
             resultBox.Controls.Add(left00);
             resultBox.Controls.Add(left01);
@@ -175,9 +201,7 @@ namespace _58873_IV_
             resultBox.Controls.Add(left21);
             resultBox.Controls.Add(left22);
             resultBox.Controls.Add(leftBracketR);
-
             resultBox.Controls.Add(xChar);
-
             resultBox.Controls.Add(rightBracketL);
             resultBox.Controls.Add(right00);
             resultBox.Controls.Add(right01);
@@ -189,11 +213,10 @@ namespace _58873_IV_
             resultBox.Controls.Add(right21);
             resultBox.Controls.Add(right22);
             resultBox.Controls.Add(rightBracketR);
-
             resultBox.Controls.Add(equalChar);
-
             resultBox.Controls.Add(countButton);
             resultBox.Controls.Add(clearButton);
+            resultBox.Controls.Add(randomButton);
         }
 
         private void clearResultPanel_Button_Click(object sender, EventArgs e)
@@ -205,36 +228,32 @@ namespace _58873_IV_
         private void countButton_Button_Click(object sender, EventArgs e)
         {
             int[,] wynik = obliczMacierz();
-            printResult(wynik);
-
- /*           Button countButton = (Button)this.Controls.Find( "countButton", true)[0];
-            if (countButton != null) countButton.Enabled = false;*/
-        }
-
-        private void printResult(int[,] wynik)
-        {
             createMatrixResultFields(wynik);
-        }
 
+            Button countButton = (Button)this.Controls.Find("countButton", true)[0];
+            if (countButton != null) countButton.Enabled = false;
+        }
         private void createMatrixResultFields(int[,] wynik)
         {
+            int szerokoscLabelki = 45;
+            int wysokoscLabelki = 25;
             Font labelFont = new Font("Times New Roman", 120, FontStyle.Regular, GraphicsUnit.Pixel);
             Font resultFont = new Font("Times New Roman", 14, FontStyle.Bold, GraphicsUnit.Pixel);
             Color backColor = Color.FromKnownColor(KnownColor.Control);
-            int szerokoscLabelki = 45;
-            int wysokoscLabelki = 25;
+            ContentAlignment lblTxtAlign = ContentAlignment.MiddleCenter;
+            BorderStyle lblBorderStyle = BorderStyle.FixedSingle;
 
-            Label resultBracketL = MI_58873_ctrl.MI_58873_createLabel("resultBracketL", new Point(420, 20), labelFont, backColor, Color.Black, 60, 135, "[", BorderStyle.None, ContentAlignment.MiddleLeft);
-            Label result00 = MI_58873_ctrl.MI_58873_createLabel("result00", new Point(480, 55), resultFont, backColor, Color.Black, szerokoscLabelki, wysokoscLabelki, wynik[0, 0].ToString(), BorderStyle.FixedSingle, ContentAlignment.MiddleCenter);
-            Label result10 = MI_58873_ctrl.MI_58873_createLabel("result10", new Point(480, 83), resultFont, backColor, Color.Black, szerokoscLabelki, wysokoscLabelki, wynik[1, 0].ToString(), BorderStyle.FixedSingle, ContentAlignment.MiddleCenter);
-            Label result20 = MI_58873_ctrl.MI_58873_createLabel("result20", new Point(480, 111), resultFont, backColor, Color.Black, szerokoscLabelki, wysokoscLabelki, wynik[2, 0].ToString(), BorderStyle.FixedSingle, ContentAlignment.MiddleCenter);
-            Label result01 = MI_58873_ctrl.MI_58873_createLabel("result01", new Point(530, 55), resultFont, backColor, Color.Black, szerokoscLabelki, wysokoscLabelki, wynik[0, 1].ToString(), BorderStyle.FixedSingle, ContentAlignment.MiddleCenter);
-            Label result11 = MI_58873_ctrl.MI_58873_createLabel("result11", new Point(530, 83), resultFont, backColor, Color.Black, szerokoscLabelki, wysokoscLabelki, wynik[1, 1].ToString(), BorderStyle.FixedSingle, ContentAlignment.MiddleCenter);
-            Label result21 = MI_58873_ctrl.MI_58873_createLabel("result21", new Point(530, 111), resultFont, backColor, Color.Black, szerokoscLabelki, wysokoscLabelki, wynik[2, 1].ToString(), BorderStyle.FixedSingle, ContentAlignment.MiddleCenter);
-            Label result02 = MI_58873_ctrl.MI_58873_createLabel("result02", new Point(580, 55), resultFont, backColor, Color.Black, szerokoscLabelki, wysokoscLabelki, wynik[0, 2].ToString(), BorderStyle.FixedSingle, ContentAlignment.MiddleCenter);
-            Label result12 = MI_58873_ctrl.MI_58873_createLabel("result12", new Point(580, 83), resultFont, backColor, Color.Black, szerokoscLabelki, wysokoscLabelki, wynik[1, 2].ToString(), BorderStyle.FixedSingle, ContentAlignment.MiddleCenter);
-            Label result22 = MI_58873_ctrl.MI_58873_createLabel("result22", new Point(580, 111), resultFont, backColor, Color.Black, szerokoscLabelki, wysokoscLabelki, wynik[2, 2].ToString(), BorderStyle.FixedSingle, ContentAlignment.MiddleCenter);
-            Label resultBracketR = MI_58873_ctrl.MI_58873_createLabel("resultBracketR", new Point(650, 20), labelFont, backColor, Color.Black, 60, 135, "]", BorderStyle.None, ContentAlignment.MiddleLeft);
+            Label result00 = MI_58873_ctrl.MI_58873_createLabel("result00", new Point(480, 55), resultFont, backColor, foreColor, szerokoscLabelki, wysokoscLabelki, wynik[0, 0].ToString(), lblBorderStyle, lblTxtAlign);
+            Label result10 = MI_58873_ctrl.MI_58873_createLabel("result10", new Point(480, 83), resultFont, backColor, foreColor, szerokoscLabelki, wysokoscLabelki, wynik[1, 0].ToString(), lblBorderStyle, lblTxtAlign);
+            Label result20 = MI_58873_ctrl.MI_58873_createLabel("result20", new Point(480, 111), resultFont, backColor, foreColor, szerokoscLabelki, wysokoscLabelki, wynik[2, 0].ToString(), lblBorderStyle, lblTxtAlign);
+            Label result01 = MI_58873_ctrl.MI_58873_createLabel("result01", new Point(530, 55), resultFont, backColor, foreColor, szerokoscLabelki, wysokoscLabelki, wynik[0, 1].ToString(), lblBorderStyle, lblTxtAlign);
+            Label result11 = MI_58873_ctrl.MI_58873_createLabel("result11", new Point(530, 83), resultFont, backColor, foreColor, szerokoscLabelki, wysokoscLabelki, wynik[1, 1].ToString(), lblBorderStyle, lblTxtAlign);
+            Label result21 = MI_58873_ctrl.MI_58873_createLabel("result21", new Point(530, 111), resultFont, backColor, foreColor, szerokoscLabelki, wysokoscLabelki, wynik[2, 1].ToString(), lblBorderStyle, lblTxtAlign);
+            Label result02 = MI_58873_ctrl.MI_58873_createLabel("result02", new Point(580, 55), resultFont, backColor, foreColor, szerokoscLabelki, wysokoscLabelki, wynik[0, 2].ToString(), lblBorderStyle, lblTxtAlign);
+            Label result12 = MI_58873_ctrl.MI_58873_createLabel("result12", new Point(580, 83), resultFont, backColor, foreColor, szerokoscLabelki, wysokoscLabelki, wynik[1, 2].ToString(), lblBorderStyle, lblTxtAlign);
+            Label result22 = MI_58873_ctrl.MI_58873_createLabel("result22", new Point(580, 111), resultFont, backColor, foreColor, szerokoscLabelki, wysokoscLabelki, wynik[2, 2].ToString(), lblBorderStyle, lblTxtAlign);
+            Label resultBracketL = MI_58873_ctrl.MI_58873_createLabel("resultBracketL", new Point(420, 20), labelFont, backColor, foreColor, lblWidth, lblHeight, "[", laberBorder, labelAlignement);
+            Label resultBracketR = MI_58873_ctrl.MI_58873_createLabel("resultBracketR", new Point(600, 20), labelFont, backColor, foreColor, lblWidth, lblHeight, "]", laberBorder, labelAlignement);
 
             resultBox.Controls.Add(resultBracketL);
             resultBox.Controls.Add(result00);
@@ -257,8 +276,8 @@ namespace _58873_IV_
 
             //deklaruję tablicę w której będę przechowywał wyniki mnożenia
             //3x3 no bo wynik dzielenia dwóch macierzy 3x3 daje nam również macież 3x3
-            int[,] Z = new int[3,3];
-            
+            int[,] Z = new int[3, 3];
+
             //iterowanie się po wierszach
             for (int i = 0; i < 3; i++)
             {
@@ -266,15 +285,15 @@ namespace _58873_IV_
                 for (int j = 0; j < 3; j++)
                 {
                     //inicjalnie wyliczony indeks tablicy wielowymiarowej musi mieć wartość 0 
-                    Z[i,j] = 0;
+                    Z[i, j] = 0;
                     //wykonanie mnożenia macierzy
                     for (int k = 0; k < 3; k++)
                     {
                         //wszystkie elementy z pierwszego wiersza macierzy A pomnożone przez wszystkie elementy pierwszej kolumny macieży B
                         //to wszystko razem ze sobą zsumowane dają nam wynikowy index macierzy result
-                        Z[i,j] += X[i,k] * Y[k,j];
+                        Z[i, j] += X[i, k] * Y[k, j];
                     }
-                }   
+                }
             }
             return Z;
         }
@@ -296,7 +315,7 @@ namespace _58873_IV_
             TextBox textField;
 
             int index00 = 0;
-            textField = (TextBox)resultBox.Controls.Find(matrix +"00", true)[0];
+            textField = (TextBox)resultBox.Controls.Find(matrix + "00", true)[0];
             if (textField != null) index00 = getValue(textField);
 
             int index01 = 0;
@@ -339,22 +358,37 @@ namespace _58873_IV_
         private int getValue(TextBox tb)
         {
             string returnNumber = tb.Text;
-
             if (returnNumber.Equals("") && showEmptyTextFieldWarning)
             {
-                MessageBox.Show("Jest 0 a go nie podałeś");
+                MessageBox.Show("Conajmniej jedno pole w podanych macierzach jest puste.\n\nNieuzupełnione pola przyjmują wartość 0.", "Niewypełnione pole", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 showEmptyTextFieldWarning = false;
             }
 
-            
-
             if (returnNumber == "")
             {
-                
                 returnNumber = "0";
             }
 
             return Int32.Parse(returnNumber);
+        }
+
+        //metoda sprawdzająca czy wciśnięty klawisz jest cyfrą lub backspace
+        private void MI_58873_keyPress(object sender, KeyPressEventArgs e)
+        {
+            //informuję program że sender jest textBoxem
+            TextBox element = sender as TextBox;
+
+            //jeśli wciśnięty klawisz jest cyfrą - isDigit
+            //lub jeśli jest klawiszem Backspace = '\b'
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+                ToolTip tool = new ToolTip();
+                tool.ToolTipTitle = "To pole przyjmuje tylko cyfry";
+                tool.ShowAlways = true;
+                tool.InitialDelay = 25;
+                tool.Show("Wprowadź liczbę typu int", element, 3000);
+            }
         }
 
         private void mainZipButton_Click(object sender, EventArgs e)
@@ -404,27 +438,13 @@ namespace _58873_IV_
         //metoda odpowiedzialna za sterowanie widocznością buttonów AUTO i MANUAL
         private void MI_58873_changeVisibilityButtons(bool MI_58873_isVisible)
         {
-            
             Button MI_58873_buttonAuto = (Button)this.Controls.Find("mainSortButton", true)[0];
             Button MI_58873_mainMathButton = (Button)this.Controls.Find("mainMathButton", true)[0];
             Button MI_58873_mainZipButton = (Button)this.Controls.Find("mainZipButton", true)[0];
-            
+
             MI_58873_buttonAuto.Enabled = MI_58873_isVisible;
             MI_58873_mainMathButton.Enabled = MI_58873_isVisible;
             MI_58873_mainZipButton.Enabled = MI_58873_isVisible;
-        }
-
-        //metoda sprawdzająca czy wciśnięty klawisz jest cyfrą lub backspace
-        private void MI_58873_keyPress(object sender, KeyPressEventArgs e)
-        {
-            //jeśli wciśnięty klawisz jest cyfrą - isDigit
-            //lub jeśli jest klawiszem Backspace = '\b'
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b')
-            {
-                //przechwycenie i wyświetlenie odpowiedniego komunikatu dla usera
-                e.Handled = true;
-                MessageBox.Show("Proszę podać wartość typu int!", "Nieprawidłowy typ wejściowy", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
 
         //metoda wywoływana po kliknięciu w przycisk EXIT

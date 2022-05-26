@@ -9,7 +9,7 @@ namespace _58873_IV_
     {
         //metoda tworząca button
         //metoda dostarczona przez wykładowcę
-        public Button MI_58873_createButton(string MI_58873_name, int MI_58873_x, int MI_58873_y, int MI_58873_width, int MI_58873_height, Font MI_58873_font, Color MI_58873_fontColor, Color MI_58873_backColor, string MI_58873_text)
+        public Button MI_58873_createButton(string MI_58873_name, int MI_58873_x, int MI_58873_y, int MI_58873_width, int MI_58873_height, Font MI_58873_font, Color MI_58873_foreColor, Color MI_58873_backColor, string MI_58873_text)
         {
             Button MI_58873_element = new Button
             {
@@ -19,11 +19,12 @@ namespace _58873_IV_
                 Height = MI_58873_height,
                 AutoSize = false,
                 Font = MI_58873_font,
-                ForeColor = MI_58873_fontColor,
+                ForeColor = MI_58873_foreColor,
                 BackColor = MI_58873_backColor,
                 Text = MI_58873_text,
-                TextAlign = ContentAlignment.MiddleCenter
-            };
+                TextAlign = ContentAlignment.MiddleCenter,
+                
+        };
             return MI_58873_element;
         }
 
@@ -64,7 +65,18 @@ namespace _58873_IV_
 
         //metoda tworząca labelkę
         //metoda dostarczona przez wykładowcę
-        public Label MI_58873_createLabel(string MI_58873_name, Point MI_58873_location, Font MI_58873_font, Color MI_58873_backColor, Color MI_58873_foreColor, int MI_58873_width, int MI_58873_height, string MI_58873_text, BorderStyle MI_58873_borderStyle, ContentAlignment MI_58873_textAlign)
+        public Label MI_58873_createLabel(
+            string MI_58873_name, 
+            Point MI_58873_location, 
+            Font MI_58873_font, 
+            Color MI_58873_backColor, 
+            Color MI_58873_foreColor, 
+            int MI_58873_width, 
+            int MI_58873_height, 
+            string MI_58873_text, 
+            BorderStyle MI_58873_borderStyle, 
+            ContentAlignment MI_58873_textAlign
+            )
         {
             Label MI_58873_element = new Label
             {
