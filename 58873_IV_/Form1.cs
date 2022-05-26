@@ -116,19 +116,21 @@ namespace _58873_IV_
             int btnHeight = 50;
             int tbWidth = 25;
             int tbHeight = 25;
-            int buttonsPositionY = 200;
+            int buttonsPositionY = 275;
+            int bracketTopPosition = 20;
+            int operatorTopPosion = 35;
             Color tfBackColor = Color.White;
             Font labelFont = new Font("Times New Roman", 120, FontStyle.Regular, GraphicsUnit.Pixel);
             Font operatorFont = new Font("Times New Roman", 60, FontStyle.Regular, GraphicsUnit.Pixel);
             Font inputFont = new Font("Times New Roman", 15, FontStyle.Regular, GraphicsUnit.Pixel);
 
             //labelki
-            Label leftBrackerL = MI_58873_ctrl.MI_58873_createLabel("leftBrackerL", new Point(10, 20), labelFont, panelColor, foreColor, lblWidth, lblHeight, "[", laberBorder, labelAlignement);
-            Label leftBracketR = MI_58873_ctrl.MI_58873_createLabel("leftBracketR", new Point(128, 20), labelFont, panelColor, foreColor, lblWidth, lblHeight, "]", laberBorder, labelAlignement);
-            Label rightBracketL = MI_58873_ctrl.MI_58873_createLabel("rightBracketL", new Point(220, 20), labelFont, panelColor, foreColor, lblWidth, lblHeight, "[", laberBorder, labelAlignement);
-            Label rightBracketR = MI_58873_ctrl.MI_58873_createLabel("rightBracketR", new Point(338, 20), labelFont, panelColor, foreColor, lblWidth, lblHeight, "]", laberBorder, labelAlignement);
-            Label xChar = MI_58873_ctrl.MI_58873_createLabel("xChar", new Point(185, 35), operatorFont, panelColor, foreColor, lblWidth, lblHeight, "X", laberBorder, labelAlignement);
-            Label equalChar = MI_58873_ctrl.MI_58873_createLabel("equalChar", new Point(392, 35), operatorFont, panelColor, foreColor, lblWidth, lblHeight, "=", laberBorder, labelAlignement);
+            Label leftBrackerL = MI_58873_ctrl.MI_58873_createLabel("leftBrackerL", new Point(10, bracketTopPosition), labelFont, panelColor, foreColor, lblWidth, lblHeight, "[", laberBorder, labelAlignement);
+            Label leftBracketR = MI_58873_ctrl.MI_58873_createLabel("leftBracketR", new Point(128, bracketTopPosition), labelFont, panelColor, foreColor, lblWidth, lblHeight, "]", laberBorder, labelAlignement);
+            Label rightBracketL = MI_58873_ctrl.MI_58873_createLabel("rightBracketL", new Point(220, bracketTopPosition), labelFont, panelColor, foreColor, lblWidth, lblHeight, "[", laberBorder, labelAlignement);
+            Label rightBracketR = MI_58873_ctrl.MI_58873_createLabel("rightBracketR", new Point(338, bracketTopPosition), labelFont, panelColor, foreColor, lblWidth, lblHeight, "]", laberBorder, labelAlignement);
+            Label xChar = MI_58873_ctrl.MI_58873_createLabel("xChar", new Point(185, operatorTopPosion), operatorFont, panelColor, foreColor, lblWidth, lblHeight, "X", laberBorder, labelAlignement);
+            Label equalChar = MI_58873_ctrl.MI_58873_createLabel("equalChar", new Point(392, operatorTopPosion), operatorFont, panelColor, foreColor, lblWidth, lblHeight, "=", laberBorder, labelAlignement);
 
             //textboxy
             TextBox left00 = MI_58873_ctrl.createTextField("left00", new Point(70, 55), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
@@ -178,6 +180,7 @@ namespace _58873_IV_
             //kliknięcie w button
             countButton.Click += new EventHandler(countButton_Button_Click);
             clearButton.Click += new EventHandler(clearResultPanel_Button_Click);
+            randomButton.Click += new EventHandler(randomButton_Button_Click);
 
             //hover
             countButton.MouseHover += new EventHandler(MI_58873_MouseHover);
@@ -219,6 +222,24 @@ namespace _58873_IV_
             resultBox.Controls.Add(randomButton);
         }
 
+        private void randomButton_Button_Click(object sender, EventArgs e)
+        {
+            foreach (var pb in resultBox.Controls.OfType<TextBox>())
+            {
+                Random random = new Random();
+                int randomInt = random.Next(0, 99); 
+                pb.Text = randomInt.ToString();
+            }
+        }
+
+        private void blockTextField()
+        {
+            foreach (var pb in resultBox.Controls.OfType<TextBox>())
+            {
+                pb.Enabled = false;
+            }
+        }
+
         private void clearResultPanel_Button_Click(object sender, EventArgs e)
         {
             clearResultPanel();
@@ -229,9 +250,13 @@ namespace _58873_IV_
         {
             int[,] wynik = obliczMacierz();
             createMatrixResultFields(wynik);
+            blockTextField();
 
             Button countButton = (Button)this.Controls.Find("countButton", true)[0];
             if (countButton != null) countButton.Enabled = false;
+
+            Button randomButton = (Button)this.Controls.Find("randomButton", true)[0];
+            if (randomButton != null) randomButton.Enabled = false;
         }
         private void createMatrixResultFields(int[,] wynik)
         {
