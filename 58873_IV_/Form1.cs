@@ -14,15 +14,18 @@ namespace _58873_IV_
         //instancja klasy którą będziemy wykorzysywać do tworzenia kontrolek w locie
         MI_58873_Controlls MI_58873_ctrl = new MI_58873_Controlls();
         GroupBox resultBox;
-        bool showEmptyTextFieldWarning = true;
 
-        int lblWidth = 60;
-        int lblHeight = 135;
-        private Color panelColor = Color.FromKnownColor(KnownColor.Control);
-        private Color foreColor = Color.Black;
-        private Font buttonsFont = new Font("Microsoft Sans Serif", 9, FontStyle.Bold);
-        private BorderStyle laberBorder = BorderStyle.None;
-        ContentAlignment labelAlignement = ContentAlignment.MiddleLeft;
+        private bool showEmptyTextFieldWarning = true;
+        private readonly int lblWidth = 60;
+        private readonly int lblHeight = 135;
+        private readonly int bracketTopPosition = 70;
+        private readonly Color panelColor = Color.FromKnownColor(KnownColor.Control);
+        private readonly Color foreColor = Color.Black;
+        private readonly Font buttonsFont = new Font("Microsoft Sans Serif", 9, FontStyle.Bold);
+        private readonly BorderStyle laberBorder = BorderStyle.None;
+        private readonly BorderStyle lblBorderStyleFixed = BorderStyle.FixedSingle;
+        private readonly ContentAlignment labelAlignement = ContentAlignment.MiddleLeft;
+        private readonly ContentAlignment lblTxtCenter = ContentAlignment.MiddleCenter;
 
         public ProjektZaliczeniowy()
         {
@@ -112,50 +115,59 @@ namespace _58873_IV_
         private void buildMatrix()
         {
             //przydatne zmienne
-            int btnWidth = 145;
+            int btnWidth = 170;
             int btnHeight = 50;
             int tbWidth = 25;
             int tbHeight = 25;
-            int buttonsPositionY = 275;
-            int bracketTopPosition = 20;
-            int operatorTopPosion = 35;
+            int buttonsPositionY = 235;
+            int operatorTopPosion = 85;
             Color tfBackColor = Color.White;
             Font labelFont = new Font("Times New Roman", 120, FontStyle.Regular, GraphicsUnit.Pixel);
             Font operatorFont = new Font("Times New Roman", 60, FontStyle.Regular, GraphicsUnit.Pixel);
             Font inputFont = new Font("Times New Roman", 15, FontStyle.Regular, GraphicsUnit.Pixel);
+            Font titleFont = new Font("Arial", 25, FontStyle.Bold, GraphicsUnit.Pixel);
+            string description = " - Program oblicza iloczyn dwóch macierzy\n"
+                + " - Dostępna jest macierz 3x3\n"
+                + " - Pola tekstowe przyjmują tylko liczby\n"
+                + " - Pola tekstowe przyjmują maksymalnie dwa znaki\n"
+                + " - Przycisk \"LOSUJ\" jest odpowiedzialny za losowe przydzielenie wartości do Text Boxów\n"
+                + " - Przydzielane wartości są z zakresu <-99;99>";
 
             //labelki
-            Label leftBrackerL = MI_58873_ctrl.MI_58873_createLabel("leftBrackerL", new Point(10, bracketTopPosition), labelFont, panelColor, foreColor, lblWidth, lblHeight, "[", laberBorder, labelAlignement);
-            Label leftBracketR = MI_58873_ctrl.MI_58873_createLabel("leftBracketR", new Point(128, bracketTopPosition), labelFont, panelColor, foreColor, lblWidth, lblHeight, "]", laberBorder, labelAlignement);
-            Label rightBracketL = MI_58873_ctrl.MI_58873_createLabel("rightBracketL", new Point(220, bracketTopPosition), labelFont, panelColor, foreColor, lblWidth, lblHeight, "[", laberBorder, labelAlignement);
-            Label rightBracketR = MI_58873_ctrl.MI_58873_createLabel("rightBracketR", new Point(338, bracketTopPosition), labelFont, panelColor, foreColor, lblWidth, lblHeight, "]", laberBorder, labelAlignement);
-            Label xChar = MI_58873_ctrl.MI_58873_createLabel("xChar", new Point(185, operatorTopPosion), operatorFont, panelColor, foreColor, lblWidth, lblHeight, "X", laberBorder, labelAlignement);
-            Label equalChar = MI_58873_ctrl.MI_58873_createLabel("equalChar", new Point(392, operatorTopPosion), operatorFont, panelColor, foreColor, lblWidth, lblHeight, "=", laberBorder, labelAlignement);
+            Label lblTitle = MI_58873_ctrl.MI_58873_createLabel("lblTitle", new Point(100, 20), titleFont, panelColor, foreColor, 575, 35, "Mnożenie macierzy kwadratowej 3x3", lblBorderStyleFixed, lblTxtCenter);
+            Label leftBrackerL = MI_58873_ctrl.MI_58873_createLabel("leftBrackerL", new Point(60, bracketTopPosition), labelFont, panelColor, foreColor, lblWidth, lblHeight, "[", laberBorder, labelAlignement);
+            Label leftBracketR = MI_58873_ctrl.MI_58873_createLabel("leftBracketR", new Point(178, bracketTopPosition), labelFont, panelColor, foreColor, lblWidth, lblHeight, "]", laberBorder, labelAlignement);
+            Label rightBracketL = MI_58873_ctrl.MI_58873_createLabel("rightBracketL", new Point(270, bracketTopPosition), labelFont, panelColor, foreColor, lblWidth, lblHeight, "[", laberBorder, labelAlignement);
+            Label rightBracketR = MI_58873_ctrl.MI_58873_createLabel("rightBracketR", new Point(388, bracketTopPosition), labelFont, panelColor, foreColor, lblWidth, lblHeight, "]", laberBorder, labelAlignement);
+            Label xChar = MI_58873_ctrl.MI_58873_createLabel("xChar", new Point(235, operatorTopPosion), operatorFont, panelColor, foreColor, lblWidth, lblHeight, "X", laberBorder, labelAlignement);
+            Label equalChar = MI_58873_ctrl.MI_58873_createLabel("equalChar", new Point(442, operatorTopPosion), operatorFont, panelColor, foreColor, lblWidth, lblHeight, "=", laberBorder, labelAlignement);
+            Label lblDescription = MI_58873_ctrl.MI_58873_createLabel("lblDescription", new Point(25, 300), inputFont, panelColor, foreColor, 725, 140, description, lblBorderStyleFixed, labelAlignement);
+
 
             //textboxy
-            TextBox left00 = MI_58873_ctrl.createTextField("left00", new Point(70, 55), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
-            TextBox left01 = MI_58873_ctrl.createTextField("left01", new Point(70, 83), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
-            TextBox left02 = MI_58873_ctrl.createTextField("left02", new Point(70, 111), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
-            TextBox left10 = MI_58873_ctrl.createTextField("left10", new Point(100, 55), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
-            TextBox left11 = MI_58873_ctrl.createTextField("left11", new Point(100, 83), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
-            TextBox left12 = MI_58873_ctrl.createTextField("left12", new Point(100, 111), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
-            TextBox left20 = MI_58873_ctrl.createTextField("left20", new Point(130, 55), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
-            TextBox left21 = MI_58873_ctrl.createTextField("left21", new Point(130, 83), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
-            TextBox left22 = MI_58873_ctrl.createTextField("left22", new Point(130, 111), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
-            TextBox right00 = MI_58873_ctrl.createTextField("right00", new Point(280, 55), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
-            TextBox right01 = MI_58873_ctrl.createTextField("right01", new Point(280, 83), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
-            TextBox right02 = MI_58873_ctrl.createTextField("right02", new Point(280, 111), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
-            TextBox right10 = MI_58873_ctrl.createTextField("right10", new Point(310, 55), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
-            TextBox right11 = MI_58873_ctrl.createTextField("right11", new Point(310, 83), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
-            TextBox right12 = MI_58873_ctrl.createTextField("right12", new Point(310, 111), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
-            TextBox right20 = MI_58873_ctrl.createTextField("right20", new Point(340, 55), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
-            TextBox right21 = MI_58873_ctrl.createTextField("right21", new Point(340, 83), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
-            TextBox right22 = MI_58873_ctrl.createTextField("right22", new Point(340, 111), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
+            TextBox left00 = MI_58873_ctrl.createTextField("left00", new Point(120, 105), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
+            TextBox left01 = MI_58873_ctrl.createTextField("left01", new Point(120, 133), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
+            TextBox left02 = MI_58873_ctrl.createTextField("left02", new Point(120, 161), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
+            TextBox left10 = MI_58873_ctrl.createTextField("left10", new Point(150, 105), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
+            TextBox left11 = MI_58873_ctrl.createTextField("left11", new Point(150, 133), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
+            TextBox left12 = MI_58873_ctrl.createTextField("left12", new Point(150, 161), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
+            TextBox left20 = MI_58873_ctrl.createTextField("left20", new Point(180, 105), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
+            TextBox left21 = MI_58873_ctrl.createTextField("left21", new Point(180, 133), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
+            TextBox left22 = MI_58873_ctrl.createTextField("left22", new Point(180, 161), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
+            TextBox right00 = MI_58873_ctrl.createTextField("right00", new Point(330, 105), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
+            TextBox right01 = MI_58873_ctrl.createTextField("right01", new Point(330, 133), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
+            TextBox right02 = MI_58873_ctrl.createTextField("right02", new Point(330, 161), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
+            TextBox right10 = MI_58873_ctrl.createTextField("right10", new Point(360, 105), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
+            TextBox right11 = MI_58873_ctrl.createTextField("right11", new Point(360, 133), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
+            TextBox right12 = MI_58873_ctrl.createTextField("right12", new Point(360, 161), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
+            TextBox right20 = MI_58873_ctrl.createTextField("right20", new Point(390, 105), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
+            TextBox right21 = MI_58873_ctrl.createTextField("right21", new Point(390, 133), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
+            TextBox right22 = MI_58873_ctrl.createTextField("right22", new Point(390, 161), tbWidth, tbHeight, inputFont, tfBackColor, foreColor);
 
             //buttony
-            Button countButton = MI_58873_ctrl.MI_58873_createButton("countButton", 25, buttonsPositionY, btnWidth, btnHeight, buttonsFont, foreColor, panelColor, "OBLICZ");
-            Button clearButton = MI_58873_ctrl.MI_58873_createButton("clearResultPanel", 175, buttonsPositionY, btnWidth, btnHeight, buttonsFont, foreColor, panelColor, "WYCZYŚĆ");
-            Button randomButton = MI_58873_ctrl.MI_58873_createButton("randomButton", 325, buttonsPositionY, btnWidth, btnHeight, buttonsFont, foreColor, panelColor, "LOSUJ");
+            Button countButton = MI_58873_ctrl.MI_58873_createButton("countButton", 135, buttonsPositionY, btnWidth, btnHeight, buttonsFont, foreColor, panelColor, "OBLICZ");
+            Button clearButton = MI_58873_ctrl.MI_58873_createButton("clearResultPanel", 495, buttonsPositionY, btnWidth, btnHeight, buttonsFont, foreColor, panelColor, "WYCZYŚĆ");
+            Button randomButton = MI_58873_ctrl.MI_58873_createButton("randomButton", 313, buttonsPositionY, btnWidth, btnHeight, buttonsFont, foreColor, panelColor, "LOSUJ");
 
             //wciśnięcie klawisza
             left00.KeyPress += new KeyPressEventHandler(MI_58873_keyPress);
@@ -193,6 +205,7 @@ namespace _58873_IV_
             randomButton.MouseLeave += new EventHandler(MI_58873_MouseLeave);
 
             //przypisanie klawiszy do panelu wyników
+            resultBox.Controls.Add(lblTitle);
             resultBox.Controls.Add(leftBrackerL);
             resultBox.Controls.Add(left00);
             resultBox.Controls.Add(left01);
@@ -220,23 +233,24 @@ namespace _58873_IV_
             resultBox.Controls.Add(countButton);
             resultBox.Controls.Add(clearButton);
             resultBox.Controls.Add(randomButton);
+            resultBox.Controls.Add(lblDescription);
         }
 
         private void randomButton_Button_Click(object sender, EventArgs e)
         {
-            foreach (var pb in resultBox.Controls.OfType<TextBox>())
+            foreach (var element in resultBox.Controls.OfType<TextBox>())
             {
                 Random random = new Random();
-                int randomInt = random.Next(0, 99); 
-                pb.Text = randomInt.ToString();
+                int randomInt = random.Next(-99, 99);
+                element.Text = randomInt.ToString();
             }
         }
 
         private void blockTextField()
         {
-            foreach (var pb in resultBox.Controls.OfType<TextBox>())
+            foreach (var element in resultBox.Controls.OfType<TextBox>())
             {
-                pb.Enabled = false;
+                element.Enabled = false;
             }
         }
 
@@ -264,21 +278,18 @@ namespace _58873_IV_
             int wysokoscLabelki = 25;
             Font labelFont = new Font("Times New Roman", 120, FontStyle.Regular, GraphicsUnit.Pixel);
             Font resultFont = new Font("Times New Roman", 14, FontStyle.Bold, GraphicsUnit.Pixel);
-            Color backColor = Color.FromKnownColor(KnownColor.Control);
-            ContentAlignment lblTxtAlign = ContentAlignment.MiddleCenter;
-            BorderStyle lblBorderStyle = BorderStyle.FixedSingle;
 
-            Label result00 = MI_58873_ctrl.MI_58873_createLabel("result00", new Point(480, 55), resultFont, backColor, foreColor, szerokoscLabelki, wysokoscLabelki, wynik[0, 0].ToString(), lblBorderStyle, lblTxtAlign);
-            Label result10 = MI_58873_ctrl.MI_58873_createLabel("result10", new Point(480, 83), resultFont, backColor, foreColor, szerokoscLabelki, wysokoscLabelki, wynik[1, 0].ToString(), lblBorderStyle, lblTxtAlign);
-            Label result20 = MI_58873_ctrl.MI_58873_createLabel("result20", new Point(480, 111), resultFont, backColor, foreColor, szerokoscLabelki, wysokoscLabelki, wynik[2, 0].ToString(), lblBorderStyle, lblTxtAlign);
-            Label result01 = MI_58873_ctrl.MI_58873_createLabel("result01", new Point(530, 55), resultFont, backColor, foreColor, szerokoscLabelki, wysokoscLabelki, wynik[0, 1].ToString(), lblBorderStyle, lblTxtAlign);
-            Label result11 = MI_58873_ctrl.MI_58873_createLabel("result11", new Point(530, 83), resultFont, backColor, foreColor, szerokoscLabelki, wysokoscLabelki, wynik[1, 1].ToString(), lblBorderStyle, lblTxtAlign);
-            Label result21 = MI_58873_ctrl.MI_58873_createLabel("result21", new Point(530, 111), resultFont, backColor, foreColor, szerokoscLabelki, wysokoscLabelki, wynik[2, 1].ToString(), lblBorderStyle, lblTxtAlign);
-            Label result02 = MI_58873_ctrl.MI_58873_createLabel("result02", new Point(580, 55), resultFont, backColor, foreColor, szerokoscLabelki, wysokoscLabelki, wynik[0, 2].ToString(), lblBorderStyle, lblTxtAlign);
-            Label result12 = MI_58873_ctrl.MI_58873_createLabel("result12", new Point(580, 83), resultFont, backColor, foreColor, szerokoscLabelki, wysokoscLabelki, wynik[1, 2].ToString(), lblBorderStyle, lblTxtAlign);
-            Label result22 = MI_58873_ctrl.MI_58873_createLabel("result22", new Point(580, 111), resultFont, backColor, foreColor, szerokoscLabelki, wysokoscLabelki, wynik[2, 2].ToString(), lblBorderStyle, lblTxtAlign);
-            Label resultBracketL = MI_58873_ctrl.MI_58873_createLabel("resultBracketL", new Point(420, 20), labelFont, backColor, foreColor, lblWidth, lblHeight, "[", laberBorder, labelAlignement);
-            Label resultBracketR = MI_58873_ctrl.MI_58873_createLabel("resultBracketR", new Point(600, 20), labelFont, backColor, foreColor, lblWidth, lblHeight, "]", laberBorder, labelAlignement);
+            Label result00 = MI_58873_ctrl.MI_58873_createLabel("result00", new Point(530, 105), resultFont, panelColor, foreColor, szerokoscLabelki, wysokoscLabelki, wynik[0, 0].ToString(), lblBorderStyleFixed, lblTxtCenter);
+            Label result10 = MI_58873_ctrl.MI_58873_createLabel("result10", new Point(530, 133), resultFont, panelColor, foreColor, szerokoscLabelki, wysokoscLabelki, wynik[1, 0].ToString(), lblBorderStyleFixed, lblTxtCenter);
+            Label result20 = MI_58873_ctrl.MI_58873_createLabel("result20", new Point(530, 161), resultFont, panelColor, foreColor, szerokoscLabelki, wysokoscLabelki, wynik[2, 0].ToString(), lblBorderStyleFixed, lblTxtCenter);
+            Label result01 = MI_58873_ctrl.MI_58873_createLabel("result01", new Point(580, 105), resultFont, panelColor, foreColor, szerokoscLabelki, wysokoscLabelki, wynik[0, 1].ToString(), lblBorderStyleFixed, lblTxtCenter);
+            Label result11 = MI_58873_ctrl.MI_58873_createLabel("result11", new Point(580, 133), resultFont, panelColor, foreColor, szerokoscLabelki, wysokoscLabelki, wynik[1, 1].ToString(), lblBorderStyleFixed, lblTxtCenter);
+            Label result21 = MI_58873_ctrl.MI_58873_createLabel("result21", new Point(580, 161), resultFont, panelColor, foreColor, szerokoscLabelki, wysokoscLabelki, wynik[2, 1].ToString(), lblBorderStyleFixed, lblTxtCenter);
+            Label result02 = MI_58873_ctrl.MI_58873_createLabel("result02", new Point(630, 105), resultFont, panelColor, foreColor, szerokoscLabelki, wysokoscLabelki, wynik[0, 2].ToString(), lblBorderStyleFixed, lblTxtCenter);
+            Label result12 = MI_58873_ctrl.MI_58873_createLabel("result12", new Point(630, 133), resultFont, panelColor, foreColor, szerokoscLabelki, wysokoscLabelki, wynik[1, 2].ToString(), lblBorderStyleFixed, lblTxtCenter);
+            Label result22 = MI_58873_ctrl.MI_58873_createLabel("result22", new Point(630, 161), resultFont, panelColor, foreColor, szerokoscLabelki, wysokoscLabelki, wynik[2, 2].ToString(), lblBorderStyleFixed, lblTxtCenter);
+            Label resultBracketL = MI_58873_ctrl.MI_58873_createLabel("resultBracketL", new Point(470, bracketTopPosition), labelFont, panelColor, foreColor, lblWidth, lblHeight, "[", laberBorder, labelAlignement);
+            Label resultBracketR = MI_58873_ctrl.MI_58873_createLabel("resultBracketR", new Point(650, bracketTopPosition), labelFont, panelColor, foreColor, lblWidth, lblHeight, "]", laberBorder, labelAlignement);
 
             resultBox.Controls.Add(resultBracketL);
             resultBox.Controls.Add(result00);
@@ -403,9 +414,8 @@ namespace _58873_IV_
             //informuję program że sender jest textBoxem
             TextBox element = sender as TextBox;
 
-            //jeśli wciśnięty klawisz jest cyfrą - isDigit
-            //lub jeśli jest klawiszem Backspace = '\b'
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b')
+
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b' && e.KeyChar != '-')
             {
                 e.Handled = true;
                 ToolTip tool = new ToolTip();
