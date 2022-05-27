@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace _58873_IV_
 {
-    partial class ProjektZaliczeniowy
+    partial class Proj
     {
         /// <summary>
         ///  Required designer variable.

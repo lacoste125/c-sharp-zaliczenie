@@ -4,18 +4,22 @@ using System.Windows.Forms;
 
 namespace _58873_IV_
 {
-    public partial class ProjektZaliczeniowy : Form
+    public partial class Proj : Form
     {
         MI_58873_Controlls MI_58873_ctrl = new MI_58873_Controlls();
-        ProjektZaliczeniowy MI_58873_workPanel;
+        Proj MI_58873_workPanel;
         GroupBox resultBox;
         Matrix matrix;
+        Bubble bubble;
 
         public static readonly Color panelColor = Color.FromKnownColor(KnownColor.Control);
         public static readonly Color foreColor = Color.Black;
         public static readonly Font buttonsFont = new Font("Microsoft Sans Serif", 9, FontStyle.Bold);
+        public static readonly ContentAlignment lblTxtCenter = ContentAlignment.MiddleCenter;
+        public static readonly BorderStyle lblBorderStyleFixed = BorderStyle.FixedSingle;
+        public static readonly ContentAlignment labelAlignement = ContentAlignment.MiddleLeft;
 
-        public ProjektZaliczeniowy()
+        public Proj()
         {
             InitializeComponent();
             MI_58873_workPanel = this;
@@ -23,6 +27,7 @@ namespace _58873_IV_
             this.Height = 600;
             MI_58873_loadControlls();
             matrix = new Matrix(this, resultBox);
+            bubble = new Bubble(this, resultBox);
         }
 
         private void MI_58873_loadControlls()
@@ -90,13 +95,14 @@ namespace _58873_IV_
         {
             clearResultPanel();
             MI_58873_changeVisibilityButtons(false);
+            bubble.buildBubbleSection();
         }
 
         private void mainMathButton_Click(object sender, EventArgs e)
         {
             clearResultPanel();
             MI_58873_changeVisibilityButtons(false);
-            matrix.buildMatrix();
+            matrix.buildMatrixSection();
         }
 
         //metoda wywoływana po kliknięciu w przucisk CLEAR

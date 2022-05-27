@@ -98,7 +98,7 @@ namespace _58873_IV_
 
         //metoda tworząca Text box
         //metoda dostarczona przez wykładowcę
-        public TextBox createTextField(string MI_58873_name, Point MI_58873_location, int MI_58873_width, int MI_58873_height, Font MI_58873_font, Color MI_58873_backColor, Color MI_58873_foreColor)
+        public TextBox createTextField(string MI_58873_name, Point MI_58873_location, int MI_58873_width, int MI_58873_height, Font MI_58873_font, Color MI_58873_backColor, Color MI_58873_foreColor, int maxLength)
         {
             TextBox MI_58873_element = new TextBox
             {
@@ -111,7 +111,8 @@ namespace _58873_IV_
                 ForeColor = MI_58873_foreColor,
                 BorderStyle = BorderStyle.FixedSingle,
                 TextAlign = HorizontalAlignment.Center,
-                MaxLength = 2
+                MaxLength = maxLength,
+                AutoSize = false
             };
 
             return MI_58873_element;
