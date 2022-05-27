@@ -11,6 +11,7 @@ namespace _58873_IV_
         GroupBox resultBox;
         Matrix matrix;
         Bubble bubble;
+        Compress compress;
 
         public static readonly Color panelColor = Color.FromKnownColor(KnownColor.Control);
         public static readonly Color foreColor = Color.Black;
@@ -28,6 +29,7 @@ namespace _58873_IV_
             MI_58873_loadControlls();
             matrix = new Matrix(this, resultBox);
             bubble = new Bubble(this, resultBox);
+            compress = new Compress(this, resultBox);
         }
 
         private void MI_58873_loadControlls()
@@ -123,6 +125,7 @@ namespace _58873_IV_
         {
             clearResultPanel();
             MI_58873_changeVisibilityButtons(false);
+            compress.buildCompressSection();
         }
 
         //metoda odpowiedzialna za efekt po najechaniu na button myszką

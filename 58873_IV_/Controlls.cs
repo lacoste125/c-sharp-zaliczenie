@@ -117,5 +117,19 @@ namespace _58873_IV_
 
             return MI_58873_element;
         }
+
+        public ListBox createListBox(string MI_58873_name, Point MI_58873_location, int MI_58873_width, int MI_58873_height)
+        {
+            ListBox MI_58873_element = new ListBox
+            { 
+            ItemHeight = 30,
+            Location = MI_58873_location,
+            Name = MI_58873_name,
+            Size = new Size(MI_58873_width, MI_58873_height)
+        };
+
+            return MI_58873_element;
+        }
+
     }
 }
