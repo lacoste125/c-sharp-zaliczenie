@@ -52,9 +52,9 @@ namespace _58873_IV_
             Button mainSortButton = MI_58873_ctrl.MI_58873_createButton("mainSortButton", btnPositionX, 25, btnWidth, btnHeight, buttonsFont, foreColor, panelColor, "ALGORYTM SORTUJĄCY");
             Button mainMathButton = MI_58873_ctrl.MI_58873_createButton("mainMathButton", btnPositionX, 85, btnWidth, btnHeight, buttonsFont, foreColor, panelColor, "ALGORYTM MATEMATYCZNY");
             Button mainZipButton = MI_58873_ctrl.MI_58873_createButton("mainZipButton", btnPositionX, 140, btnWidth, btnHeight, buttonsFont, foreColor, panelColor, "ALGORYTM KOMPRESUJĄCY");
-            Button MI_58873_btnClear = MI_58873_ctrl.MI_58873_createButton("BtnClear", btnPositionX, 330, btnWidth, btnHeight, buttonsFont, foreColor, panelColor, "NOWE DZIAŁANIE");
+            Button MI_58873_btnClear = MI_58873_ctrl.MI_58873_createButton("BtnClear", btnPositionX, 330, btnWidth, btnHeight, buttonsFont, foreColor, panelColor, "WYCZYŚĆ EKRAN");
+            MI_58873_btnClear.Enabled = false;
             Button MI_58873_btnExit = MI_58873_ctrl.MI_58873_createButton("BtnExit", btnPositionX, 385, btnWidth, btnHeight, buttonsFont, foreColor, panelColor, "EXIT");
-
 
             //kliknięcie w buttony
             mainSortButton.Click += new EventHandler(mainSortButton_Click);
@@ -128,6 +128,12 @@ namespace _58873_IV_
             compress.buildCompressSection();
         }
 
+        private void turnCleanButton(bool status)
+        {
+            Button clearBtn = (Button)MI_58873_workPanel.Controls.Find("BtnClear", true)[0];
+            if (clearBtn != null) clearBtn.Enabled = status;
+        }
+
         //metoda odpowiedzialna za efekt po najechaniu na button myszką
         public static void MI_58873_MouseHover(object sender, EventArgs e)
         {
@@ -150,8 +156,10 @@ namespace _58873_IV_
             GroupBox MI_58873_gb = (GroupBox)MI_58873_workPanel.Controls.Find("GbResult", true)[0];
             //czyszcimy go
             if (MI_58873_gb.Controls.Count > 0) MI_58873_gb.Controls.Clear();
-
             matrix.setShowEmptyTextFieldWarning(true);
+
+            Button clearBtn = (Button)MI_58873_workPanel.Controls.Find("BtnClear", true)[0];
+            if (clearBtn != null) clearBtn.Enabled = true;
         }
 
         private void MI_58873_changeVisibilityButtons(bool MI_58873_isVisible)
@@ -163,6 +171,8 @@ namespace _58873_IV_
             MI_58873_buttonAuto.Enabled = MI_58873_isVisible;
             MI_58873_mainMathButton.Enabled = MI_58873_isVisible;
             MI_58873_mainZipButton.Enabled = MI_58873_isVisible;
+
+            turnCleanButton(!MI_58873_isVisible);
         }
     }
 }
