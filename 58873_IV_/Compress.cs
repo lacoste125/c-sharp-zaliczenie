@@ -39,12 +39,16 @@ namespace _58873_IV_
             Font operatorFont = new Font("Arial", 60, FontStyle.Regular, GraphicsUnit.Pixel);
             Font tbFont = new Font("Arial", 23, FontStyle.Bold, GraphicsUnit.Pixel);
             Font titleFont = new Font("Arial", 25, FontStyle.Bold, GraphicsUnit.Pixel);
-            string description = " - Instrukcje programu\n"
-                + " - Do uzupełnienia\n";
+            string description = " - Program realizuje kompresję oraz dekompresję metodą Hufmanna\n"
+                + " - Input inicjalnie jest wypełniony ciągiem \"XADJSOSDAOUAZADXSXOD\"\n"
+                + " - Input przyjmuje dowolne znaki z klawiatury, max 20 znaków\n"
+                + " - Nie wszystkie ciągi są poprawnie kompresowane i dekompresowane. Nie udało mi się ustalić co jest tego powodem.\n"
+                + " - Przycisk \"LOSUJ\" generuje losowy ciąg liter. Długość wygenerowanego tekstu to 6 znaków.";
 
             //labelki
             Label lblTitle = MI_58873_ctrl.MI_58873_createLabel("lblTitle", new Point(100, 19), titleFont, Proj.panelColor, Proj.foreColor, 575, 35, "Kompresja Huffmanna", Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
             Label lblfillField = MI_58873_ctrl.MI_58873_createLabel("lblfillField", new Point(195, 61), footerFont, Proj.panelColor, Proj.foreColor, 500, 18, "Wprowadź ciąg do skopresowania lub kliknij w przycisk \"LOSUJ\"", BorderStyle.None, Proj.labelAlignement);
+            Label lblDescription = MI_58873_ctrl.MI_58873_createLabel("lblDescription", new Point(25, 353), footerFont, Proj.panelColor, Proj.foreColor, 725, 90, description, Proj.lblBorderStyleFixed, Proj.labelAlignement);
 
             //textboxy
             TextBox inputText = MI_58873_ctrl.createTextField("inputText", new Point(163, tbPositionY), tbWidth, tbHeight, tbFont, tfBackColor, Proj.foreColor, tbMaxlength);
@@ -80,6 +84,7 @@ namespace _58873_IV_
             resultBox.Controls.Add(countButton);
             resultBox.Controls.Add(clearButton);
             resultBox.Controls.Add(randomButton);
+            resultBox.Controls.Add(lblDescription);
         }
 
         private void countButton_Button_Click(object sender, EventArgs e)
@@ -122,15 +127,8 @@ namespace _58873_IV_
 
                 //buttony
                 Button decompressButton = MI_58873_ctrl.MI_58873_createButton("decompressButton", 400, 192, btnWidth, btnHeight, Proj.buttonsFont, Proj.foreColor, Proj.panelColor, "DEKOMPRESUJ");
-
-
-                //button click
                 decompressButton.Click += new EventHandler(decompressButton_Button_Click);
-
-                //hover
                 decompressButton.MouseHover += new EventHandler(Proj.MI_58873_MouseHover);
-
-                //leave
                 decompressButton.MouseLeave += new EventHandler(Proj.MI_58873_MouseLeave);
 
                 //dodanie elementów do ekranu
@@ -141,8 +139,6 @@ namespace _58873_IV_
 
                 textAfterDecompression = MI_58873_dekompresuj(MI_58873_znaki, MI_58873_listaKompresji, MI_58873_textDoSkompresowania);
             }
-
-            
 
             Button countButton = (Button)MI_58873_workPanel.Controls.Find("countButton", true)[0];
             if (countButton != null) countButton.Enabled = false;
