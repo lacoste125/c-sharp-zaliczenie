@@ -9,31 +9,25 @@ namespace _58873_IV_
     class Matrix
     {
         //instancje elementów
-        private MI_58873_Controlls MI_58873_ctrl = new MI_58873_Controlls();
-        private ProjektZaliczeniowy MI_58873_workPanel;
-        private GroupBox resultBox;
+        MI_58873_Controlls MI_58873_ctrl = new MI_58873_Controlls();
+        ProjektZaliczeniowy MI_58873_workPanel;
+        GroupBox resultBox;
 
         //właściwości klasy
-        private bool showEmptyTextFieldWarning = true;
-        private readonly int lblWidth = 60;
-        private readonly int lblHeight = 135;
-        private readonly int bracketTopPosition = 70;
-        private readonly BorderStyle laberBorder = BorderStyle.None;
-        private readonly BorderStyle lblBorderStyleFixed = BorderStyle.FixedSingle;
-        private readonly ContentAlignment labelAlignement = ContentAlignment.MiddleLeft;
-        private readonly ContentAlignment lblTxtCenter = ContentAlignment.MiddleCenter;
+        bool showEmptyTextFieldWarning = true;
+        readonly int lblWidth = 60;
+        readonly int lblHeight = 135;
+        readonly int bracketTopPosition = 70;
+        readonly BorderStyle laberBorder = BorderStyle.None;
+        readonly BorderStyle lblBorderStyleFixed = BorderStyle.FixedSingle;
+        readonly ContentAlignment labelAlignement = ContentAlignment.MiddleLeft;
+        readonly ContentAlignment lblTxtCenter = ContentAlignment.MiddleCenter;
 
         //konstruktor
         public Matrix(ProjektZaliczeniowy MI_58873_workPanel, GroupBox resultBox)
         {
             this.MI_58873_workPanel = MI_58873_workPanel;
             this.resultBox = resultBox;
-        }
-
-        //setter dla flagi do wyświetlania komunikatu
-        public void setShowEmptyTextFieldWarning(bool showEmptyTextFieldWarning)
-        {
-            this.showEmptyTextFieldWarning = showEmptyTextFieldWarning;
         }
 
         //budowanie ekranu Result
@@ -161,48 +155,7 @@ namespace _58873_IV_
             resultBox.Controls.Add(lblDescription);
         }
 
-        private void randomButton_Button_Click(object sender, EventArgs e)
-        {
-            foreach (var element in resultBox.Controls.OfType<TextBox>())
-            {
-                Random random = new Random();
-                int randomInt = random.Next(-99, 99);
-                element.Text = randomInt.ToString();
-            }
-        }
-
-        private void blockTextField()
-        {
-            foreach (var element in resultBox.Controls.OfType<TextBox>())
-            {
-                element.Enabled = false;
-            }
-        }
-
-        private void clearResultPanel_Button_Click(object sender, EventArgs e)
-        {
-            clearResultPanel();
-            buildMatrix();
-        }
-
-        private void clearResultPanel()
-        {
-            GroupBox MI_58873_gb = (GroupBox)MI_58873_workPanel.Controls.Find("GbResult", true)[0];
-            if (MI_58873_gb.Controls.Count > 0) MI_58873_gb.Controls.Clear();
-        }
-
-        private void countButton_Button_Click(object sender, EventArgs e)
-        {
-            int[,] wynik = obliczMacierz();
-            createMatrixResultFields(wynik);
-            blockTextField();
-
-            Button countButton = (Button)MI_58873_workPanel.Controls.Find("countButton", true)[0];
-            if (countButton != null) countButton.Enabled = false;
-
-            Button randomButton = (Button)MI_58873_workPanel.Controls.Find("randomButton", true)[0];
-            if (randomButton != null) randomButton.Enabled = false;
-        }
+        //budowanie wyników 
         private void createMatrixResultFields(int[,] wynik)
         {
             int szerokoscLabelki = 45;
@@ -328,7 +281,7 @@ namespace _58873_IV_
             if (returnNumber.Equals("") && showEmptyTextFieldWarning)
             {
                 MessageBox.Show("Conajmniej jedno pole w podanych macierzach jest puste.\n\nNieuzupełnione pola przyjmują wartość 0.", "Niewypełnione pole", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                showEmptyTextFieldWarning = false;
+                setShowEmptyTextFieldWarning(false);
             }
 
             if (returnNumber == "")
@@ -337,6 +290,35 @@ namespace _58873_IV_
             }
 
             return Int32.Parse(returnNumber);
+        }
+
+        private void randomButton_Button_Click(object sender, EventArgs e)
+        {
+            foreach (var element in resultBox.Controls.OfType<TextBox>())
+            {
+                Random random = new Random();
+                int randomInt = random.Next(-99, 99);
+                element.Text = randomInt.ToString();
+            }
+        }
+
+        private void countButton_Button_Click(object sender, EventArgs e)
+        {
+            int[,] wynik = obliczMacierz();
+            createMatrixResultFields(wynik);
+            blockTextField();
+
+            Button countButton = (Button)MI_58873_workPanel.Controls.Find("countButton", true)[0];
+            if (countButton != null) countButton.Enabled = false;
+
+            Button randomButton = (Button)MI_58873_workPanel.Controls.Find("randomButton", true)[0];
+            if (randomButton != null) randomButton.Enabled = false;
+        }
+
+        private void clearResultPanel_Button_Click(object sender, EventArgs e)
+        {
+            clearResultPanel();
+            buildMatrix();
         }
 
         //metoda sprawdzająca czy wciśnięty klawisz jest cyfrą lub backspace
@@ -354,6 +336,27 @@ namespace _58873_IV_
                 tool.InitialDelay = 25;
                 tool.Show("Wprowadź liczbę typu int", element, 3000);
             }
+        }
+
+        private void blockTextField()
+        {
+            foreach (var element in resultBox.Controls.OfType<TextBox>())
+            {
+                element.Enabled = false;
+            }
+        }
+
+        private void clearResultPanel()
+        {
+            GroupBox MI_58873_gb = (GroupBox)MI_58873_workPanel.Controls.Find("GbResult", true)[0];
+            if (MI_58873_gb.Controls.Count > 0) MI_58873_gb.Controls.Clear();
+            setShowEmptyTextFieldWarning(true);
+        }
+
+        //setter dla flagi do wyświetlania komunikatu
+        public void setShowEmptyTextFieldWarning(bool showEmptyTextFieldWarning)
+        {
+            this.showEmptyTextFieldWarning = showEmptyTextFieldWarning;
         }
     }
 }

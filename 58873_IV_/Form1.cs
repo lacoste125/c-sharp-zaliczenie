@@ -15,11 +15,6 @@ namespace _58873_IV_
         public static readonly Color foreColor = Color.Black;
         public static readonly Font buttonsFont = new Font("Microsoft Sans Serif", 9, FontStyle.Bold);
 
-        public GroupBox getResultBox()
-        {
-            return resultBox;
-        }
-
         public ProjektZaliczeniowy()
         {
             InitializeComponent();
@@ -104,6 +99,26 @@ namespace _58873_IV_
             matrix.buildMatrix();
         }
 
+        //metoda wywoływana po kliknięciu w przucisk CLEAR
+        private void MI_58873_btnClear_Click(object sender, EventArgs e)
+        {
+            clearResultPanel();
+            MI_58873_changeVisibilityButtons(true);
+        }
+
+        //metoda wywoływana po kliknięciu w przycisk EXIT
+        private void MI_58873_btnExit_Click(object sender, EventArgs e)
+        {
+            //zamknięcie aplikacji
+            Application.Exit();
+        }
+
+        private void mainZipButton_Click(object sender, EventArgs e)
+        {
+            clearResultPanel();
+            MI_58873_changeVisibilityButtons(false);
+        }
+
         //metoda odpowiedzialna za efekt po najechaniu na button myszką
         public static void MI_58873_MouseHover(object sender, EventArgs e)
         {
@@ -120,20 +135,12 @@ namespace _58873_IV_
             //po zjechaniu myszką z buttona przypisue mu spowrotem inicjalną wartość
             if (MI_58873_button != null) MI_58873_button.BackColor = Color.FromKnownColor(KnownColor.Control);
         }
-
-        //metoda wywoływana po kliknięciu w przucisk CLEAR
-        private void MI_58873_btnClear_Click(object sender, EventArgs e)
-        {
-            clearResultPanel();
-            MI_58873_changeVisibilityButtons(true);
-        }
-
+        
         private void clearResultPanel()
         {
             GroupBox MI_58873_gb = (GroupBox)MI_58873_workPanel.Controls.Find("GbResult", true)[0];
             //czyszcimy go
             if (MI_58873_gb.Controls.Count > 0) MI_58873_gb.Controls.Clear();
-
 
             matrix.setShowEmptyTextFieldWarning(true);
         }
@@ -148,19 +155,5 @@ namespace _58873_IV_
             MI_58873_mainMathButton.Enabled = MI_58873_isVisible;
             MI_58873_mainZipButton.Enabled = MI_58873_isVisible;
         }
-
-        //metoda wywoływana po kliknięciu w przycisk EXIT
-        private void MI_58873_btnExit_Click(object sender, EventArgs e)
-        {
-            //zamknięcie aplikacji
-            Application.Exit();
-        }
-
-        private void mainZipButton_Click(object sender, EventArgs e)
-        {
-            clearResultPanel();
-            MI_58873_changeVisibilityButtons(false);
-        }
-
     }
 }
