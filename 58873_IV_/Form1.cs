@@ -6,15 +6,16 @@ namespace _58873_IV_
 {
     public partial class ProjektZaliczeniowy : Form
     {
-        public static ProjektZaliczeniowy MI_58873_workPanel;
-        private MI_58873_Controlls MI_58873_ctrl = new MI_58873_Controlls();
-        private static GroupBox resultBox;
-        private Matrix matrix;
+        MI_58873_Controlls MI_58873_ctrl = new MI_58873_Controlls();
+        ProjektZaliczeniowy MI_58873_workPanel;
+        GroupBox resultBox;
+        Matrix matrix;
+
         public static readonly Color panelColor = Color.FromKnownColor(KnownColor.Control);
         public static readonly Color foreColor = Color.Black;
         public static readonly Font buttonsFont = new Font("Microsoft Sans Serif", 9, FontStyle.Bold);
 
-        public static GroupBox getResultBox()
+        public GroupBox getResultBox()
         {
             return resultBox;
         }
@@ -26,7 +27,7 @@ namespace _58873_IV_
             this.Width = 1000;
             this.Height = 600;
             MI_58873_loadControlls();
-            matrix = new Matrix(this);
+            matrix = new Matrix(this, resultBox);
         }
 
         private void MI_58873_loadControlls()
