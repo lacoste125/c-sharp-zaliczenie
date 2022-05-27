@@ -17,6 +17,7 @@ namespace _58873_IV_
         string textAfterDecompression = "";
         readonly int btnHeight = 50;
         readonly int btnWidth = 170;
+        readonly Font footerFont = new Font("Times New Roman", 15, FontStyle.Regular, GraphicsUnit.Pixel);
 
         //konstruktor
         public Compress(Proj MI_58873_workPanel, GroupBox resultBox)
@@ -28,27 +29,26 @@ namespace _58873_IV_
         public void buildCompressSection()
         {
             //przydatne zmienne
-            int tbWidth = 600;
+            int tbWidth = 450;
             int tbHeight = 35;
-            int buttonsPositionY = 350;
-            int tbPositionY = 90;
+            int buttonsPositionY = 300;
+            int tbPositionY = 84;
             int operatorTopPosion = 85;
             int tbMaxlength = 20;
             Color tfBackColor = Color.White;
-            Font labelFont = new Font("Times New Roman", 120, FontStyle.Regular, GraphicsUnit.Pixel);
-            Font operatorFont = new Font("Times New Roman", 60, FontStyle.Regular, GraphicsUnit.Pixel);
-            Font footerFont = new Font("Times New Roman", 15, FontStyle.Regular, GraphicsUnit.Pixel);
-            Font tbFont = new Font("Arial", 25, FontStyle.Bold, GraphicsUnit.Pixel);
+            Font operatorFont = new Font("Arial", 60, FontStyle.Regular, GraphicsUnit.Pixel);
+            Font tbFont = new Font("Arial", 23, FontStyle.Bold, GraphicsUnit.Pixel);
             Font titleFont = new Font("Arial", 25, FontStyle.Bold, GraphicsUnit.Pixel);
             string description = " - Instrukcje programu\n"
                 + " - Do uzupełnienia\n";
 
             //labelki
-            Label lblTitle = MI_58873_ctrl.MI_58873_createLabel("lblTitle", new Point(100, 20), titleFont, Proj.panelColor, Proj.foreColor, 575, 35, "Kompresja Huffmanna", Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
-            Label lblfillField = MI_58873_ctrl.MI_58873_createLabel("lblfillField", new Point(195, 63), footerFont, Proj.panelColor, Proj.foreColor, 600, 18, "Wprowadź ciąg do skopresowania lub kliknij w przycisk \"LOSUJ\"", BorderStyle.None, Proj.labelAlignement);
+            Label lblTitle = MI_58873_ctrl.MI_58873_createLabel("lblTitle", new Point(100, 19), titleFont, Proj.panelColor, Proj.foreColor, 575, 35, "Kompresja Huffmanna", Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
+            Label lblfillField = MI_58873_ctrl.MI_58873_createLabel("lblfillField", new Point(195, 61), footerFont, Proj.panelColor, Proj.foreColor, 500, 18, "Wprowadź ciąg do skopresowania lub kliknij w przycisk \"LOSUJ\"", BorderStyle.None, Proj.labelAlignement);
 
             //textboxy
-            TextBox inputText = MI_58873_ctrl.createTextField("inputText", new Point(87, tbPositionY), tbWidth, tbHeight, tbFont, tfBackColor, Proj.foreColor, tbMaxlength);
+            TextBox inputText = MI_58873_ctrl.createTextField("inputText", new Point(163, tbPositionY), tbWidth, tbHeight, tbFont, tfBackColor, Proj.foreColor, tbMaxlength);
+            inputText.Text = "XADJSOSDAOUAZADXSXOD";
 
             //buttony
             Button countButton = MI_58873_ctrl.MI_58873_createButton("countButton", 135, buttonsPositionY, btnWidth, btnHeight, Proj.buttonsFont, Proj.foreColor, Proj.panelColor, "KOMPRESUJ");
@@ -84,53 +84,105 @@ namespace _58873_IV_
 
         private void countButton_Button_Click(object sender, EventArgs e)
         {
-            Font resultFont = new Font("Times New Roman", 16, FontStyle.Bold, GraphicsUnit.Pixel);
+            TextBox textField = (TextBox)resultBox.Controls.Find("inputText", true)[0];
+            if (textField != null)
+            {
+                if (textField.Text.Equals(""))
+                {
+                    MessageBox.Show("Ciąg do kompresji nie może być pusty.", "Puste pole", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                else
+                {
+                    MI_58873_textDoSkompresowania = textField.Text;
+                    textField.Enabled = false;
+                }
+            }
+
+            Font resultFont = new Font("Arial", 16, FontStyle.Bold, GraphicsUnit.Pixel);
+            //labelki
+            Label lblAfterCompression = MI_58873_ctrl.MI_58873_createLabel("lblAfterCompression", new Point(230, 140), resultFont, Proj.panelColor, Proj.foreColor, 535, 50, "", BorderStyle.None, Proj.lblTxtCenter);
+            resultBox.Controls.Add(lblAfterCompression);
 
             //listbox
-            ListBox binaryCodes = MI_58873_ctrl.createListBox("binaryCodes", new Point(8, 150), 215, 180);
-
-            //labelki
-            Label lblAfterCompression = MI_58873_ctrl.MI_58873_createLabel("lblAfterCompression", new Point(230, 150), resultFont, Proj.panelColor, Proj.foreColor, 535, 50, "", Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
-
-            //buttony
-            Button decompressButton = MI_58873_ctrl.MI_58873_createButton("decompressButton", 400, 205, btnWidth, btnHeight, Proj.buttonsFont, Proj.foreColor, Proj.panelColor, "DEKOMPRESUJ");
-
-            //button click
-            decompressButton.Click += new EventHandler(decompressButton_Button_Click);
-
-            //dodanie elementów do ekranu
+            ListBox binaryCodes = MI_58873_ctrl.createListBox("binaryCodes", new Point(8, 140), 215, 165);
+            binaryCodes.Visible = false;
             resultBox.Controls.Add(binaryCodes);
-            resultBox.Controls.Add(lblAfterCompression);
-            resultBox.Controls.Add(decompressButton);
-
-            TextBox textField = (TextBox)resultBox.Controls.Find("inputText", true)[0];
-            if (textField != null) MI_58873_textDoSkompresowania = textField.Text;
 
             List<string> MI_58873_listaKompresji = new List<string>();
             List<MI_58873_WystepującyZnak> MI_58873_znaki = new List<MI_58873_WystepującyZnak>();
 
-            MI_58873_kompresuj(MI_58873_textDoSkompresowania, ref MI_58873_listaKompresji, ref MI_58873_znaki);
+            bool compressionResult = MI_58873_kompresuj(MI_58873_textDoSkompresowania, ref MI_58873_listaKompresji, ref MI_58873_znaki);
 
-            textAfterDecompression = MI_58873_dekompresuj(MI_58873_znaki, MI_58873_listaKompresji, MI_58873_textDoSkompresowania);
+            if (compressionResult)
+            {
+                //labelki
+                Label titleChars = MI_58873_ctrl.MI_58873_createLabel("titleChars", new Point(7, 124), footerFont, Proj.panelColor, Proj.foreColor, 200, 18, "Zestawienie znaków:", BorderStyle.None, Proj.labelAlignement);
+                Label compressedChars = MI_58873_ctrl.MI_58873_createLabel("compressedChars", new Point(228, 124), footerFont, Proj.panelColor, Proj.foreColor, 500, 18, "Skompresowany ciąg znaków:", BorderStyle.None, Proj.labelAlignement);
+
+                //buttony
+                Button decompressButton = MI_58873_ctrl.MI_58873_createButton("decompressButton", 400, 192, btnWidth, btnHeight, Proj.buttonsFont, Proj.foreColor, Proj.panelColor, "DEKOMPRESUJ");
+
+
+                //button click
+                decompressButton.Click += new EventHandler(decompressButton_Button_Click);
+
+                //hover
+                decompressButton.MouseHover += new EventHandler(Proj.MI_58873_MouseHover);
+
+                //leave
+                decompressButton.MouseLeave += new EventHandler(Proj.MI_58873_MouseLeave);
+
+                //dodanie elementów do ekranu
+                resultBox.Controls.Add(binaryCodes);
+                resultBox.Controls.Add(decompressButton);
+                resultBox.Controls.Add(titleChars);
+                resultBox.Controls.Add(compressedChars);
+
+                textAfterDecompression = MI_58873_dekompresuj(MI_58873_znaki, MI_58873_listaKompresji, MI_58873_textDoSkompresowania);
+            }
+
+            
+
+            Button countButton = (Button)MI_58873_workPanel.Controls.Find("countButton", true)[0];
+            if (countButton != null) countButton.Enabled = false;
+
+            Button randomButton = (Button)MI_58873_workPanel.Controls.Find("randomButton", true)[0];
+            if (randomButton != null) randomButton.Enabled = false;
         }
 
         private void decompressButton_Button_Click(object sender, EventArgs e)
         {
-            Font resultFont = new Font("Times New Roman", 16, FontStyle.Bold, GraphicsUnit.Pixel);
+            Font resultFont = new Font("Arial", 16, FontStyle.Bold, GraphicsUnit.Pixel);
 
             //labelki
-            Label lblDecompression = MI_58873_ctrl.MI_58873_createLabel("lblAfterCompression", new Point(230, 260), resultFont, Proj.panelColor, Proj.foreColor, 535, 50, textAfterDecompression, Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
+            Label lblDecompression = MI_58873_ctrl.MI_58873_createLabel("lblAfterCompression", new Point(230, 244), resultFont, Proj.panelColor, Proj.foreColor, 535, 50, textAfterDecompression, Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
+
+            bool decompressionResult = checkDecompressionResult();
+            if (decompressionResult)
+                lblDecompression.BackColor = Color.Green;
+            else
+                lblDecompression.BackColor = Color.OrangeRed;
+
 
             //dodanie kontrolki do ekranu
             resultBox.Controls.Add(lblDecompression);
 
+            Button decompressButton = (Button)MI_58873_workPanel.Controls.Find("decompressButton", true)[0];
+            if (decompressButton != null) decompressButton.Enabled = false;
 
+            if (decompressionResult)
+                MessageBox.Show("Dekompresja powiodła się.", "SUCCESS", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            else
+                MessageBox.Show("Dekompresja nie powiodła się.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void clearResultPanel_Button_Click(object sender, EventArgs e)
         {
             clearResultPanel();
             buildCompressSection();
+            TextBox input = (TextBox)MI_58873_workPanel.Controls.Find("inputText", true)[0];
+            if (input != null) input.Text = "";
         }
 
         private void randomButton_Button_Click(object sender, EventArgs e)
@@ -139,7 +191,7 @@ namespace _58873_IV_
             {
                 //źródło http://csharp.net-informations.com/string/random.htm
                 Random random = new Random();
-                int length = 16;
+                int length = 6;
                 var randomString = "";
                 for (var i = 0; i < length; i++)
                 {
@@ -162,38 +214,47 @@ namespace _58873_IV_
             if (MI_58873_gb.Controls.Count > 0) MI_58873_gb.Controls.Clear();
         }
 
+        private bool checkDecompressionResult()
+        {
+            if (MI_58873_textDoSkompresowania == textAfterDecompression) return true;
+            else return false;
+        }
 
-
-
-
-
-
-
-
-
-        private void MI_58873_kompresuj(
+        private bool MI_58873_kompresuj(
             string MI_58873_textDoSkompresowania,
             ref List<string> MI_58873_listaKompresji,
             ref List<MI_58873_WystepującyZnak> MI_58873_znaki)
         {
             //wywołanie metody kompresującej 
-            MI_58873_Kompresja.MI_58873_KompresjaHuffmanna(MI_58873_textDoSkompresowania, ref MI_58873_listaKompresji, ref MI_58873_znaki);
-
-            //wypełnianie listy kodów
+            bool compressionResult = MI_58873_Kompresja.MI_58873_KompresjaHuffmanna(MI_58873_textDoSkompresowania, ref MI_58873_listaKompresji, ref MI_58873_znaki);
             ListBox resultSpace = (ListBox)MI_58873_workPanel.Controls.Find("binaryCodes", true)[0];
-            if (resultSpace != null)
+            Label resultCodesSpace = (Label)MI_58873_workPanel.Controls.Find("lblAfterCompression", true)[0];
+
+            if (compressionResult) {
+                //wypełnianie listy kodów
+                
+                if (resultSpace != null)
+                {
+                    resultSpace.Visible = true;
+                    MI_58873_znaki.ForEach(x => resultSpace.Items.Add("Znak: " + x.MI_58873_Znak + " Ilość: " + x.MI_58873_Ilosc + " Kod Binarny: " + x.MI_58873_BinaryCode));
+                }
+
+                if (resultCodesSpace != null)
+                {
+                    resultCodesSpace.BorderStyle = Proj.lblBorderStyleFixed;
+                    resultCodesSpace.Text = "[";
+                    MI_58873_listaKompresji.ForEach(x => resultCodesSpace.Text += x + " ");
+                    resultCodesSpace.Text += "EOF]";
+                }
+            }
+            else
             {
-                MI_58873_znaki.ForEach(x => resultSpace.Items.Add("Znak: " + x.MI_58873_Znak + " Ilość: " + x.MI_58873_Ilosc + " Kod Binarny: " + x.MI_58873_BinaryCode));
+                if (resultSpace != null) resultSpace.Visible = false;
+
+                if (resultCodesSpace != null) resultCodesSpace.Visible = false;
             }
 
-            //wypełnianie ciągu po kompresji
-            Label resultCodesSpace = (Label)MI_58873_workPanel.Controls.Find("lblAfterCompression", true)[0];
-            if (resultCodesSpace != null)
-            {
-                resultCodesSpace.Text = "[";
-                MI_58873_listaKompresji.ForEach(x => resultCodesSpace.Text += x + " ");
-                resultCodesSpace.Text += "EOF]";
-            }
+            return compressionResult;
         }
 
         private string MI_58873_dekompresuj(List<MI_58873_WystepującyZnak> MI_58873_znaki, List<string> MI_58873_listaKompresji, string MI_58873_tekstPrzedkompresja)
@@ -237,20 +298,23 @@ namespace _58873_IV_
             //wszystkie obiekty z listy MI_58873_listaRozkodowanych łączę w jedną całość za pomocą pętli for
             for (int MI_58873_i = 0; MI_58873_i < MI_58873_listaRozkodowanych.Count; MI_58873_i++)
             {
-                
+
                 MI_58873_rozkodowanyTekst += MI_58873_listaRozkodowanych[MI_58873_i];
             }
 
             return MI_58873_rozkodowanyTekst;
         }
+    }
 
     public class MI_58873_Kompresja
     {
-        public static void MI_58873_KompresjaHuffmanna(
-    string MI_58873_source,
-    ref List<string> MI_58873_resultCode,
-    ref List<MI_58873_WystepującyZnak> MI_58873_listaZnaków)
+        public static bool MI_58873_KompresjaHuffmanna(
+        string MI_58873_source,
+        ref List<string> MI_58873_resultCode,
+        ref List<MI_58873_WystepującyZnak> MI_58873_listaZnaków)
+
         {
+            bool compressionResult = true;
             string MI_58873_pozostaly = MI_58873_source;
             string MI_58873_roboczy = MI_58873_pozostaly;
             string MI_58873_kolejnyZnak = "";
@@ -371,8 +435,16 @@ namespace _58873_IV_
             {
                 MI_58873_kolejnyZnak = MI_58873_listaZnaków[MI_58873_i].MI_58873_Znak;
                 MI_58873_indexListy = MI_58873_drzewoHuffmana.FindIndex(f => f.MI_58873_Znak == MI_58873_kolejnyZnak);
-                MI_58873_actualNode = MI_58873_drzewoHuffmana[MI_58873_indexListy].MI_58873_Node;
-                MI_58873_tempBinaryCode = MI_58873_drzewoHuffmana[MI_58873_indexListy].MI_58873_BinaryCode.ToString();
+
+                try
+                {
+                    MI_58873_actualNode = MI_58873_drzewoHuffmana[MI_58873_indexListy].MI_58873_Node;
+                    MI_58873_tempBinaryCode = MI_58873_drzewoHuffmana[MI_58873_indexListy].MI_58873_BinaryCode.ToString();
+                }
+                catch(Exception) {
+                    MessageBox.Show("Kompresja nie powiodła się", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    compressionResult = false;
+                }
 
                 do
                 {
@@ -402,6 +474,7 @@ namespace _58873_IV_
                     }
                 }
             }
+            return compressionResult;
         }
     }
 
