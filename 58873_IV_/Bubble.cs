@@ -9,7 +9,7 @@ namespace _58873_IV_
 {
     class Bubble
     {
-        //instancje elementów
+        //instancje elementów używanych w klasie
         MI_58873_Controlls MI_58873_ctrl = new MI_58873_Controlls();
         Proj MI_58873_workPanel;
         GroupBox resultBox;
@@ -21,7 +21,7 @@ namespace _58873_IV_
             this.resultBox = resultBox;
         }
 
-        //budowanie ekranu Result
+        //metoda do budowania sekcji result panel dla sortowania bąbelkowego
         public void buildBubbleSection()
         {
             //przydatne zmienne
@@ -38,12 +38,12 @@ namespace _58873_IV_
                 + " - Program pracuje tylko na liczbach typu int\n"
                 + " - Wszystkie niedozwolone operacje starałem się przewidziec i zaprezentować odpowiedni komunikat";
 
-            //labelki
+            //tworzę labelki używane w ekranie sortowania
             Label lblTitle = MI_58873_ctrl.MI_58873_createLabel("lblTitle", new Point(100, 20), Proj.titleFont, Proj.panelColor, Proj.foreColor, 575, 35, "Sortowanie bąbelkowe", Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
             Label lblDescription = MI_58873_ctrl.MI_58873_createLabel("lblDescription", new Point(25, 300), Proj.footerFont, Proj.panelColor, Proj.foreColor, 725, 140, description, Proj.lblBorderStyleFixed, Proj.labelAlignement);
             Label lblfillFields = MI_58873_ctrl.MI_58873_createLabel("lblfillFields", new Point(195, 63), Proj.footerFont, Proj.panelColor, Proj.foreColor, 600, 18, "Wprowadź liczby do posortowania lub kliknij w przycisk \"LOSUJ\"", BorderStyle.None, Proj.labelAlignement);
 
-            //textboxy
+            //tworzę textboxy używane w ekranie sortowania
             TextBox tf0 = MI_58873_ctrl.createTextField("tf0", new Point(30, tbPositionY), tbWidth, tbHeight, tbFont, Proj.inputBackColor, Proj.foreColor, tbMaxlength);
             TextBox tf1 = MI_58873_ctrl.createTextField("tf1", new Point(120, tbPositionY), tbWidth, tbHeight, tbFont, Proj.inputBackColor, Proj.foreColor, tbMaxlength);
             TextBox tf2 = MI_58873_ctrl.createTextField("tf2", new Point(210, tbPositionY), tbWidth, tbHeight, tbFont, Proj.inputBackColor, Proj.foreColor, tbMaxlength);
@@ -53,12 +53,12 @@ namespace _58873_IV_
             TextBox tf6 = MI_58873_ctrl.createTextField("tf6", new Point(570, tbPositionY), tbWidth, tbHeight, tbFont, Proj.inputBackColor, Proj.foreColor, tbMaxlength);
             TextBox tf7 = MI_58873_ctrl.createTextField("tf7", new Point(660, tbPositionY), tbWidth, tbHeight, tbFont, Proj.inputBackColor, Proj.foreColor, tbMaxlength);
 
-            //buttony
+            //tworzę butony używane w ekranie sortowania
             Button countButton = MI_58873_ctrl.MI_58873_createButton("countButton", 135, buttonsPositionY, Proj.btnWidth, Proj.btnHeight, Proj.buttonsFont, Proj.foreColor, Proj.panelColor, "SORTUJ");
             Button clearButton = MI_58873_ctrl.MI_58873_createButton("clearResultPanel", 495, buttonsPositionY, Proj.btnWidth, Proj.btnHeight, Proj.buttonsFont, Proj.foreColor, Proj.panelColor, "WYCZYŚĆ");
             Button randomButton = MI_58873_ctrl.MI_58873_createButton("randomButton", 313, buttonsPositionY, Proj.btnWidth, Proj.btnHeight, Proj.buttonsFont, Proj.foreColor, Proj.panelColor, "LOSUJ");
 
-            //wciśnięcie klawisza
+            //przypisanie metod odpowiedzialnych za wykonanie odpowiednich akcji po wprowadzeniu tekstu w text fieldy
             tf0.KeyPress += new KeyPressEventHandler(MI_58873_keyPress);
             tf1.KeyPress += new KeyPressEventHandler(MI_58873_keyPress);
             tf2.KeyPress += new KeyPressEventHandler(MI_58873_keyPress);
@@ -68,22 +68,22 @@ namespace _58873_IV_
             tf6.KeyPress += new KeyPressEventHandler(MI_58873_keyPress);
             tf7.KeyPress += new KeyPressEventHandler(MI_58873_keyPress);
 
-            //kliknięcie w button
+            //przypisanie metod odpowiedzialnych za wykonanie odpowiednich akcji po kliknięciu w buttony
             countButton.Click += new EventHandler(countButton_Button_Click);
             clearButton.Click += new EventHandler(clearResultPanel_Button_Click);
             randomButton.Click += new EventHandler(randomButton_Button_Click);
 
-            //hover
+            //do buttonów przypisuję efekt po najechaniu myszką
             countButton.MouseHover += new EventHandler(Proj.MI_58873_MouseHover);
             clearButton.MouseHover += new EventHandler(Proj.MI_58873_MouseHover);
             randomButton.MouseHover += new EventHandler(Proj.MI_58873_MouseHover);
 
-            //leave
+            //do buttonów przypisuję efekt po zjechaniu myszką
             countButton.MouseLeave += new EventHandler(Proj.MI_58873_MouseLeave);
             clearButton.MouseLeave += new EventHandler(Proj.MI_58873_MouseLeave);
             randomButton.MouseLeave += new EventHandler(Proj.MI_58873_MouseLeave);
 
-            //przypisanie klawiszy do panelu wyników
+            //wyswietlenie kontrolek w sekcji Panel Wyników
             resultBox.Controls.Add(lblTitle);
             resultBox.Controls.Add(lblfillFields);
             resultBox.Controls.Add(tf0);
@@ -100,8 +100,10 @@ namespace _58873_IV_
             resultBox.Controls.Add(lblDescription);
         }
 
+        //to jest metoda która jest odpowiedzalna za zbudowanie elementów do prezentowania wyników sortowania bąbelkowego
         private void buildBubbleResult()
         {
+            //przyatne zmienne
             int lblPositionY = 160;
             Font tbFont = new Font("Arial", 23, FontStyle.Bold, GraphicsUnit.Pixel);
 
@@ -115,6 +117,7 @@ namespace _58873_IV_
             Label lbl6 = MI_58873_ctrl.MI_58873_createLabel("lbl6", new Point(570, lblPositionY), tbFont, Proj.panelColor, Proj.foreColor, 80, 35, "", Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
             Label lbl7 = MI_58873_ctrl.MI_58873_createLabel("lbl7", new Point(660, lblPositionY), tbFont, Proj.panelColor, Proj.foreColor, 80, 35, "", Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
 
+            //dodanie kontrolek do ekranu
             resultBox.Controls.Add(lblResultsInfo);
             resultBox.Controls.Add(lbl0);
             resultBox.Controls.Add(lbl1);
@@ -126,6 +129,136 @@ namespace _58873_IV_
             resultBox.Controls.Add(lbl7);
         }
 
+        //metoda odpowiedzialna za wykonanie sortowania bąbelkowego
+        //metoda przyjmuje listę którą przetwarza i zwraca
+        private List<int> bubbleSort(List<int> numbersList)
+        {
+            //wykonuje się dla każdego indexu znajdującego w liście
+            for (int i = 0; i < numbersList.Count; i++)
+            {   
+                //każdy znaleziony index jest poównywany z kolejmym znakiem dlatego j= i + 1
+                for (int j = i + 1; j < numbersList.Count; j++)
+                {
+                    //pobieram te indexy do poniższych zmiennych
+                    int a = numbersList[i];
+                    int b = numbersList[j];
+
+                    //jeżeli pierwszy jes większy od drugiego to zamieniam je miejscami
+                    if (a > b)
+                    {
+                        numbersList[i] = b;
+                        numbersList[j] = a;
+                    }
+                }
+            }
+
+            //zwracam postortowaną tę samą listę
+            return numbersList;
+        }
+
+            //metoda sprawdzająca czy wciśnięty klawisz jest cyfrą lub backspace lub minusem
+            private void MI_58873_keyPress(object sender, KeyPressEventArgs e)
+        {
+            //informuję program że sender jest textBoxem
+            TextBox element = sender as TextBox;
+
+            //sprawdzam czy wciśnięty klawisz jest cyfrą lub backspace lub minusem
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b' && e.KeyChar != '-')
+            {   
+                //jeśli tak to prezentuję userowi odpowiedni tooltip
+                e.Handled = true;
+                ToolTip tool = new ToolTip();
+                tool.ToolTipTitle = "To pole przyjmuje tylko cyfry";
+                tool.ShowAlways = true;
+                tool.InitialDelay = 25;
+                tool.Show("Wprowadź liczbę typu int", element, 3000);
+            }
+        }
+
+        //metoda wywoływana po kliknięciuw przycisk SORTUJ
+        private void countButton_Button_Click(object sender, EventArgs e)
+        {
+            //tworzę zmienna która przechowuje info o tym czy text boxy są prawidłowo uzupełnione
+            bool isReady = true;
+
+            //wyszukuję wszystkie text boxy znajdujące się w sekcji Panel wyników
+            foreach (var element in resultBox.Controls.OfType<TextBox>())
+            {
+                //sprawdzam czy któryś z text boxów nie jest pusty lub nie posiada samego minusa(-)
+                if (element.Text.Equals("") || element.Text == "-")
+                {
+                    //jeśli tak to presentuję userowi odpowiedni komunikat
+                    MessageBox.Show("Conajmniej jedno pole w podanych text boxach jest puste albo zawiera znak\"-\".\n\nSprawdź poprawność danych.", "Nieprawidłowa wartość w text box", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    //i aktualizuję zmienną o informację że nie można zbudować ekranu
+                    isReady = false;
+                    //wychodze z pętli bo bez sensu już jest sprawdzać pozostałe text boxy - już wiemy że jest źle
+                    break;
+                }
+            }
+
+            //sprawdzam czy zmienna przechowująca info o tym czy text boxy są prawidłowo uzupełniony ma wartość true
+            if (isReady)
+            {
+                //jeśl tak to buduję kontrolki w których będę przechowywał wyniki 
+                buildBubbleResult();
+                //wykonu i printuje wyniki na ekran
+                solveNumbers();
+                //blokuję inputy i odpowiednie buttony po wykonaniu sortowania
+                blockElementsAfterCount();
+            }
+        }
+
+        //metoda odpowiedzialna za wyczyszczeniu ekranu RESULT PANEl po kliknięciu w wyczyść
+        private void clearResultPanel_Button_Click(object sender, EventArgs e)
+        {
+            //czyszczę Sekcję Result panel
+            clearResultPanel();
+            //przywracam inicjalny wygląd sekcji Panel wyników
+            buildBubbleSection();
+        }
+
+        //metoda wywoływana po kliknięciu LOSUJ
+        private void randomButton_Button_Click(object sender, EventArgs e)
+        {
+            //wyszukuję wszystkie textfieldy które są w sekcji Panel wyników
+             foreach (var element in resultBox.Controls.OfType<TextBox>())
+            {
+                //i przypisuję do nich randomowe liczby
+                Random random = new Random();
+                int randomInt = random.Next(-9999, 99999);
+                element.Text = randomInt.ToString();
+            }
+        }
+
+        //metoda odpowiedzialna za wyczyszczenie sekcji Panel wyników
+        private void clearResultPanel()
+        {
+            //wyszukuję sekcję panel wyników i czyszczę ją
+            GroupBox MI_58873_gb = (GroupBox)MI_58873_workPanel.Controls.Find("GbResult", true)[0];
+            if (MI_58873_gb.Controls.Count > 0) MI_58873_gb.Controls.Clear();
+        }
+
+        //metoda odpowiedzialna za zablokowanie odpowiednich elementów po wykonaniu sortowania- tak aby user nie mógł już danych modyfikować
+        private void blockElementsAfterCount()
+        {
+            //wyszukuję wszystkie text boxy w sekcji Panel wyników
+            foreach (var element in resultBox.Controls.OfType<TextBox>())
+            {
+                //zmianiam ich dostępność na false
+                //dzięki temu są widoczne ale są nieklikalne
+                element.Enabled = false;
+            }
+
+            //wyszukuję buttony SORTUJ i LOSUJ
+            Button randomButton = (Button)MI_58873_workPanel.Controls.Find("randomButton", true)[0];
+            Button countButton = (Button)MI_58873_workPanel.Controls.Find("countButton", true)[0];
+
+            //blokuje ich klikalność
+            if (countButton != null) countButton.Enabled = false;
+            if (randomButton != null) randomButton.Enabled = false;
+        }
+
+        //metoda odpowiedzialna za pobranie numerów z textboxów, wykonanie sortowania i wyprintowanie wyników
         private void solveNumbers()
         {
             //pobieram dane z text boxów
@@ -142,110 +275,17 @@ namespace _58873_IV_
                     return;
                 }
             }
-            
+
             //sortuję i wyniki przypisuję do nowej listy
             List<int> sortedList = bubbleSort(numbersList);
 
             //wposortowane wartości z listy przypisuję do odpowiednich labelek
             Label lbl;
-            for(int i = 0; i < sortedList.Count; i++)
+            for (int i = 0; i < sortedList.Count; i++)
             {
-                lbl = (Label)resultBox.Controls.Find("lbl"+ i, true)[0];
+                lbl = (Label)resultBox.Controls.Find("lbl" + i, true)[0];
                 if (lbl != null) lbl.Text = sortedList[i].ToString();
             }
-        }
-
-        private List<int> bubbleSort(List<int> numbersList)
-        {
-            for (int i = 0; i < numbersList.Count; i++)
-            {
-                for (int j = i + 1; j < numbersList.Count; j++)
-                {
-                    int a = numbersList[i];
-                    int b = numbersList[j];
-
-                    if (a > b)
-                    {
-                        numbersList[i] = b;
-                        numbersList[j] = a;
-                    }
-                }
-            }
-            return numbersList;
-        }
-
-            //metoda sprawdzająca czy wciśnięty klawisz jest cyfrą lub backspace
-            private void MI_58873_keyPress(object sender, KeyPressEventArgs e)
-        {
-            //informuję program że sender jest textBoxem
-            TextBox element = sender as TextBox;
-
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b' && e.KeyChar != '-')
-            {
-                e.Handled = true;
-                ToolTip tool = new ToolTip();
-                tool.ToolTipTitle = "To pole przyjmuje tylko cyfry";
-                tool.ShowAlways = true;
-                tool.InitialDelay = 25;
-                tool.Show("Wprowadź liczbę typu int", element, 3000);
-            }
-        }
-
-        private void countButton_Button_Click(object sender, EventArgs e)
-        {
-            bool isReady = true;
-            foreach (var element in resultBox.Controls.OfType<TextBox>())
-            {
-                if (element.Text.Equals("") || element.Text == "-")
-                {
-                    MessageBox.Show("Conajmniej jedno pole w podanych text boxach jest puste albo zawiera znak\"-\".\n\nSprawdź poprawność danych.", "Nieprawidłowa wartość w text box", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    isReady = false;
-                    break;
-                }
-            }
-
-            if (isReady)
-            {
-                buildBubbleResult();
-                solveNumbers();
-                blockElementsAfterCount();
-            }
-        }
-
-        private void clearResultPanel_Button_Click(object sender, EventArgs e)
-        {
-            clearResultPanel();
-            buildBubbleSection();
-        }
-
-        private void randomButton_Button_Click(object sender, EventArgs e)
-        {
-             foreach (var element in resultBox.Controls.OfType<TextBox>())
-            {
-                Random random = new Random();
-                int randomInt = random.Next(-9999, 99999);
-                element.Text = randomInt.ToString();
-            }
-        }
-
-        private void clearResultPanel()
-        {
-            GroupBox MI_58873_gb = (GroupBox)MI_58873_workPanel.Controls.Find("GbResult", true)[0];
-            if (MI_58873_gb.Controls.Count > 0) MI_58873_gb.Controls.Clear();
-        }
-
-        private void blockElementsAfterCount()
-        {
-            foreach (var element in resultBox.Controls.OfType<TextBox>())
-            {
-                element.Enabled = false;
-            }
-
-            Button countButton = (Button)MI_58873_workPanel.Controls.Find("countButton", true)[0];
-            if (countButton != null) countButton.Enabled = false;
-
-            Button randomButton = (Button)MI_58873_workPanel.Controls.Find("randomButton", true)[0];
-            if (randomButton != null) randomButton.Enabled = false;
         }
     }
 }
