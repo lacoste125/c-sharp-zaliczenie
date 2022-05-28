@@ -27,10 +27,10 @@ namespace _58873_IV_
             this.resultBox = resultBox;
         }
 
-        //budowanie ekranu Result
+        //metoda wywoływana podczas budowania ekranu po wciśnięciu przycisku ALGORYTM MATEMATYCZNY
         public void buildMatrixSection()
         {
-            //przydatne zmienne
+            //przydatne zmienne używane w metodzie
             int tbMaxlength = 2;
             int tbWidth = 25;
             int tbHeight = 25;
@@ -46,7 +46,7 @@ namespace _58873_IV_
                 + " - Przycisk \"LOSUJ\" jest odpowiedzialny za losowe przydzielenie wartości do Text Boxów\n"
                 + " - Przydzielane wartości są z zakresu <-99;99>";
 
-            //labelki
+            //utworzenie labelek używanych podczas budowania sekcji PANEL WYNIKÓW
             Label lblTitle = MI_58873_ctrl.MI_58873_createLabel("lblTitle", new Point(100, 20), Proj.titleFont, Proj.panelColor, Proj.foreColor, 575, 35, "Mnożenie macierzy kwadratowej 3x3", Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
             Label leftBrackerL = MI_58873_ctrl.MI_58873_createLabel("leftBrackerL", new Point(60, bracketTopPosition), labelFont, Proj.panelColor, Proj.foreColor, lblWidth, lblHeight, "[", laberBorder, Proj.labelAlignement);
             Label leftBracketR = MI_58873_ctrl.MI_58873_createLabel("leftBracketR", new Point(178, bracketTopPosition), labelFont, Proj.panelColor, Proj.foreColor, lblWidth, lblHeight, "]", laberBorder, Proj.labelAlignement);
@@ -56,7 +56,7 @@ namespace _58873_IV_
             Label equalChar = MI_58873_ctrl.MI_58873_createLabel("equalChar", new Point(442, operatorTopPosion), operatorFont, Proj.panelColor, Proj.foreColor, lblWidth, lblHeight, "=", laberBorder, Proj.labelAlignement);
             Label lblDescription = MI_58873_ctrl.MI_58873_createLabel("lblDescription", new Point(25, 300), inputFont, Proj.panelColor, Proj.foreColor, 725, 140, description, Proj.lblBorderStyleFixed, Proj.labelAlignement);
 
-            //textboxy
+            //utworzenie textboxów używanych podczas budowania sekcji PANEL WYNIKÓW
             TextBox left00 = MI_58873_ctrl.createTextField("left00", new Point(120, 105), tbWidth, tbHeight, inputFont, Proj.inputBackColor, Proj.foreColor, tbMaxlength);
             TextBox left01 = MI_58873_ctrl.createTextField("left01", new Point(120, 133), tbWidth, tbHeight, inputFont, Proj.inputBackColor, Proj.foreColor, tbMaxlength);
             TextBox left02 = MI_58873_ctrl.createTextField("left02", new Point(120, 161), tbWidth, tbHeight, inputFont, Proj.inputBackColor, Proj.foreColor, tbMaxlength);
@@ -76,12 +76,12 @@ namespace _58873_IV_
             TextBox right21 = MI_58873_ctrl.createTextField("right21", new Point(390, 133), tbWidth, tbHeight, inputFont, Proj.inputBackColor, Proj.foreColor, tbMaxlength);
             TextBox right22 = MI_58873_ctrl.createTextField("right22", new Point(390, 161), tbWidth, tbHeight, inputFont, Proj.inputBackColor, Proj.foreColor, tbMaxlength);
 
-            //buttony
-            Button countButton = MI_58873_ctrl.MI_58873_createButton("countButton", 135, buttonsPositionY, Proj.btnWidth, Proj.btnHeight, Proj.buttonsFont, Proj.foreColor, Proj.panelColor, "OBLICZ++");
+            //utworzenie buttonów używanych podczas budowania sekcji PANEL WYNIKÓW
+            Button countButton = MI_58873_ctrl.MI_58873_createButton("countButton", 135, buttonsPositionY, Proj.btnWidth, Proj.btnHeight, Proj.buttonsFont, Proj.foreColor, Proj.panelColor, "OBLICZ");
             Button clearButton = MI_58873_ctrl.MI_58873_createButton("clearResultPanel", 495, buttonsPositionY, Proj.btnWidth, Proj.btnHeight, Proj.buttonsFont, Proj.foreColor, Proj.panelColor, "WYCZYŚĆ");
             Button randomButton = MI_58873_ctrl.MI_58873_createButton("randomButton", 313, buttonsPositionY, Proj.btnWidth, Proj.btnHeight, Proj.buttonsFont, Proj.foreColor, Proj.panelColor, "LOSUJ");
 
-            //wciśnięcie klawisza
+            //do wszystkich text boxów na ekranie, przypisuę logikę uruchamianą po wprowadzeniu danych w text box
             left00.KeyPress += new KeyPressEventHandler(MI_58873_keyPress);
             left01.KeyPress += new KeyPressEventHandler(MI_58873_keyPress);
             left02.KeyPress += new KeyPressEventHandler(MI_58873_keyPress);
@@ -101,22 +101,22 @@ namespace _58873_IV_
             right21.KeyPress += new KeyPressEventHandler(MI_58873_keyPress);
             right22.KeyPress += new KeyPressEventHandler(MI_58873_keyPress);
 
-            //kliknięcie w button
+            //przypisanie metod odpowiedzialnych za wykonanie odpowiednich akcji po kliknięciu w buttony
             countButton.Click += new EventHandler(countButton_Button_Click);
             clearButton.Click += new EventHandler(clearResultPanel_Button_Click);
             randomButton.Click += new EventHandler(randomButton_Button_Click);
 
-            //hover
+            //do buttonów przypisuję efekt po najechaniu myszką
             countButton.MouseHover += new EventHandler(Proj.MI_58873_MouseHover);
             clearButton.MouseHover += new EventHandler(Proj.MI_58873_MouseHover);
             randomButton.MouseHover += new EventHandler(Proj.MI_58873_MouseHover);
 
-            //leave
+            //do buttonów przypisuję efekt po zjechaniu myszką
             countButton.MouseLeave += new EventHandler(Proj.MI_58873_MouseLeave);
             clearButton.MouseLeave += new EventHandler(Proj.MI_58873_MouseLeave);
             randomButton.MouseLeave += new EventHandler(Proj.MI_58873_MouseLeave);
 
-            //przypisanie klawiszy do panelu wyników
+            //wszystkie utworzone wcześniej kontrolki, dodaję do panelu wyników
             resultBox.Controls.Add(lblTitle);
             resultBox.Controls.Add(leftBrackerL);
             resultBox.Controls.Add(left00);
@@ -148,7 +148,7 @@ namespace _58873_IV_
             resultBox.Controls.Add(lblDescription);
         }
 
-        //budowanie wyników 
+        //metoda jest odpowiedzialna za zbudowanie kontrolek w których będą przechowywane wyniki działania 
         private void createMatrixResultFields(int[,] wynik)
         {
             //przydatne zmienne
@@ -157,7 +157,9 @@ namespace _58873_IV_
             Font labelFont = new Font("Times New Roman", 120, FontStyle.Regular, GraphicsUnit.Pixel);
             Font resultFont = new Font("Times New Roman", 14, FontStyle.Bold, GraphicsUnit.Pixel);
 
-            //labelki
+            //tworzę odpowiednie labelki
+            //proszę zwrócić uwagę że każda labelka odwołuje się do innego indeksu z przysłanej tablicy wielowymiarowej
+            //są to indeksy reprezentujące wyniki macierzy wynikowej
             Label result00 = MI_58873_ctrl.MI_58873_createLabel("result00", new Point(530, 105), resultFont, Proj.panelColor, Proj.foreColor, szerokoscLabelki, wysokoscLabelki, wynik[0, 0].ToString(), Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
             Label result10 = MI_58873_ctrl.MI_58873_createLabel("result10", new Point(530, 133), resultFont, Proj.panelColor, Proj.foreColor, szerokoscLabelki, wysokoscLabelki, wynik[1, 0].ToString(), Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
             Label result20 = MI_58873_ctrl.MI_58873_createLabel("result20", new Point(530, 161), resultFont, Proj.panelColor, Proj.foreColor, szerokoscLabelki, wysokoscLabelki, wynik[2, 0].ToString(), Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
@@ -170,7 +172,7 @@ namespace _58873_IV_
             Label resultBracketL = MI_58873_ctrl.MI_58873_createLabel("resultBracketL", new Point(470, bracketTopPosition), labelFont, Proj.panelColor, Proj.foreColor, lblWidth, lblHeight, "[", laberBorder, Proj.labelAlignement);
             Label resultBracketR = MI_58873_ctrl.MI_58873_createLabel("resultBracketR", new Point(650, bracketTopPosition), labelFont, Proj.panelColor, Proj.foreColor, lblWidth, lblHeight, "]", laberBorder, Proj.labelAlignement);
 
-            //dodanie kontrolek do ekranu
+            //dodaję kontrolki do panelu wyników
             resultBox.Controls.Add(resultBracketL);
             resultBox.Controls.Add(result00);
             resultBox.Controls.Add(result10);
@@ -184,9 +186,16 @@ namespace _58873_IV_
             resultBox.Controls.Add(resultBracketR);
         }
 
+        //metoda odpowiedzialna za liczenie macierzy
         private int[,] obliczMacierz()
         {
+            //poniżej tworzę listę tablic dwuwymiarowych w których przechowuję pobrane wartości z odpowiednich text fieldów na ekranie
+            //wywołuję metodę buildTables która nam taką listę zbuduje
             List<int[,]> macierze = buildTables();
+            
+            //deklaruję tablice w której będę przechowywał wartości macierzy
+            //pierwsza macierz to tablica z indexem 0 na liście
+            //druga macierz to tablica z indeksiem 1 na liście
             int[,] X = macierze[0];
             int[,] Y = macierze[1];
 
@@ -211,27 +220,45 @@ namespace _58873_IV_
                     }
                 }
             }
+
+            //zwracam tablicę wielowymiarową z wynikami mnożenia macierzy
             return Z;
         }
 
+        //metoda odpowiedzialna za zbudowanie listy tablic dwuwymiarowych do przechowywania pobranych wartości z textfieldów
         private List<int[,]> buildTables()
         {
+            //deklaruję listę którą będę uzupełniał o odpowiednie tablice
             List<int[,]> list = new List<int[,]>();
+            
+            //deklaruję pierwszą tablicę (wartości z pierwszej macierzy) i wywołuję metodę która te wartości przypisze
             int[,] pierwszaMacierz = pobierzWartosciMacierzy("left");
+            //deklaruję drugą tablicę (wartości z drugiej macierzy) i wywołuję metodę która te wartości przypisze
             int[,] drugaMacierz = pobierzWartosciMacierzy("right"); ;
 
+            //dodaję do listy wartości macierzy pobranych ekranu
             list.Add(pierwszaMacierz);
             list.Add(drugaMacierz);
 
+            //zwracam tę listę macierzy
             return list;
         }
 
+        //metoda służy do wyszukania text fieldów przechowujących dane macierzy i zbudowanie tablicy dwuwymiarowej która będzie przechowywać warrtości macierzy
         private int[,] pobierzWartosciMacierzy(string matrix)
         {
+            //deklaruję textfield
+            //robię to raz bo niżej będę tylko zmieniał wartość tej zmiennej
             TextBox textField;
 
+            //w tej metodzie opiszę tylko wyszukanie jednego textfield bo pozostałe sątakie same
+            //różnią się tylko wyszukiwanym indeksem i przypisaniem wartości do zmiennej reprezentującej jej index z macierzy
+
+            //deklaruję zmienną odpwowiedzialną za wyszukiwany index
             int index00 = 0;
+            //wyszukuję kontrolkę na ekranie - tu chodzi o kontrolkę left lub right z indexem 00
             textField = (TextBox)resultBox.Controls.Find(matrix + "00", true)[0];
+            //jeśli kontrolka jest znaleziona to wywołuję metodę do pobrania jej konkretnej wartości
             if (textField != null) index00 = getValue(textField);
 
             int index01 = 0;
@@ -271,53 +298,75 @@ namespace _58873_IV_
             return macierz;
         }
 
+        //metoda odpowiedzialna za pobranie wartości z kontrolki textfield która przechowują wartości macierzy
         private int getValue(TextBox tb)
         {
+            //pobieram tekst z kontrolki
             string returnNumber = tb.Text;
+
+            //sprawdzam czy wartośc text boxa jest pusta i czy komunikat był już użytkownikowi zaprezentowany
             if (returnNumber.Equals("") && showEmptyTextFieldWarning)
             {
+                //jeśli wartość text field jest pusta i komunikat nie był prezentowany - to wyświetlam ostrzerzenie
                 MessageBox.Show("Conajmniej jedno pole w podanych macierzach jest puste.\n\nNieuzupełnione pola przyjmują wartość 0.", "Niewypełnione pole", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                //i informuję program że użytkownik poinformowany
+                //dzięki temu program nie będzie już informował o tym usera w sytuacji gdy więcej pól jest pustych
                 setShowEmptyTextFieldWarning(false);
             }
 
-            if (returnNumber == "")
-            {
-                returnNumber = "0";
-            }
+            //na message box informuję usera że puste wartości będą przyjmowały wartość 0
+            //czyli jeśli text field jest nullem to przypisuję mu wartość 0
+            if (returnNumber == "") returnNumber = "0";
 
+            //deklaruję zmienną do której przypisuję wartość zparsowanej wartości z textfielda
             int parsedReturnNumber = 0;
             try
-            {
+            {   
+                //parsuję pobrany text z textfielda na wartość typu int
                 parsedReturnNumber = Int32.Parse(returnNumber);
             }
             catch (Exception)
             {
+                //jeżeli podczas parsowania jest błąd to wyświetlam użytkownikowy poniższy message box
+                //prawdopodobnie user wprowadził sam znak "-" albo np "3-" bo text fieldy przyjmują tylko numery, backspace i minus(-) 
                 MessageBox.Show("Ups.\n\nCoś poszło nie tak.\nTextBox " +tb.Name +" prawdopodobnie zawiera nieprawidłowe dane: \"" + tb.Text + "\"" + "\nWynik działania jest nieprawidłowy." , "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+            //zwracam pobraną liczbę z textfielda
             return parsedReturnNumber;
         }
 
+        //metoda wywoływanapo kliknięciu w przycisk LOSUJ
         private void randomButton_Button_Click(object sender, EventArgs e)
         {
+            //wyszukuję wszystkie Text Boxy w panelu wyników
             foreach (var element in resultBox.Controls.OfType<TextBox>())
             {
+                //generuję losową liczbę
                 Random random = new Random();
                 int randomInt = random.Next(-99, 99);
+
+                //wygenerowaną lliczbę przypisąję do iterowanego text boxa
                 element.Text = randomInt.ToString();
             }
         }
 
+        //metoda odpowiedzialna  za logikę po kliknięciu przycisku OBLICZ
         private void countButton_Button_Click(object sender, EventArgs e)
         {
+            //deklaruję tablicę przechowującą wynik i wywołuję metodę która mi ten wynik zwróci
             int[,] wynik = obliczMacierz();
+            //tworzę kontrolki w których ten wynik zaprezentuję
             createMatrixResultFields(wynik);
+            //blokuję text boxy na ekranie aby nie można było już ich modyfikować
             blockTextField();
 
+            //wyszukuję butony OBLICZ i LOSUJ
             Button countButton = (Button)MI_58873_workPanel.Controls.Find("countButton", true)[0];
-            if (countButton != null) countButton.Enabled = false;
-
             Button randomButton = (Button)MI_58873_workPanel.Controls.Find("randomButton", true)[0];
+            
+            //jeśli je znalazłem to blokuję je abe nie można już ich było wcisnąć
+            if (countButton != null) countButton.Enabled = false;
             if (randomButton != null) randomButton.Enabled = false;
         }
 
@@ -327,14 +376,16 @@ namespace _58873_IV_
             buildMatrixSection();
         }
 
-        //metoda sprawdzająca czy wciśnięty klawisz jest cyfrą lub backspace
+        //metoda sprawdzająca czy wciśnięty klawisz jest cyfrą lub backspace lub minusem(-)
         private void MI_58873_keyPress(object sender, KeyPressEventArgs e)
         {
             //informuję program że sender jest textBoxem
             TextBox element = sender as TextBox;
 
+            //sprawdzam czy wciśnięty klawisz jest cyfrą lub backspace lub minusem(-)
             if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b' && e.KeyChar != '-')
             {
+                //jeśli tak to prezentuję userowi odpowiedni tooltip
                 e.Handled = true;
                 ToolTip tool = new ToolTip();
                 tool.ToolTipTitle = "To pole przyjmuje tylko cyfry";
@@ -344,22 +395,31 @@ namespace _58873_IV_
             }
         }
 
+        //metoda odppowiedzialna za zablokowanie wszystkich textfieldów które znajdzie na ekranie
+        //chodzi o textfielde w której user wprowadza wartości macierzy
+        //jest to po to ponieważ po kliknięciu OBLICZ nie chcemy żeby user mógł te dane jeszcze modyfikować
         private void blockTextField()
         {
+            //wyszukuję wszystkie text boxy w panelu wyników
             foreach (var element in resultBox.Controls.OfType<TextBox>())
             {
+                //blokuję wszystkie znalezione textboxy
                 element.Enabled = false;
             }
         }
 
+        //metoda która przywraca sekcję Panel wyników do inicjalnej wartości
         private void clearResultPanel()
         {
+            //wyszukuję i czyszczę sekcję panel wyników
             GroupBox MI_58873_gb = (GroupBox)MI_58873_workPanel.Controls.Find("GbResult", true)[0];
             if (MI_58873_gb.Controls.Count > 0) MI_58873_gb.Controls.Clear();
+
+            //zmienną przechowującą info o konieczności zaprezentowania komunikatu gdy jedno z pól było puste, przywracam do wartości inicjalnej
             setShowEmptyTextFieldWarning(true);
         }
 
-        //setter dla flagi do wyświetlania komunikatu
+        //setter dla flagi do wyświetlania komunikatu o pustym textfieldzie
         public void setShowEmptyTextFieldWarning(bool showEmptyTextFieldWarning)
         {
             this.showEmptyTextFieldWarning = showEmptyTextFieldWarning;
