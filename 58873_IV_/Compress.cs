@@ -15,8 +15,6 @@ namespace _58873_IV_
         GroupBox resultBox;
         string MI_58873_textDoSkompresowania = "";
         string textAfterDecompression = "";
-        readonly int btnHeight = 50;
-        readonly int btnWidth = 170;
         readonly Font footerFont = new Font("Times New Roman", 15, FontStyle.Regular, GraphicsUnit.Pixel);
 
         //konstruktor
@@ -35,7 +33,6 @@ namespace _58873_IV_
             int tbPositionY = 84;
             int operatorTopPosion = 85;
             int tbMaxlength = 20;
-            Color tfBackColor = Color.White;
             Font operatorFont = new Font("Arial", 60, FontStyle.Regular, GraphicsUnit.Pixel);
             Font tbFont = new Font("Arial", 23, FontStyle.Bold, GraphicsUnit.Pixel);
             Font titleFont = new Font("Arial", 25, FontStyle.Bold, GraphicsUnit.Pixel);
@@ -51,13 +48,13 @@ namespace _58873_IV_
             Label lblDescription = MI_58873_ctrl.MI_58873_createLabel("lblDescription", new Point(25, 353), footerFont, Proj.panelColor, Proj.foreColor, 725, 90, description, Proj.lblBorderStyleFixed, Proj.labelAlignement);
 
             //textboxy
-            TextBox inputText = MI_58873_ctrl.createTextField("inputText", new Point(163, tbPositionY), tbWidth, tbHeight, tbFont, tfBackColor, Proj.foreColor, tbMaxlength);
+            TextBox inputText = MI_58873_ctrl.createTextField("inputText", new Point(163, tbPositionY), tbWidth, tbHeight, tbFont, Proj.inputBackColor, Proj.foreColor, tbMaxlength);
             inputText.Text = "XADJSOSDAOUAZADXSXOD";
 
             //buttony
-            Button countButton = MI_58873_ctrl.MI_58873_createButton("countButton", 135, buttonsPositionY, btnWidth, btnHeight, Proj.buttonsFont, Proj.foreColor, Proj.panelColor, "KOMPRESUJ");
-            Button clearButton = MI_58873_ctrl.MI_58873_createButton("clearResultPanel", 495, buttonsPositionY, btnWidth, btnHeight, Proj.buttonsFont, Proj.foreColor, Proj.panelColor, "WYCZYŚĆ");
-            Button randomButton = MI_58873_ctrl.MI_58873_createButton("randomButton", 313, buttonsPositionY, btnWidth, btnHeight, Proj.buttonsFont, Proj.foreColor, Proj.panelColor, "LOSUJ");
+            Button countButton = MI_58873_ctrl.MI_58873_createButton("countButton", 135, buttonsPositionY, Proj.btnWidth, Proj.btnHeight, Proj.buttonsFont, Proj.foreColor, Proj.panelColor, "KOMPRESUJ");
+            Button clearButton = MI_58873_ctrl.MI_58873_createButton("clearResultPanel", 495, buttonsPositionY, Proj.btnWidth, Proj.btnHeight, Proj.buttonsFont, Proj.foreColor, Proj.panelColor, "WYCZYŚĆ");
+            Button randomButton = MI_58873_ctrl.MI_58873_createButton("randomButton", 313, buttonsPositionY, Proj.btnWidth, Proj.btnHeight, Proj.buttonsFont, Proj.foreColor, Proj.panelColor, "LOSUJ");
 
             //wciśnięcie klawisza
             inputText.KeyPress += new KeyPressEventHandler(MI_58873_keyPress);
@@ -126,7 +123,7 @@ namespace _58873_IV_
                 Label compressedChars = MI_58873_ctrl.MI_58873_createLabel("compressedChars", new Point(228, 124), footerFont, Proj.panelColor, Proj.foreColor, 500, 18, "Skompresowany ciąg znaków:", BorderStyle.None, Proj.labelAlignement);
 
                 //buttony
-                Button decompressButton = MI_58873_ctrl.MI_58873_createButton("decompressButton", 400, 192, btnWidth, btnHeight, Proj.buttonsFont, Proj.foreColor, Proj.panelColor, "DEKOMPRESUJ");
+                Button decompressButton = MI_58873_ctrl.MI_58873_createButton("decompressButton", 400, 192, Proj.btnWidth, Proj.btnHeight, Proj.buttonsFont, Proj.foreColor, Proj.panelColor, "DEKOMPRESUJ");
                 decompressButton.Click += new EventHandler(decompressButton_Button_Click);
                 decompressButton.MouseHover += new EventHandler(Proj.MI_58873_MouseHover);
                 decompressButton.MouseLeave += new EventHandler(Proj.MI_58873_MouseLeave);

@@ -32,17 +32,13 @@ namespace _58873_IV_
         {
             //przydatne zmienne
             int tbMaxlength = 2;
-            int btnWidth = 170;
-            int btnHeight = 50;
             int tbWidth = 25;
             int tbHeight = 25;
             int buttonsPositionY = 235;
             int operatorTopPosion = 85;
-            Color tfBackColor = Color.White;
             Font labelFont = new Font("Times New Roman", 120, FontStyle.Regular, GraphicsUnit.Pixel);
             Font operatorFont = new Font("Times New Roman", 60, FontStyle.Regular, GraphicsUnit.Pixel);
             Font inputFont = new Font("Times New Roman", 15, FontStyle.Regular, GraphicsUnit.Pixel);
-            Font titleFont = new Font("Arial", 25, FontStyle.Bold, GraphicsUnit.Pixel);
             string description = " - Program oblicza iloczyn dwóch macierzy\n"
                 + " - Dostępna jest macierz 3x3\n"
                 + " - Pola tekstowe przyjmują tylko liczby\n"
@@ -51,7 +47,7 @@ namespace _58873_IV_
                 + " - Przydzielane wartości są z zakresu <-99;99>";
 
             //labelki
-            Label lblTitle = MI_58873_ctrl.MI_58873_createLabel("lblTitle", new Point(100, 20), titleFont, Proj.panelColor, Proj.foreColor, 575, 35, "Mnożenie macierzy kwadratowej 3x3", Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
+            Label lblTitle = MI_58873_ctrl.MI_58873_createLabel("lblTitle", new Point(100, 20), Proj.titleFont, Proj.panelColor, Proj.foreColor, 575, 35, "Mnożenie macierzy kwadratowej 3x3", Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
             Label leftBrackerL = MI_58873_ctrl.MI_58873_createLabel("leftBrackerL", new Point(60, bracketTopPosition), labelFont, Proj.panelColor, Proj.foreColor, lblWidth, lblHeight, "[", laberBorder, Proj.labelAlignement);
             Label leftBracketR = MI_58873_ctrl.MI_58873_createLabel("leftBracketR", new Point(178, bracketTopPosition), labelFont, Proj.panelColor, Proj.foreColor, lblWidth, lblHeight, "]", laberBorder, Proj.labelAlignement);
             Label rightBracketL = MI_58873_ctrl.MI_58873_createLabel("rightBracketL", new Point(270, bracketTopPosition), labelFont, Proj.panelColor, Proj.foreColor, lblWidth, lblHeight, "[", laberBorder, Proj.labelAlignement);
@@ -60,31 +56,30 @@ namespace _58873_IV_
             Label equalChar = MI_58873_ctrl.MI_58873_createLabel("equalChar", new Point(442, operatorTopPosion), operatorFont, Proj.panelColor, Proj.foreColor, lblWidth, lblHeight, "=", laberBorder, Proj.labelAlignement);
             Label lblDescription = MI_58873_ctrl.MI_58873_createLabel("lblDescription", new Point(25, 300), inputFont, Proj.panelColor, Proj.foreColor, 725, 140, description, Proj.lblBorderStyleFixed, Proj.labelAlignement);
 
-
             //textboxy
-            TextBox left00 = MI_58873_ctrl.createTextField("left00", new Point(120, 105), tbWidth, tbHeight, inputFont, tfBackColor, Proj.foreColor, tbMaxlength);
-            TextBox left01 = MI_58873_ctrl.createTextField("left01", new Point(120, 133), tbWidth, tbHeight, inputFont, tfBackColor, Proj.foreColor, tbMaxlength);
-            TextBox left02 = MI_58873_ctrl.createTextField("left02", new Point(120, 161), tbWidth, tbHeight, inputFont, tfBackColor, Proj.foreColor, tbMaxlength);
-            TextBox left10 = MI_58873_ctrl.createTextField("left10", new Point(150, 105), tbWidth, tbHeight, inputFont, tfBackColor, Proj.foreColor, tbMaxlength);
-            TextBox left11 = MI_58873_ctrl.createTextField("left11", new Point(150, 133), tbWidth, tbHeight, inputFont, tfBackColor, Proj.foreColor, tbMaxlength);
-            TextBox left12 = MI_58873_ctrl.createTextField("left12", new Point(150, 161), tbWidth, tbHeight, inputFont, tfBackColor, Proj.foreColor, tbMaxlength);
-            TextBox left20 = MI_58873_ctrl.createTextField("left20", new Point(180, 105), tbWidth, tbHeight, inputFont, tfBackColor, Proj.foreColor, tbMaxlength);
-            TextBox left21 = MI_58873_ctrl.createTextField("left21", new Point(180, 133), tbWidth, tbHeight, inputFont, tfBackColor, Proj.foreColor, tbMaxlength);
-            TextBox left22 = MI_58873_ctrl.createTextField("left22", new Point(180, 161), tbWidth, tbHeight, inputFont, tfBackColor, Proj.foreColor, tbMaxlength);
-            TextBox right00 = MI_58873_ctrl.createTextField("right00", new Point(330, 105), tbWidth, tbHeight, inputFont, tfBackColor, Proj.foreColor, tbMaxlength);
-            TextBox right01 = MI_58873_ctrl.createTextField("right01", new Point(330, 133), tbWidth, tbHeight, inputFont, tfBackColor, Proj.foreColor, tbMaxlength);
-            TextBox right02 = MI_58873_ctrl.createTextField("right02", new Point(330, 161), tbWidth, tbHeight, inputFont, tfBackColor, Proj.foreColor, tbMaxlength);
-            TextBox right10 = MI_58873_ctrl.createTextField("right10", new Point(360, 105), tbWidth, tbHeight, inputFont, tfBackColor, Proj.foreColor, tbMaxlength);
-            TextBox right11 = MI_58873_ctrl.createTextField("right11", new Point(360, 133), tbWidth, tbHeight, inputFont, tfBackColor, Proj.foreColor, tbMaxlength);
-            TextBox right12 = MI_58873_ctrl.createTextField("right12", new Point(360, 161), tbWidth, tbHeight, inputFont, tfBackColor, Proj.foreColor, tbMaxlength);
-            TextBox right20 = MI_58873_ctrl.createTextField("right20", new Point(390, 105), tbWidth, tbHeight, inputFont, tfBackColor, Proj.foreColor, tbMaxlength);
-            TextBox right21 = MI_58873_ctrl.createTextField("right21", new Point(390, 133), tbWidth, tbHeight, inputFont, tfBackColor, Proj.foreColor, tbMaxlength);
-            TextBox right22 = MI_58873_ctrl.createTextField("right22", new Point(390, 161), tbWidth, tbHeight, inputFont, tfBackColor, Proj.foreColor, tbMaxlength);
+            TextBox left00 = MI_58873_ctrl.createTextField("left00", new Point(120, 105), tbWidth, tbHeight, inputFont, Proj.inputBackColor, Proj.foreColor, tbMaxlength);
+            TextBox left01 = MI_58873_ctrl.createTextField("left01", new Point(120, 133), tbWidth, tbHeight, inputFont, Proj.inputBackColor, Proj.foreColor, tbMaxlength);
+            TextBox left02 = MI_58873_ctrl.createTextField("left02", new Point(120, 161), tbWidth, tbHeight, inputFont, Proj.inputBackColor, Proj.foreColor, tbMaxlength);
+            TextBox left10 = MI_58873_ctrl.createTextField("left10", new Point(150, 105), tbWidth, tbHeight, inputFont, Proj.inputBackColor, Proj.foreColor, tbMaxlength);
+            TextBox left11 = MI_58873_ctrl.createTextField("left11", new Point(150, 133), tbWidth, tbHeight, inputFont, Proj.inputBackColor, Proj.foreColor, tbMaxlength);
+            TextBox left12 = MI_58873_ctrl.createTextField("left12", new Point(150, 161), tbWidth, tbHeight, inputFont, Proj.inputBackColor, Proj.foreColor, tbMaxlength);
+            TextBox left20 = MI_58873_ctrl.createTextField("left20", new Point(180, 105), tbWidth, tbHeight, inputFont, Proj.inputBackColor, Proj.foreColor, tbMaxlength);
+            TextBox left21 = MI_58873_ctrl.createTextField("left21", new Point(180, 133), tbWidth, tbHeight, inputFont, Proj.inputBackColor, Proj.foreColor, tbMaxlength);
+            TextBox left22 = MI_58873_ctrl.createTextField("left22", new Point(180, 161), tbWidth, tbHeight, inputFont, Proj.inputBackColor, Proj.foreColor, tbMaxlength);
+            TextBox right00 = MI_58873_ctrl.createTextField("right00", new Point(330, 105), tbWidth, tbHeight, inputFont, Proj.inputBackColor, Proj.foreColor, tbMaxlength);
+            TextBox right01 = MI_58873_ctrl.createTextField("right01", new Point(330, 133), tbWidth, tbHeight, inputFont, Proj.inputBackColor, Proj.foreColor, tbMaxlength);
+            TextBox right02 = MI_58873_ctrl.createTextField("right02", new Point(330, 161), tbWidth, tbHeight, inputFont, Proj.inputBackColor, Proj.foreColor, tbMaxlength);
+            TextBox right10 = MI_58873_ctrl.createTextField("right10", new Point(360, 105), tbWidth, tbHeight, inputFont, Proj.inputBackColor, Proj.foreColor, tbMaxlength);
+            TextBox right11 = MI_58873_ctrl.createTextField("right11", new Point(360, 133), tbWidth, tbHeight, inputFont, Proj.inputBackColor, Proj.foreColor, tbMaxlength);
+            TextBox right12 = MI_58873_ctrl.createTextField("right12", new Point(360, 161), tbWidth, tbHeight, inputFont, Proj.inputBackColor, Proj.foreColor, tbMaxlength);
+            TextBox right20 = MI_58873_ctrl.createTextField("right20", new Point(390, 105), tbWidth, tbHeight, inputFont, Proj.inputBackColor, Proj.foreColor, tbMaxlength);
+            TextBox right21 = MI_58873_ctrl.createTextField("right21", new Point(390, 133), tbWidth, tbHeight, inputFont, Proj.inputBackColor, Proj.foreColor, tbMaxlength);
+            TextBox right22 = MI_58873_ctrl.createTextField("right22", new Point(390, 161), tbWidth, tbHeight, inputFont, Proj.inputBackColor, Proj.foreColor, tbMaxlength);
 
             //buttony
-            Button countButton = MI_58873_ctrl.MI_58873_createButton("countButton", 135, buttonsPositionY, btnWidth, btnHeight, Proj.buttonsFont, Proj.foreColor, Proj.panelColor, "OBLICZ");
-            Button clearButton = MI_58873_ctrl.MI_58873_createButton("clearResultPanel", 495, buttonsPositionY, btnWidth, btnHeight, Proj.buttonsFont, Proj.foreColor, Proj.panelColor, "WYCZYŚĆ");
-            Button randomButton = MI_58873_ctrl.MI_58873_createButton("randomButton", 313, buttonsPositionY, btnWidth, btnHeight, Proj.buttonsFont, Proj.foreColor, Proj.panelColor, "LOSUJ");
+            Button countButton = MI_58873_ctrl.MI_58873_createButton("countButton", 135, buttonsPositionY, Proj.btnWidth, Proj.btnHeight, Proj.buttonsFont, Proj.foreColor, Proj.panelColor, "OBLICZ");
+            Button clearButton = MI_58873_ctrl.MI_58873_createButton("clearResultPanel", 495, buttonsPositionY, Proj.btnWidth, Proj.btnHeight, Proj.buttonsFont, Proj.foreColor, Proj.panelColor, "WYCZYŚĆ");
+            Button randomButton = MI_58873_ctrl.MI_58873_createButton("randomButton", 313, buttonsPositionY, Proj.btnWidth, Proj.btnHeight, Proj.buttonsFont, Proj.foreColor, Proj.panelColor, "LOSUJ");
 
             //wciśnięcie klawisza
             left00.KeyPress += new KeyPressEventHandler(MI_58873_keyPress);

@@ -20,6 +20,12 @@ namespace _58873_IV_
         public static readonly BorderStyle lblBorderStyleFixed = BorderStyle.FixedSingle;
         public static readonly ContentAlignment labelAlignement = ContentAlignment.MiddleLeft;
 
+
+        public static readonly int btnWidth = 145;
+        public static readonly int btnHeight = 50;
+        public static readonly Font titleFont = new Font("Arial", 25, FontStyle.Bold, GraphicsUnit.Pixel);
+        public static readonly Color inputBackColor = Color.White;
+
         public Proj()
         {
             InitializeComponent();
@@ -36,8 +42,6 @@ namespace _58873_IV_
         {
             //przydane zmienne
             Font footerFont = new Font("Microsoft Sans Serif", 28, FontStyle.Bold);
-            int btnWidth = 145;
-            int btnHeight = 50;
             int btnPositionX = 12;
 
             //groupboxy
@@ -49,7 +53,7 @@ namespace _58873_IV_
             Label personalData = MI_58873_ctrl.MI_58873_createLabel("personalData", new Point(100, 25), footerFont, panelColor, Color.Red, 750, 45, "Mariusz Iwański, Index: 58873, Grupa IV", BorderStyle.None, ContentAlignment.MiddleLeft);
 
             //buttony
-            Button mainSortButton = MI_58873_ctrl.MI_58873_createButton("mainSortButton", btnPositionX, 25, btnWidth, btnHeight, buttonsFont, foreColor, panelColor, "ALGORYTM SORTUJĄCY");
+            Button mainSortButton = MI_58873_ctrl.MI_58873_createButton("mainSortButton", btnPositionX, 25, btnWidth, btnHeight, buttonsFont, foreColor, panelColor, "ALGORYTM SORTUJĄCY+++");
             Button mainMathButton = MI_58873_ctrl.MI_58873_createButton("mainMathButton", btnPositionX, 85, btnWidth, btnHeight, buttonsFont, foreColor, panelColor, "ALGORYTM MATEMATYCZNY");
             Button mainZipButton = MI_58873_ctrl.MI_58873_createButton("mainZipButton", btnPositionX, 140, btnWidth, btnHeight, buttonsFont, foreColor, panelColor, "ALGORYTM KOMPRESUJĄCY");
             Button MI_58873_btnClear = MI_58873_ctrl.MI_58873_createButton("BtnClear", btnPositionX, 330, btnWidth, btnHeight, buttonsFont, foreColor, panelColor, "WYCZYŚĆ EKRAN");

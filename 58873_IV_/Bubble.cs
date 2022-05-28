@@ -27,18 +27,14 @@ namespace _58873_IV_
         public void buildBubbleSection()
         {
             //przydatne zmienne
-            int btnWidth = 170;
-            int btnHeight = 50;
             int tbWidth = 80;
             int tbHeight = 35;
             int buttonsPositionY = 235;
             int tbPositionY = 90;
             int operatorTopPosion = 85;
             int tbMaxlength = 5;
-            Color tfBackColor = Color.White;
             Font labelFont = new Font("Times New Roman", 120, FontStyle.Regular, GraphicsUnit.Pixel);
             Font operatorFont = new Font("Times New Roman", 60, FontStyle.Regular, GraphicsUnit.Pixel);
-            Font titleFont = new Font("Arial", 25, FontStyle.Bold, GraphicsUnit.Pixel);
             Font tbFont = new Font("Arial", 25, FontStyle.Bold, GraphicsUnit.Pixel);
             string description = " - Program wynokonuje sortowanie bąbelkowe na podstawie wprowadzonych lub wylosowanych liczb\n"
                 + " - Wylosowane liczby są z zakresu <-9999, 99999>\n"
@@ -48,24 +44,24 @@ namespace _58873_IV_
                 + " - Wszystkie niedozwolone operacje starałem się przewidziec i zaprezentować odpowiedni komunikat";
 
             //labelki
-            Label lblTitle = MI_58873_ctrl.MI_58873_createLabel("lblTitle", new Point(100, 20), titleFont, Proj.panelColor, Proj.foreColor, 575, 35, "Sortowanie bąbelkowe", Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
+            Label lblTitle = MI_58873_ctrl.MI_58873_createLabel("lblTitle", new Point(100, 20), Proj.titleFont, Proj.panelColor, Proj.foreColor, 575, 35, "Sortowanie bąbelkowe", Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
             Label lblDescription = MI_58873_ctrl.MI_58873_createLabel("lblDescription", new Point(25, 300), footerFont, Proj.panelColor, Proj.foreColor, 725, 140, description, Proj.lblBorderStyleFixed, Proj.labelAlignement);
             Label lblfillFields = MI_58873_ctrl.MI_58873_createLabel("lblfillFields", new Point(195, 63), footerFont, Proj.panelColor, Proj.foreColor, 600, 18, "Wprowadź liczby do posortowania lub kliknij w przycisk \"LOSUJ\"", BorderStyle.None, Proj.labelAlignement);
 
             //textboxy
-            TextBox tf0 = MI_58873_ctrl.createTextField("tf0", new Point(30, tbPositionY), tbWidth, tbHeight, tbFont, tfBackColor, Proj.foreColor, tbMaxlength);
-            TextBox tf1 = MI_58873_ctrl.createTextField("tf1", new Point(120, tbPositionY), tbWidth, tbHeight, tbFont, tfBackColor, Proj.foreColor, tbMaxlength);
-            TextBox tf2 = MI_58873_ctrl.createTextField("tf2", new Point(210, tbPositionY), tbWidth, tbHeight, tbFont, tfBackColor, Proj.foreColor, tbMaxlength);
-            TextBox tf3 = MI_58873_ctrl.createTextField("tf3", new Point(300, tbPositionY), tbWidth, tbHeight, tbFont, tfBackColor, Proj.foreColor, tbMaxlength);
-            TextBox tf4 = MI_58873_ctrl.createTextField("tf4", new Point(390, tbPositionY), tbWidth, tbHeight, tbFont, tfBackColor, Proj.foreColor, tbMaxlength);
-            TextBox tf5 = MI_58873_ctrl.createTextField("tf5", new Point(480, tbPositionY), tbWidth, tbHeight, tbFont, tfBackColor, Proj.foreColor, tbMaxlength);
-            TextBox tf6 = MI_58873_ctrl.createTextField("tf6", new Point(570, tbPositionY), tbWidth, tbHeight, tbFont, tfBackColor, Proj.foreColor, tbMaxlength);
-            TextBox tf7 = MI_58873_ctrl.createTextField("tf7", new Point(660, tbPositionY), tbWidth, tbHeight, tbFont, tfBackColor, Proj.foreColor, tbMaxlength);
+            TextBox tf0 = MI_58873_ctrl.createTextField("tf0", new Point(30, tbPositionY), tbWidth, tbHeight, tbFont, Proj.inputBackColor, Proj.foreColor, tbMaxlength);
+            TextBox tf1 = MI_58873_ctrl.createTextField("tf1", new Point(120, tbPositionY), tbWidth, tbHeight, tbFont, Proj.inputBackColor, Proj.foreColor, tbMaxlength);
+            TextBox tf2 = MI_58873_ctrl.createTextField("tf2", new Point(210, tbPositionY), tbWidth, tbHeight, tbFont, Proj.inputBackColor, Proj.foreColor, tbMaxlength);
+            TextBox tf3 = MI_58873_ctrl.createTextField("tf3", new Point(300, tbPositionY), tbWidth, tbHeight, tbFont, Proj.inputBackColor, Proj.foreColor, tbMaxlength);
+            TextBox tf4 = MI_58873_ctrl.createTextField("tf4", new Point(390, tbPositionY), tbWidth, tbHeight, tbFont, Proj.inputBackColor, Proj.foreColor, tbMaxlength);
+            TextBox tf5 = MI_58873_ctrl.createTextField("tf5", new Point(480, tbPositionY), tbWidth, tbHeight, tbFont, Proj.inputBackColor, Proj.foreColor, tbMaxlength);
+            TextBox tf6 = MI_58873_ctrl.createTextField("tf6", new Point(570, tbPositionY), tbWidth, tbHeight, tbFont, Proj.inputBackColor, Proj.foreColor, tbMaxlength);
+            TextBox tf7 = MI_58873_ctrl.createTextField("tf7", new Point(660, tbPositionY), tbWidth, tbHeight, tbFont, Proj.inputBackColor, Proj.foreColor, tbMaxlength);
 
             //buttony
-            Button countButton = MI_58873_ctrl.MI_58873_createButton("countButton", 135, buttonsPositionY, btnWidth, btnHeight, Proj.buttonsFont, Proj.foreColor, Proj.panelColor, "SORTUJ");
-            Button clearButton = MI_58873_ctrl.MI_58873_createButton("clearResultPanel", 495, buttonsPositionY, btnWidth, btnHeight, Proj.buttonsFont, Proj.foreColor, Proj.panelColor, "WYCZYŚĆ");
-            Button randomButton = MI_58873_ctrl.MI_58873_createButton("randomButton", 313, buttonsPositionY, btnWidth, btnHeight, Proj.buttonsFont, Proj.foreColor, Proj.panelColor, "LOSUJ");
+            Button countButton = MI_58873_ctrl.MI_58873_createButton("countButton", 135, buttonsPositionY, Proj.btnWidth, Proj.btnHeight, Proj.buttonsFont, Proj.foreColor, Proj.panelColor, "SORTUJ");
+            Button clearButton = MI_58873_ctrl.MI_58873_createButton("clearResultPanel", 495, buttonsPositionY, Proj.btnWidth, Proj.btnHeight, Proj.buttonsFont, Proj.foreColor, Proj.panelColor, "WYCZYŚĆ");
+            Button randomButton = MI_58873_ctrl.MI_58873_createButton("randomButton", 313, buttonsPositionY, Proj.btnWidth, Proj.btnHeight, Proj.buttonsFont, Proj.foreColor, Proj.panelColor, "LOSUJ");
 
             //wciśnięcie klawisza
             tf0.KeyPress += new KeyPressEventHandler(MI_58873_keyPress);
