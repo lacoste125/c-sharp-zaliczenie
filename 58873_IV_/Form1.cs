@@ -16,7 +16,7 @@ namespace _58873_IV_
 
         //zmienne wykorzystywane w klasach Form1, matrix i bubble
         public static readonly Color foreColor = Color.Black;
-        public static readonly Color buttonColor = Color.FromKnownColor(KnownColor.Control);
+        public static readonly Color succesColor = Color.FromArgb(123, 186, 0);
         public static readonly ContentAlignment lblTxtCenter = ContentAlignment.MiddleCenter;
         public static readonly BorderStyle lblBorderStyleFixed = BorderStyle.FixedSingle;
         public static readonly ContentAlignment labelAlignement = ContentAlignment.MiddleLeft;
@@ -170,7 +170,7 @@ namespace _58873_IV_
             //informuję program że element o którym mowa to button
             Button MI_58873_button = sender as Button;
             //po zjechaniu myszką z buttona przypisue mu spowrotem inicjalną wartość
-            if (MI_58873_button != null) MI_58873_button.BackColor = buttonColor;
+            if (MI_58873_button != null) MI_58873_button.BackColor = Color.FromKnownColor(KnownColor.Control);
         }
 
         //metoda odpowiedzialna za 

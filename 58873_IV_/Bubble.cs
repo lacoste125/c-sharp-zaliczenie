@@ -284,7 +284,10 @@ namespace _58873_IV_
             for (int i = 0; i < sortedList.Count; i++)
             {
                 lbl = (Label)resultBox.Controls.Find("lbl" + i, true)[0];
-                if (lbl != null) lbl.Text = sortedList[i].ToString();
+                if (lbl != null) { 
+                    lbl.Text = sortedList[i].ToString();
+                    lbl.BackColor = Proj.succesColor;
+                }
             }
         }
     }

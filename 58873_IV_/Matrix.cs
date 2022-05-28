@@ -161,14 +161,23 @@ namespace _58873_IV_
             //proszę zwrócić uwagę że każda labelka odwołuje się do innego indeksu z przysłanej tablicy wielowymiarowej
             //są to indeksy reprezentujące wyniki macierzy wynikowej
             Label result00 = MI_58873_ctrl.MI_58873_createLabel("result00", new Point(530, 105), resultFont, szerokoscLabelki, wysokoscLabelki, wynik[0, 0].ToString(), Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
+            result00.BackColor = Proj.succesColor;
             Label result10 = MI_58873_ctrl.MI_58873_createLabel("result10", new Point(530, 133), resultFont, szerokoscLabelki, wysokoscLabelki, wynik[1, 0].ToString(), Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
+            result10.BackColor = Proj.succesColor;
             Label result20 = MI_58873_ctrl.MI_58873_createLabel("result20", new Point(530, 161), resultFont, szerokoscLabelki, wysokoscLabelki, wynik[2, 0].ToString(), Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
+            result20.BackColor = Proj.succesColor; 
             Label result01 = MI_58873_ctrl.MI_58873_createLabel("result01", new Point(580, 105), resultFont, szerokoscLabelki, wysokoscLabelki, wynik[0, 1].ToString(), Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
+            result01.BackColor = Proj.succesColor; 
             Label result11 = MI_58873_ctrl.MI_58873_createLabel("result11", new Point(580, 133), resultFont, szerokoscLabelki, wysokoscLabelki, wynik[1, 1].ToString(), Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
+            result11.BackColor = Proj.succesColor; 
             Label result21 = MI_58873_ctrl.MI_58873_createLabel("result21", new Point(580, 161), resultFont, szerokoscLabelki, wysokoscLabelki, wynik[2, 1].ToString(), Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
+            result21.BackColor = Proj.succesColor; 
             Label result02 = MI_58873_ctrl.MI_58873_createLabel("result02", new Point(630, 105), resultFont, szerokoscLabelki, wysokoscLabelki, wynik[0, 2].ToString(), Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
+            result02.BackColor = Proj.succesColor; 
             Label result12 = MI_58873_ctrl.MI_58873_createLabel("result12", new Point(630, 133), resultFont, szerokoscLabelki, wysokoscLabelki, wynik[1, 2].ToString(), Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
+            result12.BackColor = Proj.succesColor; 
             Label result22 = MI_58873_ctrl.MI_58873_createLabel("result22", new Point(630, 161), resultFont, szerokoscLabelki, wysokoscLabelki, wynik[2, 2].ToString(), Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
+            result22.BackColor = Proj.succesColor; 
             Label resultBracketL = MI_58873_ctrl.MI_58873_createLabel("resultBracketL", new Point(470, bracketTopPosition), labelFont, lblWidth, lblHeight, "[", laberBorder, Proj.labelAlignement);
             Label resultBracketR = MI_58873_ctrl.MI_58873_createLabel("resultBracketR", new Point(650, bracketTopPosition), labelFont, lblWidth, lblHeight, "]", laberBorder, Proj.labelAlignement);
 
@@ -329,7 +338,7 @@ namespace _58873_IV_
             {
                 //jeżeli podczas parsowania jest błąd to wyświetlam użytkownikowy poniższy message box
                 //prawdopodobnie user wprowadził sam znak "-" albo np "3-" bo text fieldy przyjmują tylko numery, backspace i minus(-) 
-                MessageBox.Show("Ups.\n\nCoś poszło nie tak.\nTextBox " + tb.Name + " prawdopodobnie zawiera nieprawidłowe dane: \"" + tb.Text + "\"" + "\nWynik działania jest nieprawidłowy.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Ups.\n\nCoś poszło nie tak.\nTextBox " + tb.Name + " prawdopodobnie zawiera nieprawidłowe dane: \"" + tb.Text + "\"" + "\nW miejsce nieprawidłowego elementu zostało podstawione 0 !!!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             //zwracam pobraną liczbę z textfielda

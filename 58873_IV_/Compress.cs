@@ -141,9 +141,12 @@ namespace _58873_IV_
                 //blokuję buttony żeby nie można było ich użyć 
                 blockResultButtons();
 
+                //wysokość poniższych labelek
+                int labelY = 120;
+
                 //labelki
-                Label titleChars = MI_58873_ctrl.MI_58873_createLabel("titleChars", new Point(7, 124), Proj.footerFont, 200, 18, "Zestawienie znaków:", BorderStyle.None, Proj.labelAlignement);
-                Label compressedChars = MI_58873_ctrl.MI_58873_createLabel("compressedChars", new Point(228, 124), Proj.footerFont, 500, 18, "Skompresowany ciąg znaków:", BorderStyle.None, Proj.labelAlignement);
+                Label titleChars = MI_58873_ctrl.MI_58873_createLabel("titleChars", new Point(7, labelY), Proj.footerFont, 200, 18, "Zestawienie znaków:", BorderStyle.None, Proj.labelAlignement);
+                Label compressedChars = MI_58873_ctrl.MI_58873_createLabel("compressedChars", new Point(228, labelY), Proj.footerFont, 500, 18, "Skompresowany ciąg znaków:", BorderStyle.None, Proj.labelAlignement);
 
                 //buttony
                 Button decompressButton = MI_58873_ctrl.MI_58873_createButton("decompressButton", 400, 192, "DEKOMPRESUJ");
@@ -185,6 +188,8 @@ namespace _58873_IV_
                 {
                     //włączam ten list box - presentuję go userowi
                     resultSpace.Visible = true;
+                    //koloruję go na zielono
+                    resultSpace.BackColor = Proj.succesColor;
 
                     //iteruję się po liście znaków i przypisuję jej wartości do kolejnych wierszy listBox
                     MI_58873_znaki.ForEach(x => resultSpace.Items.Add("Znak: " + x.MI_58873_Znak + " Ilość: " + x.MI_58873_Ilosc + " Kod Binarny: " + x.MI_58873_BinaryCode));
@@ -196,6 +201,7 @@ namespace _58873_IV_
                     //ustawiam jej obramowanie tak aby była labelka widoczna
                     //bo tak na prawdę to ta labelka była już tam wcześniej :)
                     resultCodesSpace.BorderStyle = Proj.lblBorderStyleFixed;
+                    resultCodesSpace.BackColor = Proj.succesColor;
 
                     //dodaje do labelki znak rozpoczynający skompresowany ciąg
                     resultCodesSpace.Text = "[";
@@ -339,7 +345,7 @@ namespace _58873_IV_
             {
                 //jeśli jest taki sam
                 //koloruję labelkę z rezultatem na zielono
-                resultLabel.BackColor = Color.Green;
+                resultLabel.BackColor = Proj.succesColor;
 
                 //dodanie kontrolki do ekranu
                 resultBox.Controls.Add(resultLabel);
