@@ -37,7 +37,7 @@ namespace _58873_IV_
             int buttonsPositionY = 235;
             int operatorTopPosion = 85;
             Font labelFont = new Font("Times New Roman", 120, FontStyle.Regular, GraphicsUnit.Pixel);
-            Font inputFont = new Font("Times New Roman", 15, FontStyle.Regular, GraphicsUnit.Pixel);
+            Font inputFont = new Font("Arial", 15, FontStyle.Regular, GraphicsUnit.Pixel);
             Font operatorFont = new Font("Times New Roman", 60, FontStyle.Regular, GraphicsUnit.Pixel);
             string description = " - Program oblicza iloczyn dwóch macierzy\n"
                 + " - Dostępna jest macierz 3x3\n"
@@ -47,14 +47,14 @@ namespace _58873_IV_
                 + " - Przydzielane wartości są z zakresu <-99;99>";
 
             //utworzenie labelek używanych podczas budowania sekcji PANEL WYNIKÓW
-            Label lblTitle = MI_58873_ctrl.MI_58873_createLabel("lblTitle", new Point(100, 20), Proj.titleFont, Proj.panelColor, Proj.foreColor, 575, 35, "Mnożenie macierzy kwadratowej 3x3", Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
-            Label leftBrackerL = MI_58873_ctrl.MI_58873_createLabel("leftBrackerL", new Point(60, bracketTopPosition), labelFont, Proj.panelColor, Proj.foreColor, lblWidth, lblHeight, "[", laberBorder, Proj.labelAlignement);
-            Label leftBracketR = MI_58873_ctrl.MI_58873_createLabel("leftBracketR", new Point(178, bracketTopPosition), labelFont, Proj.panelColor, Proj.foreColor, lblWidth, lblHeight, "]", laberBorder, Proj.labelAlignement);
-            Label rightBracketL = MI_58873_ctrl.MI_58873_createLabel("rightBracketL", new Point(270, bracketTopPosition), labelFont, Proj.panelColor, Proj.foreColor, lblWidth, lblHeight, "[", laberBorder, Proj.labelAlignement);
-            Label rightBracketR = MI_58873_ctrl.MI_58873_createLabel("rightBracketR", new Point(388, bracketTopPosition), labelFont, Proj.panelColor, Proj.foreColor, lblWidth, lblHeight, "]", laberBorder, Proj.labelAlignement);
-            Label xChar = MI_58873_ctrl.MI_58873_createLabel("xChar", new Point(235, operatorTopPosion), operatorFont, Proj.panelColor, Proj.foreColor, lblWidth, lblHeight, "X", laberBorder, Proj.labelAlignement);
-            Label equalChar = MI_58873_ctrl.MI_58873_createLabel("equalChar", new Point(442, operatorTopPosion), operatorFont, Proj.panelColor, Proj.foreColor, lblWidth, lblHeight, "=", laberBorder, Proj.labelAlignement);
-            Label lblDescription = MI_58873_ctrl.MI_58873_createLabel("lblDescription", new Point(25, 300), inputFont, Proj.panelColor, Proj.foreColor, 725, 140, description, Proj.lblBorderStyleFixed, Proj.labelAlignement);
+            Label lblTitle = MI_58873_ctrl.MI_58873_createLabel("lblTitle", new Point(100, 20), Proj.titleFont, 575, 35, "Mnożenie macierzy kwadratowej 3x3", Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
+            Label leftBrackerL = MI_58873_ctrl.MI_58873_createLabel("leftBrackerL", new Point(60, bracketTopPosition), labelFont, lblWidth, lblHeight, "[", laberBorder, Proj.labelAlignement);
+            Label leftBracketR = MI_58873_ctrl.MI_58873_createLabel("leftBracketR", new Point(178, bracketTopPosition), labelFont, lblWidth, lblHeight, "]", laberBorder, Proj.labelAlignement);
+            Label rightBracketL = MI_58873_ctrl.MI_58873_createLabel("rightBracketL", new Point(270, bracketTopPosition), labelFont, lblWidth, lblHeight, "[", laberBorder, Proj.labelAlignement);
+            Label rightBracketR = MI_58873_ctrl.MI_58873_createLabel("rightBracketR", new Point(388, bracketTopPosition), labelFont, lblWidth, lblHeight, "]", laberBorder, Proj.labelAlignement);
+            Label xChar = MI_58873_ctrl.MI_58873_createLabel("xChar", new Point(235, operatorTopPosion), operatorFont, lblWidth, lblHeight, "X", laberBorder, Proj.labelAlignement);
+            Label equalChar = MI_58873_ctrl.MI_58873_createLabel("equalChar", new Point(442, operatorTopPosion), operatorFont, lblWidth, lblHeight, "=", laberBorder, Proj.labelAlignement);
+            Label lblDescription = MI_58873_ctrl.MI_58873_createLabel("lblDescription", new Point(25, 300), inputFont, 725, 140, description, Proj.lblBorderStyleFixed, Proj.labelAlignement);
 
             //utworzenie textboxów używanych podczas budowania sekcji PANEL WYNIKÓW
             TextBox left00 = MI_58873_ctrl.createTextField("left00", new Point(120, 105), tbWidth, tbHeight, inputFont, Proj.inputBackColor, Proj.foreColor, tbMaxlength);
@@ -77,9 +77,9 @@ namespace _58873_IV_
             TextBox right22 = MI_58873_ctrl.createTextField("right22", new Point(390, 161), tbWidth, tbHeight, inputFont, Proj.inputBackColor, Proj.foreColor, tbMaxlength);
 
             //utworzenie buttonów używanych podczas budowania sekcji PANEL WYNIKÓW
-            Button countButton = MI_58873_ctrl.MI_58873_createButton("countButton", 135, buttonsPositionY, Proj.btnWidth, Proj.btnHeight, Proj.buttonsFont, Proj.foreColor, Proj.panelColor, "OBLICZ");
-            Button clearButton = MI_58873_ctrl.MI_58873_createButton("clearResultPanel", 495, buttonsPositionY, Proj.btnWidth, Proj.btnHeight, Proj.buttonsFont, Proj.foreColor, Proj.panelColor, "WYCZYŚĆ");
-            Button randomButton = MI_58873_ctrl.MI_58873_createButton("randomButton", 313, buttonsPositionY, Proj.btnWidth, Proj.btnHeight, Proj.buttonsFont, Proj.foreColor, Proj.panelColor, "LOSUJ");
+            Button countButton = MI_58873_ctrl.MI_58873_createButton("countButton", 135, buttonsPositionY, "OBLICZ");
+            Button clearButton = MI_58873_ctrl.MI_58873_createButton("clearResultPanel", 495, buttonsPositionY, "WYCZYŚĆ");
+            Button randomButton = MI_58873_ctrl.MI_58873_createButton("randomButton", 313, buttonsPositionY, "LOSUJ");
 
             //do wszystkich text boxów na ekranie, przypisuę logikę uruchamianą po wprowadzeniu danych w text box
             left00.KeyPress += new KeyPressEventHandler(MI_58873_keyPress);
@@ -160,17 +160,17 @@ namespace _58873_IV_
             //tworzę odpowiednie labelki
             //proszę zwrócić uwagę że każda labelka odwołuje się do innego indeksu z przysłanej tablicy wielowymiarowej
             //są to indeksy reprezentujące wyniki macierzy wynikowej
-            Label result00 = MI_58873_ctrl.MI_58873_createLabel("result00", new Point(530, 105), resultFont, Proj.panelColor, Proj.foreColor, szerokoscLabelki, wysokoscLabelki, wynik[0, 0].ToString(), Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
-            Label result10 = MI_58873_ctrl.MI_58873_createLabel("result10", new Point(530, 133), resultFont, Proj.panelColor, Proj.foreColor, szerokoscLabelki, wysokoscLabelki, wynik[1, 0].ToString(), Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
-            Label result20 = MI_58873_ctrl.MI_58873_createLabel("result20", new Point(530, 161), resultFont, Proj.panelColor, Proj.foreColor, szerokoscLabelki, wysokoscLabelki, wynik[2, 0].ToString(), Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
-            Label result01 = MI_58873_ctrl.MI_58873_createLabel("result01", new Point(580, 105), resultFont, Proj.panelColor, Proj.foreColor, szerokoscLabelki, wysokoscLabelki, wynik[0, 1].ToString(), Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
-            Label result11 = MI_58873_ctrl.MI_58873_createLabel("result11", new Point(580, 133), resultFont, Proj.panelColor, Proj.foreColor, szerokoscLabelki, wysokoscLabelki, wynik[1, 1].ToString(), Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
-            Label result21 = MI_58873_ctrl.MI_58873_createLabel("result21", new Point(580, 161), resultFont, Proj.panelColor, Proj.foreColor, szerokoscLabelki, wysokoscLabelki, wynik[2, 1].ToString(), Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
-            Label result02 = MI_58873_ctrl.MI_58873_createLabel("result02", new Point(630, 105), resultFont, Proj.panelColor, Proj.foreColor, szerokoscLabelki, wysokoscLabelki, wynik[0, 2].ToString(), Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
-            Label result12 = MI_58873_ctrl.MI_58873_createLabel("result12", new Point(630, 133), resultFont, Proj.panelColor, Proj.foreColor, szerokoscLabelki, wysokoscLabelki, wynik[1, 2].ToString(), Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
-            Label result22 = MI_58873_ctrl.MI_58873_createLabel("result22", new Point(630, 161), resultFont, Proj.panelColor, Proj.foreColor, szerokoscLabelki, wysokoscLabelki, wynik[2, 2].ToString(), Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
-            Label resultBracketL = MI_58873_ctrl.MI_58873_createLabel("resultBracketL", new Point(470, bracketTopPosition), labelFont, Proj.panelColor, Proj.foreColor, lblWidth, lblHeight, "[", laberBorder, Proj.labelAlignement);
-            Label resultBracketR = MI_58873_ctrl.MI_58873_createLabel("resultBracketR", new Point(650, bracketTopPosition), labelFont, Proj.panelColor, Proj.foreColor, lblWidth, lblHeight, "]", laberBorder, Proj.labelAlignement);
+            Label result00 = MI_58873_ctrl.MI_58873_createLabel("result00", new Point(530, 105), resultFont, szerokoscLabelki, wysokoscLabelki, wynik[0, 0].ToString(), Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
+            Label result10 = MI_58873_ctrl.MI_58873_createLabel("result10", new Point(530, 133), resultFont, szerokoscLabelki, wysokoscLabelki, wynik[1, 0].ToString(), Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
+            Label result20 = MI_58873_ctrl.MI_58873_createLabel("result20", new Point(530, 161), resultFont, szerokoscLabelki, wysokoscLabelki, wynik[2, 0].ToString(), Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
+            Label result01 = MI_58873_ctrl.MI_58873_createLabel("result01", new Point(580, 105), resultFont, szerokoscLabelki, wysokoscLabelki, wynik[0, 1].ToString(), Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
+            Label result11 = MI_58873_ctrl.MI_58873_createLabel("result11", new Point(580, 133), resultFont, szerokoscLabelki, wysokoscLabelki, wynik[1, 1].ToString(), Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
+            Label result21 = MI_58873_ctrl.MI_58873_createLabel("result21", new Point(580, 161), resultFont, szerokoscLabelki, wysokoscLabelki, wynik[2, 1].ToString(), Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
+            Label result02 = MI_58873_ctrl.MI_58873_createLabel("result02", new Point(630, 105), resultFont, szerokoscLabelki, wysokoscLabelki, wynik[0, 2].ToString(), Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
+            Label result12 = MI_58873_ctrl.MI_58873_createLabel("result12", new Point(630, 133), resultFont, szerokoscLabelki, wysokoscLabelki, wynik[1, 2].ToString(), Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
+            Label result22 = MI_58873_ctrl.MI_58873_createLabel("result22", new Point(630, 161), resultFont, szerokoscLabelki, wysokoscLabelki, wynik[2, 2].ToString(), Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
+            Label resultBracketL = MI_58873_ctrl.MI_58873_createLabel("resultBracketL", new Point(470, bracketTopPosition), labelFont, lblWidth, lblHeight, "[", laberBorder, Proj.labelAlignement);
+            Label resultBracketR = MI_58873_ctrl.MI_58873_createLabel("resultBracketR", new Point(650, bracketTopPosition), labelFont, lblWidth, lblHeight, "]", laberBorder, Proj.labelAlignement);
 
             //dodaję kontrolki do panelu wyników
             resultBox.Controls.Add(resultBracketL);
@@ -192,7 +192,7 @@ namespace _58873_IV_
             //poniżej tworzę listę tablic dwuwymiarowych w których przechowuję pobrane wartości z odpowiednich text fieldów na ekranie
             //wywołuję metodę buildTables która nam taką listę zbuduje
             List<int[,]> macierze = buildTables();
-            
+
             //deklaruję tablice w której będę przechowywał wartości macierzy
             //pierwsza macierz to tablica z indexem 0 na liście
             //druga macierz to tablica z indeksiem 1 na liście
@@ -230,7 +230,7 @@ namespace _58873_IV_
         {
             //deklaruję listę którą będę uzupełniał o odpowiednie tablice
             List<int[,]> list = new List<int[,]>();
-            
+
             //deklaruję pierwszą tablicę (wartości z pierwszej macierzy) i wywołuję metodę która te wartości przypisze
             int[,] pierwszaMacierz = pobierzWartosciMacierzy("left");
             //deklaruję drugą tablicę (wartości z drugiej macierzy) i wywołuję metodę która te wartości przypisze
@@ -321,7 +321,7 @@ namespace _58873_IV_
             //deklaruję zmienną do której przypisuję wartość zparsowanej wartości z textfielda
             int parsedReturnNumber = 0;
             try
-            {   
+            {
                 //parsuję pobrany text z textfielda na wartość typu int
                 parsedReturnNumber = Int32.Parse(returnNumber);
             }
@@ -329,7 +329,7 @@ namespace _58873_IV_
             {
                 //jeżeli podczas parsowania jest błąd to wyświetlam użytkownikowy poniższy message box
                 //prawdopodobnie user wprowadził sam znak "-" albo np "3-" bo text fieldy przyjmują tylko numery, backspace i minus(-) 
-                MessageBox.Show("Ups.\n\nCoś poszło nie tak.\nTextBox " +tb.Name +" prawdopodobnie zawiera nieprawidłowe dane: \"" + tb.Text + "\"" + "\nWynik działania jest nieprawidłowy." , "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Ups.\n\nCoś poszło nie tak.\nTextBox " + tb.Name + " prawdopodobnie zawiera nieprawidłowe dane: \"" + tb.Text + "\"" + "\nWynik działania jest nieprawidłowy.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             //zwracam pobraną liczbę z textfielda
@@ -364,7 +364,7 @@ namespace _58873_IV_
             //wyszukuję butony OBLICZ i LOSUJ
             Button countButton = (Button)MI_58873_workPanel.Controls.Find("countButton", true)[0];
             Button randomButton = (Button)MI_58873_workPanel.Controls.Find("randomButton", true)[0];
-            
+
             //jeśli je znalazłem to blokuję je abe nie można już ich było wcisnąć
             if (countButton != null) countButton.Enabled = false;
             if (randomButton != null) randomButton.Enabled = false;

@@ -15,17 +15,14 @@ namespace _58873_IV_
         Compress compress;
 
         //zmienne wykorzystywane w klasach Form1, matrix i bubble
-        public static readonly Color panelColor = Color.FromKnownColor(KnownColor.Control);
         public static readonly Color foreColor = Color.Black;
-        public static readonly Font buttonsFont = new Font("Microsoft Sans Serif", 9, FontStyle.Bold);
+        public static readonly Color buttonColor = Color.FromKnownColor(KnownColor.Control);
         public static readonly ContentAlignment lblTxtCenter = ContentAlignment.MiddleCenter;
         public static readonly BorderStyle lblBorderStyleFixed = BorderStyle.FixedSingle;
         public static readonly ContentAlignment labelAlignement = ContentAlignment.MiddleLeft;
-        public static readonly int btnWidth = 145;
-        public static readonly int btnHeight = 50;
         public static readonly Font titleFont = new Font("Arial", 25, FontStyle.Bold, GraphicsUnit.Pixel);
         public static readonly Color inputBackColor = Color.White;
-        public static readonly Font footerFont = new Font("Times New Roman", 15, FontStyle.Regular, GraphicsUnit.Pixel);
+        public static readonly Font footerFont = new Font("Arial", 15, FontStyle.Regular, GraphicsUnit.Pixel);
 
         public Proj()
         {   
@@ -48,7 +45,7 @@ namespace _58873_IV_
         private void MI_58873_loadControlls()
         {
             //przydane zmienne
-            Font footerFont = new Font("Microsoft Sans Serif", 28, FontStyle.Bold);
+            Font footerFont = new Font("Arial", 28, FontStyle.Bold);
             int btnPositionX = 12;
 
             //inicjalizuję wszystkie groupoxy które będą na ekranie
@@ -57,16 +54,17 @@ namespace _58873_IV_
             GroupBox footerBox = MI_58873_ctrl.MI_58873_createGroupBox(15, 465, 955, 80, "Dane studenta", "GbStopka");
 
             //inicjalizuję labelkę na której będą prezentowane dane studenta
-            Label personalData = MI_58873_ctrl.MI_58873_createLabel("personalData", new Point(100, 25), footerFont, panelColor, Color.Green, 750, 45, "Mariusz Iwański, Index: 58873, Grupa IV", BorderStyle.None, ContentAlignment.MiddleLeft);
+            Label personalData = MI_58873_ctrl.MI_58873_createLabel("personalData", new Point(100, 25), footerFont, 750, 45, "Mariusz Iwański, Index: 58873, Grupa IV", BorderStyle.None, ContentAlignment.MiddleLeft);
+            personalData.ForeColor = Color.Green;
 
             //inicjalizuję buttony 
-            Button mainSortButton = MI_58873_ctrl.MI_58873_createButton("mainSortButton", btnPositionX, 25, btnWidth, btnHeight, buttonsFont, foreColor, panelColor, "ALGORYTM SORTUJĄCY");
-            Button mainMathButton = MI_58873_ctrl.MI_58873_createButton("mainMathButton", btnPositionX, 85, btnWidth, btnHeight, buttonsFont, foreColor, panelColor, "ALGORYTM MATEMATYCZNY");
-            Button mainZipButton = MI_58873_ctrl.MI_58873_createButton("mainZipButton", btnPositionX, 140, btnWidth, btnHeight, buttonsFont, foreColor, panelColor, "ALGORYTM KOMPRESUJĄCY");
-            Button MI_58873_btnClear = MI_58873_ctrl.MI_58873_createButton("BtnClear", btnPositionX, 330, btnWidth, btnHeight, buttonsFont, foreColor, panelColor, "WYCZYŚĆ EKRAN");
+            Button mainSortButton = MI_58873_ctrl.MI_58873_createButton("mainSortButton", btnPositionX, 25, "ALGORYTM SORTUJĄCY");
+            Button mainMathButton = MI_58873_ctrl.MI_58873_createButton("mainMathButton", btnPositionX, 85, "ALGORYTM MATEMATYCZNY");
+            Button mainZipButton = MI_58873_ctrl.MI_58873_createButton("mainZipButton", btnPositionX, 140, "ALGORYTM KOMPRESUJĄCY");
+            Button MI_58873_btnClear = MI_58873_ctrl.MI_58873_createButton("BtnClear", btnPositionX, 330, "WYCZYŚĆ EKRAN");
             //podczas uruchomienia aplikacji chcę aby przycisk WYCZYŚĆ EKRAN był niedostępny
             MI_58873_btnClear.Enabled = false;
-            Button MI_58873_btnExit = MI_58873_ctrl.MI_58873_createButton("BtnExit", btnPositionX, 385, btnWidth, btnHeight, buttonsFont, foreColor, panelColor, "EXIT");
+            Button MI_58873_btnExit = MI_58873_ctrl.MI_58873_createButton("BtnExit", btnPositionX, 385, "EXIT");
 
             //przypisuję metody wywoływane po kliknięciu w buttony
             mainSortButton.Click += new EventHandler(mainSortButton_Click);
@@ -172,9 +170,9 @@ namespace _58873_IV_
             //informuję program że element o którym mowa to button
             Button MI_58873_button = sender as Button;
             //po zjechaniu myszką z buttona przypisue mu spowrotem inicjalną wartość
-            if (MI_58873_button != null) MI_58873_button.BackColor = Color.FromKnownColor(KnownColor.Control);
+            if (MI_58873_button != null) MI_58873_button.BackColor = buttonColor;
         }
-        
+
         //metoda odpowiedzialna za 
         private void clearResultPanel()
         {

@@ -39,9 +39,9 @@ namespace _58873_IV_
                 + " - Wszystkie niedozwolone operacje starałem się przewidziec i zaprezentować odpowiedni komunikat";
 
             //tworzę labelki używane w ekranie sortowania
-            Label lblTitle = MI_58873_ctrl.MI_58873_createLabel("lblTitle", new Point(100, 20), Proj.titleFont, Proj.panelColor, Proj.foreColor, 575, 35, "Sortowanie bąbelkowe", Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
-            Label lblDescription = MI_58873_ctrl.MI_58873_createLabel("lblDescription", new Point(25, 300), Proj.footerFont, Proj.panelColor, Proj.foreColor, 725, 140, description, Proj.lblBorderStyleFixed, Proj.labelAlignement);
-            Label lblfillFields = MI_58873_ctrl.MI_58873_createLabel("lblfillFields", new Point(195, 63), Proj.footerFont, Proj.panelColor, Proj.foreColor, 600, 18, "Wprowadź liczby do posortowania lub kliknij w przycisk \"LOSUJ\"", BorderStyle.None, Proj.labelAlignement);
+            Label lblTitle = MI_58873_ctrl.MI_58873_createLabel("lblTitle", new Point(100, 20), Proj.titleFont, 575, 35, "Sortowanie bąbelkowe", Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
+            Label lblDescription = MI_58873_ctrl.MI_58873_createLabel("lblDescription", new Point(25, 300), Proj.footerFont, 725, 140, description, Proj.lblBorderStyleFixed, Proj.labelAlignement);
+            Label lblfillFields = MI_58873_ctrl.MI_58873_createLabel("lblfillFields", new Point(195, 63), Proj.footerFont,  600, 18, "Wprowadź liczby do posortowania lub kliknij w przycisk \"LOSUJ\"", BorderStyle.None, Proj.labelAlignement);
 
             //tworzę textboxy używane w ekranie sortowania
             TextBox tf0 = MI_58873_ctrl.createTextField("tf0", new Point(30, tbPositionY), tbWidth, tbHeight, tbFont, Proj.inputBackColor, Proj.foreColor, tbMaxlength);
@@ -54,9 +54,9 @@ namespace _58873_IV_
             TextBox tf7 = MI_58873_ctrl.createTextField("tf7", new Point(660, tbPositionY), tbWidth, tbHeight, tbFont, Proj.inputBackColor, Proj.foreColor, tbMaxlength);
 
             //tworzę butony używane w ekranie sortowania
-            Button countButton = MI_58873_ctrl.MI_58873_createButton("countButton", 135, buttonsPositionY, Proj.btnWidth, Proj.btnHeight, Proj.buttonsFont, Proj.foreColor, Proj.panelColor, "SORTUJ");
-            Button clearButton = MI_58873_ctrl.MI_58873_createButton("clearResultPanel", 495, buttonsPositionY, Proj.btnWidth, Proj.btnHeight, Proj.buttonsFont, Proj.foreColor, Proj.panelColor, "WYCZYŚĆ");
-            Button randomButton = MI_58873_ctrl.MI_58873_createButton("randomButton", 313, buttonsPositionY, Proj.btnWidth, Proj.btnHeight, Proj.buttonsFont, Proj.foreColor, Proj.panelColor, "LOSUJ");
+            Button countButton = MI_58873_ctrl.MI_58873_createButton("countButton", 135, buttonsPositionY, "SORTUJ");
+            Button clearButton = MI_58873_ctrl.MI_58873_createButton("clearResultPanel", 495, buttonsPositionY, "WYCZYŚĆ");
+            Button randomButton = MI_58873_ctrl.MI_58873_createButton("randomButton", 313, buttonsPositionY, "LOSUJ");
 
             //przypisanie metod odpowiedzialnych za wykonanie odpowiednich akcji po wprowadzeniu tekstu w text fieldy
             tf0.KeyPress += new KeyPressEventHandler(MI_58873_keyPress);
@@ -107,15 +107,15 @@ namespace _58873_IV_
             int lblPositionY = 160;
             Font tbFont = new Font("Arial", 23, FontStyle.Bold, GraphicsUnit.Pixel);
 
-            Label lblResultsInfo = MI_58873_ctrl.MI_58873_createLabel("lblResultsInfo", new Point(292, 135), Proj.footerFont, Proj.panelColor, Proj.foreColor, 600, 18, "Wynik sortowania bąbelkowego:", BorderStyle.None, Proj.labelAlignement);
-            Label lbl0 = MI_58873_ctrl.MI_58873_createLabel("lbl0", new Point(30, lblPositionY), tbFont, Proj.panelColor, Proj.foreColor, 80, 35, "", Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
-            Label lbl1 = MI_58873_ctrl.MI_58873_createLabel("lbl1", new Point(120, lblPositionY), tbFont, Proj.panelColor, Proj.foreColor, 80, 35, "", Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
-            Label lbl2 = MI_58873_ctrl.MI_58873_createLabel("lbl2", new Point(210, lblPositionY), tbFont, Proj.panelColor, Proj.foreColor, 80, 35, "", Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
-            Label lbl3 = MI_58873_ctrl.MI_58873_createLabel("lbl3", new Point(300, lblPositionY), tbFont, Proj.panelColor, Proj.foreColor, 80, 35, "", Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
-            Label lbl4 = MI_58873_ctrl.MI_58873_createLabel("lbl4", new Point(390, lblPositionY), tbFont, Proj.panelColor, Proj.foreColor, 80, 35, "", Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
-            Label lbl5 = MI_58873_ctrl.MI_58873_createLabel("lbl5", new Point(480, lblPositionY), tbFont, Proj.panelColor, Proj.foreColor, 80, 35, "", Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
-            Label lbl6 = MI_58873_ctrl.MI_58873_createLabel("lbl6", new Point(570, lblPositionY), tbFont, Proj.panelColor, Proj.foreColor, 80, 35, "", Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
-            Label lbl7 = MI_58873_ctrl.MI_58873_createLabel("lbl7", new Point(660, lblPositionY), tbFont, Proj.panelColor, Proj.foreColor, 80, 35, "", Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
+            Label lblResultsInfo = MI_58873_ctrl.MI_58873_createLabel("lblResultsInfo", new Point(292, 135), Proj.footerFont, 600, 18, "Wynik sortowania bąbelkowego:", BorderStyle.None, Proj.labelAlignement);
+            Label lbl0 = MI_58873_ctrl.MI_58873_createLabel("lbl0", new Point(30, lblPositionY), tbFont, 80, 35, "", Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
+            Label lbl1 = MI_58873_ctrl.MI_58873_createLabel("lbl1", new Point(120, lblPositionY), tbFont, 80, 35, "", Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
+            Label lbl2 = MI_58873_ctrl.MI_58873_createLabel("lbl2", new Point(210, lblPositionY), tbFont, 80, 35, "", Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
+            Label lbl3 = MI_58873_ctrl.MI_58873_createLabel("lbl3", new Point(300, lblPositionY), tbFont, 80, 35, "", Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
+            Label lbl4 = MI_58873_ctrl.MI_58873_createLabel("lbl4", new Point(390, lblPositionY), tbFont, 80, 35, "", Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
+            Label lbl5 = MI_58873_ctrl.MI_58873_createLabel("lbl5", new Point(480, lblPositionY), tbFont, 80, 35, "", Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
+            Label lbl6 = MI_58873_ctrl.MI_58873_createLabel("lbl6", new Point(570, lblPositionY), tbFont, 80, 35, "", Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
+            Label lbl7 = MI_58873_ctrl.MI_58873_createLabel("lbl7", new Point(660, lblPositionY), tbFont, 80, 35, "", Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
 
             //dodanie kontrolek do ekranu
             resultBox.Controls.Add(lblResultsInfo);

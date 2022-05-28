@@ -9,41 +9,22 @@ namespace _58873_IV_
     {
         //metoda tworząca button
         //metoda dostarczona przez wykładowcę
-        public Button MI_58873_createButton(string MI_58873_name, int MI_58873_x, int MI_58873_y, int MI_58873_width, int MI_58873_height, Font MI_58873_font, Color MI_58873_foreColor, Color MI_58873_backColor, string MI_58873_text)
+        public Button MI_58873_createButton(string MI_58873_name, int MI_58873_x, int MI_58873_y, string MI_58873_text)
         {
             Button MI_58873_element = new Button
             {
                 Name = MI_58873_name,
                 Location = new Point(MI_58873_x, MI_58873_y),
-                Width = MI_58873_width,
-                Height = MI_58873_height,
+                Width = 145,
+                Height = 50,
                 AutoSize = false,
-                Font = MI_58873_font,
-                ForeColor = MI_58873_foreColor,
-                BackColor = MI_58873_backColor,
+                Font = new Font("Microsoft Sans Serif", 9, FontStyle.Bold),
+                ForeColor = Color.Black,
+                BackColor = Color.FromKnownColor(KnownColor.Control),
                 Text = MI_58873_text,
                 TextAlign = ContentAlignment.MiddleCenter,
-                
-        };
-            return MI_58873_element;
-        }
 
-        //metoda tworząca checkBox
-        //metoda dostarczona przez wykładowcę
-        public CheckBox MI_58873_createCheckBox(string MI_58873_name, Point MI_58873_location, int MI_58873_width, Font MI_58873_font, Color MI_58873_foreColor, bool MI_58873_selected, string MI_58873_text)
-        {
-            CheckBox MI_58873_element = new CheckBox
-            {
-                Name = MI_58873_name,
-                Location = MI_58873_location,
-                Width = MI_58873_width,
-                Font = MI_58873_font,
-                ForeColor = MI_58873_foreColor,
-                Checked = MI_58873_selected,
-                Text = MI_58873_text,
-                TextAlign = ContentAlignment.MiddleLeft
             };
-
             return MI_58873_element;
         }
 
@@ -65,18 +46,7 @@ namespace _58873_IV_
 
         //metoda tworząca labelkę
         //metoda dostarczona przez wykładowcę
-        public Label MI_58873_createLabel(
-            string MI_58873_name, 
-            Point MI_58873_location, 
-            Font MI_58873_font, 
-            Color MI_58873_backColor, 
-            Color MI_58873_foreColor, 
-            int MI_58873_width, 
-            int MI_58873_height, 
-            string MI_58873_text, 
-            BorderStyle MI_58873_borderStyle, 
-            ContentAlignment MI_58873_textAlign
-            )
+        public Label MI_58873_createLabel(string MI_58873_name, Point MI_58873_location, Font MI_58873_font, int MI_58873_width, int MI_58873_height, string MI_58873_text, BorderStyle MI_58873_borderStyle, ContentAlignment MI_58873_textAlign)
         {
             Label MI_58873_element = new Label
             {
@@ -84,8 +54,8 @@ namespace _58873_IV_
                 Width = MI_58873_width,
                 Height = MI_58873_height,
                 Font = MI_58873_font,
-                BackColor = MI_58873_backColor,
-                ForeColor = MI_58873_foreColor,
+                BackColor = Color.FromKnownColor(KnownColor.Control),
+                ForeColor = Color.Black,
                 Name = MI_58873_name,
                 Text = MI_58873_text,
                 AutoSize = false,
@@ -121,12 +91,12 @@ namespace _58873_IV_
         public ListBox createListBox(string MI_58873_name, Point MI_58873_location, int MI_58873_width, int MI_58873_height)
         {
             ListBox MI_58873_element = new ListBox
-            { 
-            ItemHeight = 30,
-            Location = MI_58873_location,
-            Name = MI_58873_name,
-            Size = new Size(MI_58873_width, MI_58873_height)
-        };
+            {
+                ItemHeight = 30,
+                Location = MI_58873_location,
+                Name = MI_58873_name,
+                Size = new Size(MI_58873_width, MI_58873_height)
+            };
 
             return MI_58873_element;
         }

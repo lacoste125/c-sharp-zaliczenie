@@ -37,25 +37,26 @@ namespace _58873_IV_
             int tbMaxlength = 20;
             Font tbFont = new Font("Arial", 23, FontStyle.Bold, GraphicsUnit.Pixel);
             Font titleFont = new Font("Arial", 25, FontStyle.Bold, GraphicsUnit.Pixel);
-            string description = " - Program realizuje kompresję oraz dekompresję metodą Hufmanna\n"
-                + " - Input inicjalnie jest wypełniony ciągiem \"XADJSOSDAOUAZADXSXOD\"\n"
-                + " - Input przyjmuje dowolne znaki z klawiatury, max 20 znaków\n"
-                + " - Nie wszystkie ciągi są poprawnie kompresowane i dekompresowane. Nie udało mi się ustalić co jest tego powodem.\n"
-                + " - Przycisk \"LOSUJ\" generuje losowy ciąg liter. Długość wygenerowanego tekstu to 6 znaków.";
+            Font footerFont = new Font("Arial", 15, FontStyle.Regular, GraphicsUnit.Pixel);
+            string description = "- Program realizuje kompresję oraz dekompresję metodą Hufmanna\n"
+                + "- Input inicjalnie jest wypełniony ciągiem \"XADJSOSDAOUAZADXSXOD\"\n"
+                + "- Input przyjmuje dowolne znaki z klawiatury, max 20 znaków\n"
+                + "- Nie wszystkie ciągi są dobrze kompresowane i dekompresowane. Nie udało mi się ustalić co jest tego powodem\n"
+                + "- Przycisk \"LOSUJ\" generuje losowy ciąg liter. Długość wygenerowanego tekstu to 6 znaków.";
 
             //labelki wykorzystywane w ekranie Kompresja
-            Label lblTitle = MI_58873_ctrl.MI_58873_createLabel("lblTitle", new Point(100, 19), titleFont, Proj.panelColor, Proj.foreColor, 575, 35, "Kompresja Huffmanna", Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
-            Label lblfillField = MI_58873_ctrl.MI_58873_createLabel("lblfillField", new Point(195, 61), Proj.footerFont, Proj.panelColor, Proj.foreColor, 500, 18, "Wprowadź ciąg do skopresowania lub kliknij w przycisk \"LOSUJ\"", BorderStyle.None, Proj.labelAlignement);
-            Label lblDescription = MI_58873_ctrl.MI_58873_createLabel("lblDescription", new Point(25, 353), Proj.footerFont, Proj.panelColor, Proj.foreColor, 725, 90, description, Proj.lblBorderStyleFixed, Proj.labelAlignement);
+            Label lblTitle = MI_58873_ctrl.MI_58873_createLabel("lblTitle", new Point(100, 19), titleFont, 575, 35, "Kompresja Huffmanna", Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
+            Label lblfillField = MI_58873_ctrl.MI_58873_createLabel("lblfillField", new Point(195, 61), Proj.footerFont, 500, 18, "Wprowadź ciąg do skopresowania lub kliknij w przycisk \"LOSUJ\"", BorderStyle.None, Proj.labelAlignement);
+            Label lblDescription = MI_58873_ctrl.MI_58873_createLabel("lblDescription", new Point(15, 353), footerFont, 746, 90, description, Proj.lblBorderStyleFixed, Proj.labelAlignement);
 
             //textboxy wykorzystywane w ekranie Kompresja
             TextBox inputText = MI_58873_ctrl.createTextField("inputText", new Point(163, tbPositionY), tbWidth, tbHeight, tbFont, Proj.inputBackColor, Proj.foreColor, tbMaxlength);
             inputText.Text = "XADJSOSDAOUAZADXSXOD";
 
             //buttony wykorzystywane w ekranie Kompresja
-            Button countButton = MI_58873_ctrl.MI_58873_createButton("countButton", 135, buttonsPositionY, Proj.btnWidth, Proj.btnHeight, Proj.buttonsFont, Proj.foreColor, Proj.panelColor, "KOMPRESUJ");
-            Button clearButton = MI_58873_ctrl.MI_58873_createButton("clearResultPanel", 495, buttonsPositionY, Proj.btnWidth, Proj.btnHeight, Proj.buttonsFont, Proj.foreColor, Proj.panelColor, "WYCZYŚĆ");
-            Button randomButton = MI_58873_ctrl.MI_58873_createButton("randomButton", 313, buttonsPositionY, Proj.btnWidth, Proj.btnHeight, Proj.buttonsFont, Proj.foreColor, Proj.panelColor, "LOSUJ");
+            Button countButton = MI_58873_ctrl.MI_58873_createButton("countButton", 135, buttonsPositionY,  "KOMPRESUJ");
+            Button clearButton = MI_58873_ctrl.MI_58873_createButton("clearResultPanel", 495, buttonsPositionY,  "WYCZYŚĆ");
+            Button randomButton = MI_58873_ctrl.MI_58873_createButton("randomButton", 313, buttonsPositionY,"LOSUJ");
 
             //do text fielda przypisuję logikę wywoływaną po wprowadzeniu textu do niego
             inputText.KeyPress += new KeyPressEventHandler(MI_58873_keyPress);
@@ -141,11 +142,11 @@ namespace _58873_IV_
                 blockResultButtons();
 
                 //labelki
-                Label titleChars = MI_58873_ctrl.MI_58873_createLabel("titleChars", new Point(7, 124), Proj.footerFont, Proj.panelColor, Proj.foreColor, 200, 18, "Zestawienie znaków:", BorderStyle.None, Proj.labelAlignement);
-                Label compressedChars = MI_58873_ctrl.MI_58873_createLabel("compressedChars", new Point(228, 124), Proj.footerFont, Proj.panelColor, Proj.foreColor, 500, 18, "Skompresowany ciąg znaków:", BorderStyle.None, Proj.labelAlignement);
+                Label titleChars = MI_58873_ctrl.MI_58873_createLabel("titleChars", new Point(7, 124), Proj.footerFont, 200, 18, "Zestawienie znaków:", BorderStyle.None, Proj.labelAlignement);
+                Label compressedChars = MI_58873_ctrl.MI_58873_createLabel("compressedChars", new Point(228, 124), Proj.footerFont, 500, 18, "Skompresowany ciąg znaków:", BorderStyle.None, Proj.labelAlignement);
 
                 //buttony
-                Button decompressButton = MI_58873_ctrl.MI_58873_createButton("decompressButton", 400, 192, Proj.btnWidth, Proj.btnHeight, Proj.buttonsFont, Proj.foreColor, Proj.panelColor, "DEKOMPRESUJ");
+                Button decompressButton = MI_58873_ctrl.MI_58873_createButton("decompressButton", 400, 192, "DEKOMPRESUJ");
                 //do buttonu przypisuję metodę która się wywoła po kliknięciu
                 decompressButton.Click += new EventHandler(decompressButton_Button_Click);
                 //oraz standardowo hover i leave
@@ -219,7 +220,7 @@ namespace _58873_IV_
             Font resultFont = new Font("Arial", 16, FontStyle.Bold, GraphicsUnit.Pixel);
 
             //labelka potrzebna do prezentacji 
-            Label lblAfterCompression = MI_58873_ctrl.MI_58873_createLabel("lblAfterCompression", new Point(230, 140), resultFont, Proj.panelColor, Proj.foreColor, 535, 50, "", BorderStyle.None, Proj.lblTxtCenter);
+            Label lblAfterCompression = MI_58873_ctrl.MI_58873_createLabel("lblAfterCompression", new Point(230, 140), resultFont, 535, 50, "", BorderStyle.None, Proj.lblTxtCenter);
             resultBox.Controls.Add(lblAfterCompression);
 
             //tworze list box który będzie przehowywał kody binarne
@@ -331,7 +332,7 @@ namespace _58873_IV_
             //przydatana zmienna 
             Font resultFont = new Font("Arial", 16, FontStyle.Bold, GraphicsUnit.Pixel);
             //labelki przechowująca ciąg po dekompresji
-            Label resultLabel = MI_58873_ctrl.MI_58873_createLabel("lblAfterCompression", new Point(230, 244), resultFont, Proj.panelColor, Proj.foreColor, 535, 50, textAfterDecompression, Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
+            Label resultLabel = MI_58873_ctrl.MI_58873_createLabel("lblAfterCompression", new Point(230, 244), resultFont, 535, 50, textAfterDecompression, Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
 
             //porównuję sobie tekst przed kompresją i po dekompresji
             if (MI_58873_textDoSkompresowania == textAfterDecompression)
