@@ -15,7 +15,6 @@ namespace _58873_IV_
         GroupBox resultBox;
         string MI_58873_textDoSkompresowania = "";
         string textAfterDecompression = "";
-        readonly Font footerFont = new Font("Times New Roman", 15, FontStyle.Regular, GraphicsUnit.Pixel);
 
         //konstruktor
         public Compress(Proj MI_58873_workPanel, GroupBox resultBox)
@@ -33,7 +32,6 @@ namespace _58873_IV_
             int tbPositionY = 84;
             int operatorTopPosion = 85;
             int tbMaxlength = 20;
-            Font operatorFont = new Font("Arial", 60, FontStyle.Regular, GraphicsUnit.Pixel);
             Font tbFont = new Font("Arial", 23, FontStyle.Bold, GraphicsUnit.Pixel);
             Font titleFont = new Font("Arial", 25, FontStyle.Bold, GraphicsUnit.Pixel);
             string description = " - Program realizuje kompresję oraz dekompresję metodą Hufmanna\n"
@@ -44,8 +42,8 @@ namespace _58873_IV_
 
             //labelki
             Label lblTitle = MI_58873_ctrl.MI_58873_createLabel("lblTitle", new Point(100, 19), titleFont, Proj.panelColor, Proj.foreColor, 575, 35, "Kompresja Huffmanna", Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
-            Label lblfillField = MI_58873_ctrl.MI_58873_createLabel("lblfillField", new Point(195, 61), footerFont, Proj.panelColor, Proj.foreColor, 500, 18, "Wprowadź ciąg do skopresowania lub kliknij w przycisk \"LOSUJ\"", BorderStyle.None, Proj.labelAlignement);
-            Label lblDescription = MI_58873_ctrl.MI_58873_createLabel("lblDescription", new Point(25, 353), footerFont, Proj.panelColor, Proj.foreColor, 725, 90, description, Proj.lblBorderStyleFixed, Proj.labelAlignement);
+            Label lblfillField = MI_58873_ctrl.MI_58873_createLabel("lblfillField", new Point(195, 61), Proj.footerFont, Proj.panelColor, Proj.foreColor, 500, 18, "Wprowadź ciąg do skopresowania lub kliknij w przycisk \"LOSUJ\"", BorderStyle.None, Proj.labelAlignement);
+            Label lblDescription = MI_58873_ctrl.MI_58873_createLabel("lblDescription", new Point(25, 353), Proj.footerFont, Proj.panelColor, Proj.foreColor, 725, 90, description, Proj.lblBorderStyleFixed, Proj.labelAlignement);
 
             //textboxy
             TextBox inputText = MI_58873_ctrl.createTextField("inputText", new Point(163, tbPositionY), tbWidth, tbHeight, tbFont, Proj.inputBackColor, Proj.foreColor, tbMaxlength);
@@ -119,8 +117,8 @@ namespace _58873_IV_
             if (compressionResult)
             {
                 //labelki
-                Label titleChars = MI_58873_ctrl.MI_58873_createLabel("titleChars", new Point(7, 124), footerFont, Proj.panelColor, Proj.foreColor, 200, 18, "Zestawienie znaków:", BorderStyle.None, Proj.labelAlignement);
-                Label compressedChars = MI_58873_ctrl.MI_58873_createLabel("compressedChars", new Point(228, 124), footerFont, Proj.panelColor, Proj.foreColor, 500, 18, "Skompresowany ciąg znaków:", BorderStyle.None, Proj.labelAlignement);
+                Label titleChars = MI_58873_ctrl.MI_58873_createLabel("titleChars", new Point(7, 124), Proj.footerFont, Proj.panelColor, Proj.foreColor, 200, 18, "Zestawienie znaków:", BorderStyle.None, Proj.labelAlignement);
+                Label compressedChars = MI_58873_ctrl.MI_58873_createLabel("compressedChars", new Point(228, 124), Proj.footerFont, Proj.panelColor, Proj.foreColor, 500, 18, "Skompresowany ciąg znaków:", BorderStyle.None, Proj.labelAlignement);
 
                 //buttony
                 Button decompressButton = MI_58873_ctrl.MI_58873_createButton("decompressButton", 400, 192, Proj.btnWidth, Proj.btnHeight, Proj.buttonsFont, Proj.foreColor, Proj.panelColor, "DEKOMPRESUJ");

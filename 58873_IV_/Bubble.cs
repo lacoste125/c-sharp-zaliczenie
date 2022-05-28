@@ -14,8 +14,6 @@ namespace _58873_IV_
         Proj MI_58873_workPanel;
         GroupBox resultBox;
 
-        Font footerFont = new Font("Times New Roman", 15, FontStyle.Regular, GraphicsUnit.Pixel);
-
         //konstruktor
         public Bubble(Proj MI_58873_workPanel, GroupBox resultBox)
         {
@@ -31,10 +29,7 @@ namespace _58873_IV_
             int tbHeight = 35;
             int buttonsPositionY = 235;
             int tbPositionY = 90;
-            int operatorTopPosion = 85;
             int tbMaxlength = 5;
-            Font labelFont = new Font("Times New Roman", 120, FontStyle.Regular, GraphicsUnit.Pixel);
-            Font operatorFont = new Font("Times New Roman", 60, FontStyle.Regular, GraphicsUnit.Pixel);
             Font tbFont = new Font("Arial", 25, FontStyle.Bold, GraphicsUnit.Pixel);
             string description = " - Program wynokonuje sortowanie bąbelkowe na podstawie wprowadzonych lub wylosowanych liczb\n"
                 + " - Wylosowane liczby są z zakresu <-9999, 99999>\n"
@@ -45,8 +40,8 @@ namespace _58873_IV_
 
             //labelki
             Label lblTitle = MI_58873_ctrl.MI_58873_createLabel("lblTitle", new Point(100, 20), Proj.titleFont, Proj.panelColor, Proj.foreColor, 575, 35, "Sortowanie bąbelkowe", Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
-            Label lblDescription = MI_58873_ctrl.MI_58873_createLabel("lblDescription", new Point(25, 300), footerFont, Proj.panelColor, Proj.foreColor, 725, 140, description, Proj.lblBorderStyleFixed, Proj.labelAlignement);
-            Label lblfillFields = MI_58873_ctrl.MI_58873_createLabel("lblfillFields", new Point(195, 63), footerFont, Proj.panelColor, Proj.foreColor, 600, 18, "Wprowadź liczby do posortowania lub kliknij w przycisk \"LOSUJ\"", BorderStyle.None, Proj.labelAlignement);
+            Label lblDescription = MI_58873_ctrl.MI_58873_createLabel("lblDescription", new Point(25, 300), Proj.footerFont, Proj.panelColor, Proj.foreColor, 725, 140, description, Proj.lblBorderStyleFixed, Proj.labelAlignement);
+            Label lblfillFields = MI_58873_ctrl.MI_58873_createLabel("lblfillFields", new Point(195, 63), Proj.footerFont, Proj.panelColor, Proj.foreColor, 600, 18, "Wprowadź liczby do posortowania lub kliknij w przycisk \"LOSUJ\"", BorderStyle.None, Proj.labelAlignement);
 
             //textboxy
             TextBox tf0 = MI_58873_ctrl.createTextField("tf0", new Point(30, tbPositionY), tbWidth, tbHeight, tbFont, Proj.inputBackColor, Proj.foreColor, tbMaxlength);
@@ -110,7 +105,7 @@ namespace _58873_IV_
             int lblPositionY = 160;
             Font tbFont = new Font("Arial", 23, FontStyle.Bold, GraphicsUnit.Pixel);
 
-            Label lblResultsInfo = MI_58873_ctrl.MI_58873_createLabel("lblResultsInfo", new Point(292, 135), footerFont, Proj.panelColor, Proj.foreColor, 600, 18, "Wynik sortowania bąbelkowego:", BorderStyle.None, Proj.labelAlignement);
+            Label lblResultsInfo = MI_58873_ctrl.MI_58873_createLabel("lblResultsInfo", new Point(292, 135), Proj.footerFont, Proj.panelColor, Proj.foreColor, 600, 18, "Wynik sortowania bąbelkowego:", BorderStyle.None, Proj.labelAlignement);
             Label lbl0 = MI_58873_ctrl.MI_58873_createLabel("lbl0", new Point(30, lblPositionY), tbFont, Proj.panelColor, Proj.foreColor, 80, 35, "", Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
             Label lbl1 = MI_58873_ctrl.MI_58873_createLabel("lbl1", new Point(120, lblPositionY), tbFont, Proj.panelColor, Proj.foreColor, 80, 35, "", Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
             Label lbl2 = MI_58873_ctrl.MI_58873_createLabel("lbl2", new Point(210, lblPositionY), tbFont, Proj.panelColor, Proj.foreColor, 80, 35, "", Proj.lblBorderStyleFixed, Proj.lblTxtCenter);

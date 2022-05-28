@@ -37,8 +37,8 @@ namespace _58873_IV_
             int buttonsPositionY = 235;
             int operatorTopPosion = 85;
             Font labelFont = new Font("Times New Roman", 120, FontStyle.Regular, GraphicsUnit.Pixel);
-            Font operatorFont = new Font("Times New Roman", 60, FontStyle.Regular, GraphicsUnit.Pixel);
             Font inputFont = new Font("Times New Roman", 15, FontStyle.Regular, GraphicsUnit.Pixel);
+            Font operatorFont = new Font("Times New Roman", 60, FontStyle.Regular, GraphicsUnit.Pixel);
             string description = " - Program oblicza iloczyn dwóch macierzy\n"
                 + " - Dostępna jest macierz 3x3\n"
                 + " - Pola tekstowe przyjmują tylko liczby\n"
@@ -77,7 +77,7 @@ namespace _58873_IV_
             TextBox right22 = MI_58873_ctrl.createTextField("right22", new Point(390, 161), tbWidth, tbHeight, inputFont, Proj.inputBackColor, Proj.foreColor, tbMaxlength);
 
             //buttony
-            Button countButton = MI_58873_ctrl.MI_58873_createButton("countButton", 135, buttonsPositionY, Proj.btnWidth, Proj.btnHeight, Proj.buttonsFont, Proj.foreColor, Proj.panelColor, "OBLICZ");
+            Button countButton = MI_58873_ctrl.MI_58873_createButton("countButton", 135, buttonsPositionY, Proj.btnWidth, Proj.btnHeight, Proj.buttonsFont, Proj.foreColor, Proj.panelColor, "OBLICZ++");
             Button clearButton = MI_58873_ctrl.MI_58873_createButton("clearResultPanel", 495, buttonsPositionY, Proj.btnWidth, Proj.btnHeight, Proj.buttonsFont, Proj.foreColor, Proj.panelColor, "WYCZYŚĆ");
             Button randomButton = MI_58873_ctrl.MI_58873_createButton("randomButton", 313, buttonsPositionY, Proj.btnWidth, Proj.btnHeight, Proj.buttonsFont, Proj.foreColor, Proj.panelColor, "LOSUJ");
 
@@ -285,7 +285,17 @@ namespace _58873_IV_
                 returnNumber = "0";
             }
 
-            return Int32.Parse(returnNumber);
+            int parsedReturnNumber = 0;
+            try
+            {
+                parsedReturnNumber = Int32.Parse(returnNumber);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Ups.\n\nCoś poszło nie tak.\nTextBox " +tb.Name +" prawdopodobnie zawiera nieprawidłowe dane: \"" + tb.Text + "\"" + "\nWynik działania jest nieprawidłowy." , "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return parsedReturnNumber;
         }
 
         private void randomButton_Button_Click(object sender, EventArgs e)
