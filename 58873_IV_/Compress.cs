@@ -226,9 +226,10 @@ namespace _58873_IV_
             ListBox resultSpace = (ListBox)MI_58873_workPanel.Controls.Find("binaryCodes", true)[0];
             Label resultCodesSpace = (Label)MI_58873_workPanel.Controls.Find("lblAfterCompression", true)[0];
 
-            if (compressionResult) {
+            if (compressionResult)
+            {
                 //wypełnianie listy kodów
-                
+
                 if (resultSpace != null)
                 {
                     resultSpace.Visible = true;
@@ -302,6 +303,11 @@ namespace _58873_IV_
         }
     }
 
+    //klasa do kompresji jest zaimplementowana dokładnie w takiej formie jak została dostarczona w trakcie zajęć
+    //w klasie dodałem blok try-catch w celu obsłużenia wyjątku w sytuacji gdy kompreowany jest ciąg znaków np "AAAA" lub "BBB" - dzięki temu nie buduje zbędnie ekranu gdy taki błąd wystąpi
+    //dodałem też zwracanie wartości po to by ocenić czy kompresja jest ok czy nie i żeby wiedzieć jak budować ekran z rezultatem
+    //w klasie kompresja nie przerabiałem nic więcej bo za co się tylko nie wziąłem to przestawało mi całkowicie działać za co kolwiek się nie brałem to przestawało działać
+    //dodałem też kilka komentarzy ale mam wrażenie że algorytmy sortowania są dla mnie zbyt skąplikowane
     public class MI_58873_Kompresja
     {
         public static bool MI_58873_KompresjaHuffmanna(
@@ -310,6 +316,7 @@ namespace _58873_IV_
         ref List<MI_58873_WystepującyZnak> MI_58873_listaZnaków)
 
         {
+            //utworzona zmienna która będzie zwracana w celu informowania czy succes czy failure podczas kompresji
             bool compressionResult = true;
             string MI_58873_pozostaly = MI_58873_source;
             string MI_58873_roboczy = MI_58873_pozostaly;
@@ -321,56 +328,69 @@ namespace _58873_IV_
 
             do
             {
+                //pobieramy ciąg znaków jaki pozostał do skompresowania
                 MI_58873_roboczy = MI_58873_pozostaly;
+                //pobieramy jeden znak z roboczego ciągu
                 MI_58873_kolejnyZnak = MI_58873_roboczy.Substring(0, 1);
+                //porównujemy to z listą znaków i zapisujemy index
                 MI_58873_indexListy = MI_58873_tymczasowaListaZnaków.FindIndex(f => f.MI_58873_Znak == MI_58873_kolejnyZnak);
                 if (MI_58873_indexListy == -1)
                 {
+                    //jeśli indeks się nie znalazł zachowujemy pobrany znak 
                     MI_58873_WystepującyZnak nowyZnak = new MI_58873_WystepującyZnak();
                     nowyZnak.MI_58873_Ilosc = 1;
                     nowyZnak.MI_58873_Znak = MI_58873_kolejnyZnak;
                     MI_58873_tymczasowaListaZnaków.Add(nowyZnak);
                 }
                 else
-                {
+                {   
+                    //jeślil się znalazł to inkrementujemy ilość
                     MI_58873_tymczasowaListaZnaków.Where(MI_58873_w => MI_58873_w.MI_58873_Znak == MI_58873_kolejnyZnak).ToList().
                         ForEach(MI_58873_s => MI_58873_s.MI_58873_Ilosc = MI_58873_s.MI_58873_Ilosc + 1);
                 }
+                //usuwamy z listy opracowywany znak
                 MI_58873_pozostaly = MI_58873_roboczy.Remove(0, 1);
+                //pętle kontynuujemy gdy są jeszcze jakieś znaki w ciągu
             } while (MI_58873_pozostaly.Length != 0);
 
+            //deklarujemy kontenery na przechowywanie danych
             MI_58873_listaZnaków = MI_58873_tymczasowaListaZnaków.OrderBy(MI_58873_o => MI_58873_o.MI_58873_Ilosc).ToList();
             List<MI_58873_WystepującyZnak> MI_58873_posortowanaListaZnaków = new List<MI_58873_WystepującyZnak>(MI_58873_listaZnaków);
 
+            //deklarujemy inicjalne wartości przed rozpoczęciem pętli
             int MI_58873_nrKorzenia = 0;
             int MI_58873_nowyKorzenWartosc = 0;
             string MI_58873_nowyKorzen = "node";
 
+            //budowanie drzewa
             do
             {
+                //jeśli lista znaków zawiera więcej niż jeden element
                 if (MI_58873_posortowanaListaZnaków.Count > 1)
                 {
+                    //jeśli drzewo nie jest dopiero rozpoczynane
                     if (MI_58873_drzewoHuffmana.Count > 0)
                     {
-                        if (MI_58873_drzewoHuffmana[0].MI_58873_Ilosc + MI_58873_posortowanaListaZnaków[0].MI_58873_Ilosc >
-                            MI_58873_posortowanaListaZnaków[0].MI_58873_Ilosc + MI_58873_posortowanaListaZnaków[1].MI_58873_Ilosc)
+                        //tworzymy korzeń 
+                        if (MI_58873_drzewoHuffmana[0].MI_58873_Ilosc + MI_58873_posortowanaListaZnaków[0].MI_58873_Ilosc > MI_58873_posortowanaListaZnaków[0].MI_58873_Ilosc + MI_58873_posortowanaListaZnaków[1].MI_58873_Ilosc)
                             MI_58873_nowyKorzenWartosc = MI_58873_drzewoHuffmana[0].MI_58873_Ilosc + MI_58873_posortowanaListaZnaków[0].MI_58873_Ilosc;
                         else
                             MI_58873_nowyKorzenWartosc = MI_58873_posortowanaListaZnaków[0].MI_58873_Ilosc + MI_58873_posortowanaListaZnaków[1].MI_58873_Ilosc;
                     }
-
+                    //tworzymy drzewo
                     else if (MI_58873_drzewoHuffmana.Count == 0)
                         MI_58873_nowyKorzenWartosc = MI_58873_posortowanaListaZnaków[0].MI_58873_Ilosc + MI_58873_posortowanaListaZnaków[1].MI_58873_Ilosc;
 
+                    //podbijamy nr korzenia
                     if (MI_58873_posortowanaListaZnaków.Count > 2)
                     {
-                        if (MI_58873_nowyKorzenWartosc >= MI_58873_posortowanaListaZnaków[2].MI_58873_Ilosc &&
-                            MI_58873_posortowanaListaZnaków.Count >= 3)
+                        if (MI_58873_nowyKorzenWartosc >= MI_58873_posortowanaListaZnaków[2].MI_58873_Ilosc && MI_58873_posortowanaListaZnaków.Count >= 3)
                             MI_58873_nrKorzenia++;
                     }
                     else
                         MI_58873_nrKorzenia++;
 
+                    //tworzymy i dodajemy do kontenera odnaleziony znak
                     MI_58873_WystepującyZnak MI_58873_nowyZnak = new MI_58873_WystepującyZnak
                     {
                         MI_58873_Ilosc = MI_58873_nowyKorzenWartosc,
@@ -378,6 +398,7 @@ namespace _58873_IV_
                     };
                     MI_58873_posortowanaListaZnaków.Add(MI_58873_nowyZnak);
 
+                    //pętla do zbudowania drzewa huffmanna
                     for (int MI_58873_i = 0; MI_58873_i <= 1; MI_58873_i++)
                     {
                         MI_58873_DrzewoHuffmana MI_58873_drzewoHuffmanaItem = new MI_58873_DrzewoHuffmana();
@@ -390,10 +411,10 @@ namespace _58873_IV_
                         MI_58873_drzewoHuffmanaItem.MI_58873_Ilosc = MI_58873_posortowanaListaZnaków[MI_58873_i].MI_58873_Ilosc;
                         MI_58873_drzewoHuffmana.Add(MI_58873_drzewoHuffmanaItem);
                     }
+                    //przygotowujemy dane do kolejnej weryfikacji iteracji pętli
                     MI_58873_posortowanaListaZnaków.RemoveRange(0, 2);
                     MI_58873_tymczasowaListaZnaków = MI_58873_posortowanaListaZnaków.OrderBy(MI_58873_o => MI_58873_o.MI_58873_Ilosc).ToList();
                     MI_58873_tymczasoweDrzewoHuffmana = MI_58873_drzewoHuffmana.OrderByDescending(MI_58873_o => MI_58873_o.MI_58873_Ilosc).ToList();
-
                     MI_58873_drzewoHuffmana = MI_58873_tymczasoweDrzewoHuffmana;
                     MI_58873_posortowanaListaZnaków = MI_58873_tymczasowaListaZnaków;
                 }
@@ -437,7 +458,8 @@ namespace _58873_IV_
                     MI_58873_actualNode = MI_58873_drzewoHuffmana[MI_58873_indexListy].MI_58873_Node;
                     MI_58873_tempBinaryCode = MI_58873_drzewoHuffmana[MI_58873_indexListy].MI_58873_BinaryCode.ToString();
                 }
-                catch(Exception) {
+                catch (Exception)
+                {
                     MessageBox.Show("Kompresja nie powiodła się", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     compressionResult = false;
                 }
@@ -474,6 +496,8 @@ namespace _58873_IV_
         }
     }
 
+
+    //klasa do kompresji jest zaimplementowana dokładnie w takiej formie jak została dostarczona w trakcie zajęć
     public class MI_58873_Dekompresja
     {
         public static void MI_58873_DekompresjaHuffmana(
@@ -493,15 +517,11 @@ namespace _58873_IV_
                     //usunięcie przecinka z początku ciągu
                     do
                     {
-                        if (MI_58873_source.Length > 0 &&
-                            MI_58873_source.Substring(0, 1) != "0" &&
-                            MI_58873_source.Substring(0, 1) != "1")
+                        if (MI_58873_source.Length > 0 && MI_58873_source.Substring(0, 1) != "0" && MI_58873_source.Substring(0, 1) != "1")
                         {
                             MI_58873_source = MI_58873_source.Remove(0, 1);
                         }
-                    } while (MI_58873_source.Length > 0 &&
-                            MI_58873_source.Substring(0, 1) != "1" &&
-                            MI_58873_source.Substring(0, 1) != "0");
+                    } while (MI_58873_source.Length > 0 && MI_58873_source.Substring(0, 1) != "1" && MI_58873_source.Substring(0, 1) != "0");
 
                     //teraz wiadomo że nie ma przecinka na początku ciągu więc dla wszystkich elementów ciągu wykonujemy operację
                     if (MI_58873_source.Length > 0)
@@ -539,6 +559,7 @@ namespace _58873_IV_
         }
     }
 
+    //kontener na przechowywanie kodów binarnych
     public class MI_58873_WystepującyZnak
     {
         public int MI_58873_Ilosc { get; set; }
@@ -546,6 +567,7 @@ namespace _58873_IV_
         public string MI_58873_BinaryCode { get; set; }
     }
 
+    //kontener na przechowywanie rozkodowanego ciągu
     public class MI_58873_DrzewoHuffmana
     {
         public int MI_58873_BinaryCode { get; set; }
@@ -554,6 +576,7 @@ namespace _58873_IV_
         public int MI_58873_Ilosc { get; set; }
     }
 
+    //kontener na przechowywanie słownika znaków i ich kodów binarnych
     public class MI_58873_HuffmanSourceDictionary
     {
         public string MI_58873_SingleChar { get; set; }
