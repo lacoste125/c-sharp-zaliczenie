@@ -13,6 +13,8 @@ namespace _58873_IV_
         MI_58873_Controlls MI_58873_ctrl = new MI_58873_Controlls();
         Proj MI_58873_workPanel;
         GroupBox resultBox;
+
+        //tu przechowuję tekst do skompresowania i po skompresowaniu
         string MI_58873_textDoSkompresowania = "";
         string textAfterDecompression = "";
 
@@ -23,6 +25,7 @@ namespace _58873_IV_
             this.resultBox = resultBox;
         }
 
+        //mertoda odpowiedzialna za zbudowanie ekranu do kompresji 
         public void buildCompressSection()
         {
             //przydatne zmienne
@@ -40,34 +43,34 @@ namespace _58873_IV_
                 + " - Nie wszystkie ciągi są poprawnie kompresowane i dekompresowane. Nie udało mi się ustalić co jest tego powodem.\n"
                 + " - Przycisk \"LOSUJ\" generuje losowy ciąg liter. Długość wygenerowanego tekstu to 6 znaków.";
 
-            //labelki
+            //labelki wykorzystywane w ekranie Kompresja
             Label lblTitle = MI_58873_ctrl.MI_58873_createLabel("lblTitle", new Point(100, 19), titleFont, Proj.panelColor, Proj.foreColor, 575, 35, "Kompresja Huffmanna", Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
             Label lblfillField = MI_58873_ctrl.MI_58873_createLabel("lblfillField", new Point(195, 61), Proj.footerFont, Proj.panelColor, Proj.foreColor, 500, 18, "Wprowadź ciąg do skopresowania lub kliknij w przycisk \"LOSUJ\"", BorderStyle.None, Proj.labelAlignement);
             Label lblDescription = MI_58873_ctrl.MI_58873_createLabel("lblDescription", new Point(25, 353), Proj.footerFont, Proj.panelColor, Proj.foreColor, 725, 90, description, Proj.lblBorderStyleFixed, Proj.labelAlignement);
 
-            //textboxy
+            //textboxy wykorzystywane w ekranie Kompresja
             TextBox inputText = MI_58873_ctrl.createTextField("inputText", new Point(163, tbPositionY), tbWidth, tbHeight, tbFont, Proj.inputBackColor, Proj.foreColor, tbMaxlength);
             inputText.Text = "XADJSOSDAOUAZADXSXOD";
 
-            //buttony
+            //buttony wykorzystywane w ekranie Kompresja
             Button countButton = MI_58873_ctrl.MI_58873_createButton("countButton", 135, buttonsPositionY, Proj.btnWidth, Proj.btnHeight, Proj.buttonsFont, Proj.foreColor, Proj.panelColor, "KOMPRESUJ");
             Button clearButton = MI_58873_ctrl.MI_58873_createButton("clearResultPanel", 495, buttonsPositionY, Proj.btnWidth, Proj.btnHeight, Proj.buttonsFont, Proj.foreColor, Proj.panelColor, "WYCZYŚĆ");
             Button randomButton = MI_58873_ctrl.MI_58873_createButton("randomButton", 313, buttonsPositionY, Proj.btnWidth, Proj.btnHeight, Proj.buttonsFont, Proj.foreColor, Proj.panelColor, "LOSUJ");
 
-            //wciśnięcie klawisza
+            //do text fielda przypisuję logikę wywoływaną po wprowadzeniu textu do niego
             inputText.KeyPress += new KeyPressEventHandler(MI_58873_keyPress);
 
-            //kliknięcie w button
+            //do klawiszy przypisuję metodę odpowiedzialne za reakcje po kliknięciu
             countButton.Click += new EventHandler(countButton_Button_Click);
             clearButton.Click += new EventHandler(clearResultPanel_Button_Click);
             randomButton.Click += new EventHandler(randomButton_Button_Click);
 
-            //hover
+            //efekt po najechaniu myszką na button
             countButton.MouseHover += new EventHandler(Proj.MI_58873_MouseHover);
             clearButton.MouseHover += new EventHandler(Proj.MI_58873_MouseHover);
             randomButton.MouseHover += new EventHandler(Proj.MI_58873_MouseHover);
 
-            //leave
+            //efety po zjechaniu z buttona myszką
             countButton.MouseLeave += new EventHandler(Proj.MI_58873_MouseLeave);
             clearButton.MouseLeave += new EventHandler(Proj.MI_58873_MouseLeave);
             randomButton.MouseLeave += new EventHandler(Proj.MI_58873_MouseLeave);
@@ -82,104 +85,217 @@ namespace _58873_IV_
             resultBox.Controls.Add(lblDescription);
         }
 
+        //metoda wywoływana po kliknięciu w button KOMPRESUJ
         private void countButton_Button_Click(object sender, EventArgs e)
         {
-            TextBox textField = (TextBox)resultBox.Controls.Find("inputText", true)[0];
-            if (textField != null)
+            //wywołuję tworzenie elemetnów przechowujących wyniki i wywołuję kompresję
+            buildCompressionResultSpace();
+        }
+
+        //metoda do blokowania przycisków LOSUJ i KOMPRESUJ
+        private void blockResultButtons()
+        {
+            //robię to w bloku try catch bo jedej sytuacji przycik decompress jest nie dostępny i rzucany jest wyjątek
+            try
             {
-                if (textField.Text.Equals(""))
-                {
-                    MessageBox.Show("Ciąg do kompresji nie może być pusty.", "Puste pole", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-                else
-                {
-                    MI_58873_textDoSkompresowania = textField.Text;
-                    textField.Enabled = false;
-                }
+                //wyszukuję przyciski
+                Button countButton = (Button)MI_58873_workPanel.Controls.Find("countButton", true)[0];
+                Button randomButton = (Button)MI_58873_workPanel.Controls.Find("randomButton", true)[0];
+
+                //blokuję ich klikalność
+                countButton.Enabled = false;
+                randomButton.Enabled = false;
+
+                //to samo dla decompress button
+                Button decompressButton = (Button)MI_58873_workPanel.Controls.Find("decompressButton", true)[0];
+                decompressButton.Enabled = false;
             }
+            catch (IndexOutOfRangeException)
+            {
+                //ignore
+                //nie blokuje tu niczego bo nie ma takiej potrzeby
+            }
+        }
 
-            Font resultFont = new Font("Arial", 16, FontStyle.Bold, GraphicsUnit.Pixel);
-            //labelki
-            Label lblAfterCompression = MI_58873_ctrl.MI_58873_createLabel("lblAfterCompression", new Point(230, 140), resultFont, Proj.panelColor, Proj.foreColor, 535, 50, "", BorderStyle.None, Proj.lblTxtCenter);
-            resultBox.Controls.Add(lblAfterCompression);
+        //metoda odpowiedzialna za zbudowanie ekranu i wykonanie logiki
+        private void buildCompressionResultSpace()
+        {
+            //sprawdzam czy pole jest uzupełnione poprawnie
+            //jeśli nie to wychodzę z tej metody
+            if (!checkInputText()) return;
 
-            //listbox
-            ListBox binaryCodes = MI_58873_ctrl.createListBox("binaryCodes", new Point(8, 140), 215, 165);
-            binaryCodes.Visible = false;
-            resultBox.Controls.Add(binaryCodes);
+            //metoda tworzy elementy które będą przechowywac wyniki kompresji
+            createCompressionFields();
 
+            //tworzę obiekty które będą przechowywały wyniki kompresji
             List<string> MI_58873_listaKompresji = new List<string>();
             List<MI_58873_WystepującyZnak> MI_58873_znaki = new List<MI_58873_WystepującyZnak>();
 
+            //wykonuję kompresję a jej wynik przypisuje do odpowiedniej zmiennej 
             bool compressionResult = MI_58873_kompresuj(MI_58873_textDoSkompresowania, ref MI_58873_listaKompresji, ref MI_58873_znaki);
 
+            //jeśli kompresja się udała to dopiero wtedy tworze pozostałe kontrolki prezentujące wyniki
             if (compressionResult)
             {
+                //blokuję buttony żeby nie można było ich użyć 
+                blockResultButtons();
+
                 //labelki
                 Label titleChars = MI_58873_ctrl.MI_58873_createLabel("titleChars", new Point(7, 124), Proj.footerFont, Proj.panelColor, Proj.foreColor, 200, 18, "Zestawienie znaków:", BorderStyle.None, Proj.labelAlignement);
                 Label compressedChars = MI_58873_ctrl.MI_58873_createLabel("compressedChars", new Point(228, 124), Proj.footerFont, Proj.panelColor, Proj.foreColor, 500, 18, "Skompresowany ciąg znaków:", BorderStyle.None, Proj.labelAlignement);
 
                 //buttony
                 Button decompressButton = MI_58873_ctrl.MI_58873_createButton("decompressButton", 400, 192, Proj.btnWidth, Proj.btnHeight, Proj.buttonsFont, Proj.foreColor, Proj.panelColor, "DEKOMPRESUJ");
+                //do buttonu przypisuję metodę która się wywoła po kliknięciu
                 decompressButton.Click += new EventHandler(decompressButton_Button_Click);
+                //oraz standardowo hover i leave
                 decompressButton.MouseHover += new EventHandler(Proj.MI_58873_MouseHover);
                 decompressButton.MouseLeave += new EventHandler(Proj.MI_58873_MouseLeave);
 
-                //dodanie elementów do ekranu
-                resultBox.Controls.Add(binaryCodes);
+                //i dodaję te przed chwilą utworzone elementy do sekcji Panel wyników
                 resultBox.Controls.Add(decompressButton);
                 resultBox.Controls.Add(titleChars);
                 resultBox.Controls.Add(compressedChars);
 
+                //wykonuję też dodatkowo dekompresje ale jej wyniku jeszcze nie wyświetlam użytkownikowi
+                //wynik i pozostała logika została zaimplementowana po kliknięciu w button DEKOPRESJA
                 textAfterDecompression = MI_58873_dekompresuj(MI_58873_znaki, MI_58873_listaKompresji, MI_58873_textDoSkompresowania);
             }
-
-            Button countButton = (Button)MI_58873_workPanel.Controls.Find("countButton", true)[0];
-            if (countButton != null) countButton.Enabled = false;
-
-            Button randomButton = (Button)MI_58873_workPanel.Controls.Find("randomButton", true)[0];
-            if (randomButton != null) randomButton.Enabled = false;
         }
 
-        private void decompressButton_Button_Click(object sender, EventArgs e)
+        //metoda jest odpowiedzialna za wykonanie kompresji i przypisanie wyników do odpowiednich pól
+        private bool MI_58873_kompresuj(string MI_58873_textDoSkompresowania, ref List<string> MI_58873_listaKompresji, ref List<MI_58873_WystepującyZnak> MI_58873_znaki)
         {
+            //wywołanie metody kompresującej
+            //wynik kompresji przechowuje w zmiennej bool
+            bool compressionResult = MI_58873_Kompresja.MI_58873_KompresjaHuffmanna(MI_58873_textDoSkompresowania, ref MI_58873_listaKompresji, ref MI_58873_znaki);
+
+            //wyszukuje listbox w której będę wyświetlał kody binarne
+            ListBox resultSpace = (ListBox)MI_58873_workPanel.Controls.Find("binaryCodes", true)[0];
+
+            //wyszukuje labelkę w której będę wyświetlał ciąg po skompresowaniu
+            Label resultCodesSpace = (Label)MI_58873_workPanel.Controls.Find("lblAfterCompression", true)[0];
+
+            //jeśli kompresja się udała
+            if (compressionResult)
+            {
+                //jesli znaleziony został Listbox
+                if (resultSpace != null)
+                {
+                    //włączam ten list box - presentuję go userowi
+                    resultSpace.Visible = true;
+
+                    //iteruję się po liście znaków i przypisuję jej wartości do kolejnych wierszy listBox
+                    MI_58873_znaki.ForEach(x => resultSpace.Items.Add("Znak: " + x.MI_58873_Znak + " Ilość: " + x.MI_58873_Ilosc + " Kod Binarny: " + x.MI_58873_BinaryCode));
+                }
+
+                //jeśli znalazłem labelkę do printowania skompresowanego ciągu
+                if (resultCodesSpace != null)
+                {
+                    //ustawiam jej obramowanie tak aby była labelka widoczna
+                    //bo tak na prawdę to ta labelka była już tam wcześniej :)
+                    resultCodesSpace.BorderStyle = Proj.lblBorderStyleFixed;
+
+                    //dodaje do labelki znak rozpoczynający skompresowany ciąg
+                    resultCodesSpace.Text = "[";
+
+                    //iteruję się po liście i dodaje do labelki kolejne elementy z tej listy
+                    MI_58873_listaKompresji.ForEach(x => resultCodesSpace.Text += x + " ");
+
+                    //zamykam skompresowany ciąg
+                    resultCodesSpace.Text += "EOF]";
+                }
+            }
+
+            //zwracam wynik tej kompresji
+            return compressionResult;
+        }
+
+        //metoda tworzy obiekty które będą przechowywać wyniki kompresji
+        private void createCompressionFields()
+        {
+            //zmienna przechowująca czciąnkę labelki resultFont
+            //robię to tutaj dopiero bo  bedzie ona utworzona tylko wtedy gdy wcześniejsza instrukcja nie przerwie działania metody
             Font resultFont = new Font("Arial", 16, FontStyle.Bold, GraphicsUnit.Pixel);
 
-            //labelki
-            Label lblDecompression = MI_58873_ctrl.MI_58873_createLabel("lblAfterCompression", new Point(230, 244), resultFont, Proj.panelColor, Proj.foreColor, 535, 50, textAfterDecompression, Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
+            //labelka potrzebna do prezentacji 
+            Label lblAfterCompression = MI_58873_ctrl.MI_58873_createLabel("lblAfterCompression", new Point(230, 140), resultFont, Proj.panelColor, Proj.foreColor, 535, 50, "", BorderStyle.None, Proj.lblTxtCenter);
+            resultBox.Controls.Add(lblAfterCompression);
 
-            bool decompressionResult = checkDecompressionResult();
-            if (decompressionResult)
-                lblDecompression.BackColor = Color.Green;
-            else
-                lblDecompression.BackColor = Color.OrangeRed;
-
-
-            //dodanie kontrolki do ekranu
-            resultBox.Controls.Add(lblDecompression);
-
-            Button decompressButton = (Button)MI_58873_workPanel.Controls.Find("decompressButton", true)[0];
-            if (decompressButton != null) decompressButton.Enabled = false;
-
-            if (decompressionResult)
-                MessageBox.Show("Dekompresja powiodła się.", "SUCCESS", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            else
-                MessageBox.Show("Dekompresja nie powiodła się.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //tworze list box który będzie przehowywał kody binarne
+            ListBox binaryCodes = MI_58873_ctrl.createListBox("binaryCodes", new Point(8, 140), 215, 165);
+            //inicjalnie ten list box jest wyłączony
+            binaryCodes.Visible = false;
+            //dodaję go do ekranu
+            resultBox.Controls.Add(binaryCodes);
         }
 
+        //metoda służy do sprawdzenia popawności wypełnienia inputa
+        private bool checkInputText()
+        {
+            //wyszukuję textbox w którym znajduje się cąg do skompresowania
+            TextBox textField = (TextBox)resultBox.Controls.Find("inputText", true)[0];
+
+            //jeśli textbox znalazłem
+            if (textField != null)
+            {
+                //jeśli wartość tekstu w inpucie jest pustym stringiem
+                if (textField.Text.Equals(""))
+                {
+                    //wyświetlam userowi message box z info że pole nie może być puste
+                    MessageBox.Show("Ciąg do kompresji nie może być pusty.", "Puste pole", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    //informuję że 
+                    return false;
+                }
+                else
+                {
+                    //jeśli input nie jest pusty to przypisuję jego wartość do odpowiedniej zmiennej
+                    MI_58873_textDoSkompresowania = textField.Text;
+                    //i blokuję ten input aby go nie można już było zmodyfikować
+                    textField.Enabled = false;
+                    return true;
+                }
+            }
+
+            //jeśli nie znalazłem to zwracam takie info
+            else return false;
+        }
+
+
+        //logika po kliknięciu w przycisk DEKOMPRESUJ
+        //sama dekompresja była już wykonana wcześniej, tu tylko sprawdzam poprawność i tworzę odpowiednie elementy do prezentowania tego
+        private void decompressButton_Button_Click(object sender, EventArgs e)
+        {
+            //blokuję wszystkie znalezione przyciski w sekcji result panel
+            blockResultButtons();
+
+            //wywołuję sprawdzenie czy dekompresja się udała wywołując poniższą metodę
+            checkDecompressionResult();
+
+        }
+
+        //metoda wywoływana po kliknięciu w przycisk WYCZYŚĆ
         private void clearResultPanel_Button_Click(object sender, EventArgs e)
         {
+            //czyszczę sekcję panel wyników
             clearResultPanel();
+
+            //przywracam inicjalny wygląd ekranu do kompresji
             buildCompressSection();
+
+            //tym razem już input nie będzie uzupełniony domyślną wartością
             TextBox input = (TextBox)MI_58873_workPanel.Controls.Find("inputText", true)[0];
             if (input != null) input.Text = "";
         }
 
+        //metoda wywoływana po kliknięciu w button LOSUJ
         private void randomButton_Button_Click(object sender, EventArgs e)
         {
+            //wyszukuję text box do wprowadzania danych
             foreach (var element in resultBox.Controls.OfType<TextBox>())
             {
+                //przypisuję temu text boxowi nowo wygenerowany ciąg znaków - ciąg będzie zawierał 6 znaków
+                //poniższy kod został pobrany z internetu
                 //źródło http://csharp.net-informations.com/string/random.htm
                 Random random = new Random();
                 int length = 6;
@@ -188,6 +304,8 @@ namespace _58873_IV_
                 {
                     randomString += ((char)(random.Next(1, 26) + 64)).ToString().ToLower();
                 }
+                //wpisuję ten ciąg w pole tekstowe
+                //ciąg jest wpisywany wielkimi znakami (ToUpper)
                 element.Text = randomString.ToString().ToUpper(); ;
             }
         }
@@ -199,54 +317,47 @@ namespace _58873_IV_
             TextBox element = sender as TextBox;
         }
 
+        //metoda odpowiedzialna za wyczysczenie sekcji panel wyników
         private void clearResultPanel()
         {
+            //wyszukuję ten panel i czyszczę go
             GroupBox MI_58873_gb = (GroupBox)MI_58873_workPanel.Controls.Find("GbResult", true)[0];
             if (MI_58873_gb.Controls.Count > 0) MI_58873_gb.Controls.Clear();
         }
 
-        private bool checkDecompressionResult()
+        //metoda weryfikuje wynik dekompresji
+        private void checkDecompressionResult()
         {
-            if (MI_58873_textDoSkompresowania == textAfterDecompression) return true;
-            else return false;
-        }
+            //przydatana zmienna 
+            Font resultFont = new Font("Arial", 16, FontStyle.Bold, GraphicsUnit.Pixel);
+            //labelki przechowująca ciąg po dekompresji
+            Label resultLabel = MI_58873_ctrl.MI_58873_createLabel("lblAfterCompression", new Point(230, 244), resultFont, Proj.panelColor, Proj.foreColor, 535, 50, textAfterDecompression, Proj.lblBorderStyleFixed, Proj.lblTxtCenter);
 
-        private bool MI_58873_kompresuj(
-            string MI_58873_textDoSkompresowania,
-            ref List<string> MI_58873_listaKompresji,
-            ref List<MI_58873_WystepującyZnak> MI_58873_znaki)
-        {
-            //wywołanie metody kompresującej 
-            bool compressionResult = MI_58873_Kompresja.MI_58873_KompresjaHuffmanna(MI_58873_textDoSkompresowania, ref MI_58873_listaKompresji, ref MI_58873_znaki);
-            ListBox resultSpace = (ListBox)MI_58873_workPanel.Controls.Find("binaryCodes", true)[0];
-            Label resultCodesSpace = (Label)MI_58873_workPanel.Controls.Find("lblAfterCompression", true)[0];
-
-            if (compressionResult)
+            //porównuję sobie tekst przed kompresją i po dekompresji
+            if (MI_58873_textDoSkompresowania == textAfterDecompression)
             {
-                //wypełnianie listy kodów
+                //jeśli jest taki sam
+                //koloruję labelkę z rezultatem na zielono
+                resultLabel.BackColor = Color.Green;
 
-                if (resultSpace != null)
-                {
-                    resultSpace.Visible = true;
-                    MI_58873_znaki.ForEach(x => resultSpace.Items.Add("Znak: " + x.MI_58873_Znak + " Ilość: " + x.MI_58873_Ilosc + " Kod Binarny: " + x.MI_58873_BinaryCode));
-                }
+                //dodanie kontrolki do ekranu
+                resultBox.Controls.Add(resultLabel);
 
-                if (resultCodesSpace != null)
-                {
-                    resultCodesSpace.BorderStyle = Proj.lblBorderStyleFixed;
-                    resultCodesSpace.Text = "[";
-                    MI_58873_listaKompresji.ForEach(x => resultCodesSpace.Text += x + " ");
-                    resultCodesSpace.Text += "EOF]";
-                }
+                //informuję usera o sukcesie odpowiednim alertem
+                MessageBox.Show("Dekompresja powiodła się.", "SUCCESS", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                if (resultSpace != null) resultSpace.Visible = false;
+                //jesli tekst nie jest taki sam
+                //koloruję na czerwono labelkę z tekstem wyniku
+                resultLabel.BackColor = Color.OrangeRed;
 
-                if (resultCodesSpace != null) resultCodesSpace.Visible = false;
+                //dodanie kontrolki do ekranu
+                resultBox.Controls.Add(resultLabel);
+
+                //informuje usera o errorze
+                MessageBox.Show("Dekompresja nie powiodła się.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-            return compressionResult;
         }
 
         private string MI_58873_dekompresuj(List<MI_58873_WystepującyZnak> MI_58873_znaki, List<string> MI_58873_listaKompresji, string MI_58873_tekstPrzedkompresja)
@@ -280,20 +391,18 @@ namespace _58873_IV_
             bool MI_58873_wynikRozkodowania = false;
 
             //wywołanie metody dekompresującej
-            MI_58873_Dekompresja.MI_58873_DekompresjaHuffmana(
-                MI_58873_dictionary, MI_58873_ciągBinarny,
-                ref MI_58873_listaRozkodowanych,
-                ref MI_58873_wynikRozkodowania);
+            MI_58873_Dekompresja.MI_58873_DekompresjaHuffmana(MI_58873_dictionary, MI_58873_ciągBinarny, ref MI_58873_listaRozkodowanych, ref MI_58873_wynikRozkodowania);
 
             //deklaracja zmiennej która przechowywać będzie rozkodowany tekst
             string MI_58873_rozkodowanyTekst = "";
+
             //wszystkie obiekty z listy MI_58873_listaRozkodowanych łączę w jedną całość za pomocą pętli for
             for (int MI_58873_i = 0; MI_58873_i < MI_58873_listaRozkodowanych.Count; MI_58873_i++)
             {
-
                 MI_58873_rozkodowanyTekst += MI_58873_listaRozkodowanych[MI_58873_i];
             }
 
+            //zwracam rozkodowany tekst
             return MI_58873_rozkodowanyTekst;
         }
     }
@@ -338,10 +447,9 @@ namespace _58873_IV_
                     MI_58873_tymczasowaListaZnaków.Add(nowyZnak);
                 }
                 else
-                {   
+                {
                     //jeślil się znalazł to inkrementujemy ilość
-                    MI_58873_tymczasowaListaZnaków.Where(MI_58873_w => MI_58873_w.MI_58873_Znak == MI_58873_kolejnyZnak).ToList().
-                        ForEach(MI_58873_s => MI_58873_s.MI_58873_Ilosc = MI_58873_s.MI_58873_Ilosc + 1);
+                    MI_58873_tymczasowaListaZnaków.Where(MI_58873_w => MI_58873_w.MI_58873_Znak == MI_58873_kolejnyZnak).ToList().ForEach(MI_58873_s => MI_58873_s.MI_58873_Ilosc = MI_58873_s.MI_58873_Ilosc + 1);
                 }
                 //usuwamy z listy opracowywany znak
                 MI_58873_pozostaly = MI_58873_roboczy.Remove(0, 1);
@@ -491,15 +599,10 @@ namespace _58873_IV_
         }
     }
 
-
     //klasa do kompresji jest zaimplementowana dokładnie w takiej formie jak została dostarczona w trakcie zajęć
     public class MI_58873_Dekompresja
     {
-        public static void MI_58873_DekompresjaHuffmana(
-    List<MI_58873_HuffmanSourceDictionary> MI_58873_sourceDictionary,
-    string MI_58873_source,
-    ref List<string> MI_58873_resultCode,
-    ref bool MI_58873_dictionaryComplete)
+        public static void MI_58873_DekompresjaHuffmana(List<MI_58873_HuffmanSourceDictionary> MI_58873_sourceDictionary, string MI_58873_source, ref List<string> MI_58873_resultCode, ref bool MI_58873_dictionaryComplete)
         {
             string MI_58873_kolejnyZnak = "";
             int MI_58873_zawiera = 0;
