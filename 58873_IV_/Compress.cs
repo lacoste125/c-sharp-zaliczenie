@@ -10,19 +10,19 @@ namespace _58873_IV_
     class Compress
     {
         //instancje elementów
-        MI_58873_Controlls MI_58873_ctrl = new MI_58873_Controlls();
-        Proj MI_58873_workPanel;
-        GroupBox resultBox;
+        readonly MI_58873_Controlls MI_58873_ctrl = new MI_58873_Controlls();
+        readonly Proj MI_58873_workPanel;
+        readonly GroupBox resultBox;
 
         //tu przechowuję tekst do skompresowania i po skompresowaniu
         string MI_58873_textDoSkompresowania = "";
         string textAfterDecompression = "";
 
         //konstruktor
-        public Compress(Proj MI_58873_workPanel, GroupBox resultBox)
+        public Compress(Proj MI_58873_workPanel)
         {
             this.MI_58873_workPanel = MI_58873_workPanel;
-            this.resultBox = resultBox;
+            resultBox = (GroupBox)MI_58873_workPanel.Controls.Find("GbResult", true)[0];
         }
 
         //mertoda odpowiedzialna za zbudowanie ekranu do kompresji 
@@ -33,7 +33,6 @@ namespace _58873_IV_
             int tbHeight = 35;
             int buttonsPositionY = 300;
             int tbPositionY = 84;
-            int operatorTopPosion = 85;
             int tbMaxlength = 20;
             Font tbFont = new Font("Arial", 23, FontStyle.Bold, GraphicsUnit.Pixel);
             Font titleFont = new Font("Arial", 25, FontStyle.Bold, GraphicsUnit.Pixel);
@@ -57,9 +56,6 @@ namespace _58873_IV_
             Button countButton = MI_58873_ctrl.MI_58873_createButton("countButton", 135, buttonsPositionY,  "KOMPRESUJ");
             Button clearButton = MI_58873_ctrl.MI_58873_createButton("clearResultPanel", 495, buttonsPositionY,  "WYCZYŚĆ");
             Button randomButton = MI_58873_ctrl.MI_58873_createButton("randomButton", 313, buttonsPositionY,"LOSUJ");
-
-            //do text fielda przypisuję logikę wywoływaną po wprowadzeniu textu do niego
-            inputText.KeyPress += new KeyPressEventHandler(MI_58873_keyPress);
 
             //do klawiszy przypisuję metodę odpowiedzialne za reakcje po kliknięciu
             countButton.Click += new EventHandler(countButton_Button_Click);
@@ -163,7 +159,7 @@ namespace _58873_IV_
 
                 //wykonuję też dodatkowo dekompresje ale jej wyniku jeszcze nie wyświetlam użytkownikowi
                 //wynik i pozostała logika została zaimplementowana po kliknięciu w button DEKOPRESJA
-                textAfterDecompression = MI_58873_dekompresuj(MI_58873_znaki, MI_58873_listaKompresji, MI_58873_textDoSkompresowania);
+                textAfterDecompression = MI_58873_dekompresuj(MI_58873_znaki, MI_58873_listaKompresji);
             }
         }
 
@@ -317,13 +313,6 @@ namespace _58873_IV_
             }
         }
 
-        //metoda sprawdzająca czy wciśnięty klawisz jest cyfrą lub backspace
-        private void MI_58873_keyPress(object sender, KeyPressEventArgs e)
-        {
-            //informuję program że sender jest textBoxem
-            TextBox element = sender as TextBox;
-        }
-
         //metoda odpowiedzialna za wyczysczenie sekcji panel wyników
         private void clearResultPanel()
         {
@@ -367,7 +356,7 @@ namespace _58873_IV_
             }
         }
 
-        private string MI_58873_dekompresuj(List<MI_58873_WystepującyZnak> MI_58873_znaki, List<string> MI_58873_listaKompresji, string MI_58873_tekstPrzedkompresja)
+        private string MI_58873_dekompresuj(List<MI_58873_WystepującyZnak> MI_58873_znaki, List<string> MI_58873_listaKompresji)
         {
             //Lista w której przechowywać będziemy info o znakach oraz o przypisanych do nich kodach binarnych
             List<MI_58873_HuffmanSourceDictionary> MI_58873_dictionary;
@@ -448,15 +437,17 @@ namespace _58873_IV_
                 if (MI_58873_indexListy == -1)
                 {
                     //jeśli indeks się nie znalazł zachowujemy pobrany znak 
-                    MI_58873_WystepującyZnak nowyZnak = new MI_58873_WystepującyZnak();
-                    nowyZnak.MI_58873_Ilosc = 1;
-                    nowyZnak.MI_58873_Znak = MI_58873_kolejnyZnak;
+                    MI_58873_WystepującyZnak nowyZnak = new MI_58873_WystepującyZnak
+                    {
+                        MI_58873_Ilosc = 1,
+                        MI_58873_Znak = MI_58873_kolejnyZnak
+                    };
                     MI_58873_tymczasowaListaZnaków.Add(nowyZnak);
                 }
                 else
                 {
                     //jeślil się znalazł to inkrementujemy ilość
-                    MI_58873_tymczasowaListaZnaków.Where(MI_58873_w => MI_58873_w.MI_58873_Znak == MI_58873_kolejnyZnak).ToList().ForEach(MI_58873_s => MI_58873_s.MI_58873_Ilosc = MI_58873_s.MI_58873_Ilosc + 1);
+                    MI_58873_tymczasowaListaZnaków.Where(MI_58873_w => MI_58873_w.MI_58873_Znak == MI_58873_kolejnyZnak).ToList().ForEach(MI_58873_s => MI_58873_s.MI_58873_Ilosc++);
                 }
                 //usuwamy z listy opracowywany znak
                 MI_58873_pozostaly = MI_58873_roboczy.Remove(0, 1);
@@ -580,7 +571,7 @@ namespace _58873_IV_
                     if (MI_58873_indexListy != -1)
                     {
                         MI_58873_actualNode = MI_58873_drzewoHuffmana[MI_58873_indexListy].MI_58873_Node;
-                        MI_58873_tempBinaryCode = MI_58873_tempBinaryCode + MI_58873_drzewoHuffmana[MI_58873_indexListy].MI_58873_BinaryCode.ToString();
+                        MI_58873_tempBinaryCode += MI_58873_drzewoHuffmana[MI_58873_indexListy].MI_58873_BinaryCode.ToString();
 
                         if (MI_58873_tempBinaryCode.Length > 1 && MI_58873_tempBinaryCode.Substring(0, 1) == "0")
                             MI_58873_tempBinaryCode = MI_58873_tempBinaryCode.Remove(0, 1);
@@ -634,7 +625,7 @@ namespace _58873_IV_
                         do
                         {
                             //pobieramy wartośc 1 lub 0 z przygotowanego ciągu znaków i dodajemy do zmiennej MI_58873_kolejnyZnak
-                            MI_58873_kolejnyZnak = MI_58873_kolejnyZnak + MI_58873_source.Substring(0, 1);
+                            MI_58873_kolejnyZnak += MI_58873_source.Substring(0, 1);
                             //pobrany znak usuwamy z ciągu MI_58873_source po to aby go kolejny raz nie pobrać
                             MI_58873_source = MI_58873_source.Remove(0, 1);
                             //pobieramy i dopisujemy do MI_58873_kolejnyZnak aż do momentu kiedy napotkamy inny znak niż 0 lub 1 (tu wiemy żę mamy przecinek i "EOF")
@@ -655,7 +646,7 @@ namespace _58873_IV_
                     }
                 } while (MI_58873_source.Length > 0);
             }
-            catch (Exception MI_58873_ex)
+            catch (Exception)
             {
                 //w przypadku wystąpienia błędu podczas dekompresji,
                 //zamiast przerywać działanie programu informujemy o błędzie ustawiając wartość false dla rezultatu dekompreji

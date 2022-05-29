@@ -40,12 +40,6 @@ namespace _58873_IV_
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Name = "ProjektZaliczeniowy";
             this.Text = "Projekt Zaliczeniowy";
-            //usunięcie przycisku maksymalizowania okienka
-            this.MaximizeBox = false;
-            //usunięcie przycisku minimalizowania okienka
-            this.MinimizeBox = false;
-            //zablokowanie możliwość zmiany wielkości okna za pomocą myszki
-            this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.ResumeLayout(false);
 
         }

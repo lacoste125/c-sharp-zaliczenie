@@ -7,12 +7,11 @@ namespace _58873_IV_
     public partial class Proj : Form
     {
         //deklaracje instancji klas których będziemy używać 
-        MI_58873_Controlls MI_58873_ctrl = new MI_58873_Controlls();
-        Proj MI_58873_workPanel;
-        GroupBox resultBox;
-        Matrix matrix;
-        Bubble bubble;
-        Compress compress;
+        readonly MI_58873_Controlls MI_58873_ctrl = new MI_58873_Controlls();
+        readonly Proj MI_58873_workPanel;
+        readonly Matrix matrix;
+        readonly Bubble bubble;
+        readonly Compress compress;
 
         //zmienne wykorzystywane w klasach Form1, matrix i bubble
         public static readonly Color foreColor = Color.Black;
@@ -29,16 +28,24 @@ namespace _58873_IV_
             //inicjalizujemy komponenty
             InitializeComponent();
             MI_58873_workPanel = this;
+
             //ustawiamy rozmiar okna
             this.Width = 1000;
             this.Height = 600;
+            //usunięcie przycisku maksymalizowania okienka
+            this.MaximizeBox = false;
+            //usunięcie przycisku minimalizowania okienka
+            this.MinimizeBox = false;
+            //zablokowanie możliwość zmiany wielkości okna za pomocą myszki
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+
             //wywołuję metodą odpowiedzialną za zbudowanie głównego okna
             MI_58873_loadControlls();
 
             //inicjalizuje instancje klas reprezentujących poszczególne funkcjonalności
-            matrix = new Matrix(this, resultBox);
-            bubble = new Bubble(this, resultBox);
-            compress = new Compress(this, resultBox);
+            matrix = new Matrix(this);
+            bubble = new Bubble(this);
+            compress = new Compress(this);
         }
 
         //poniższa meetoda służy do zbudowania ekranu od razu po uruchomieniu programu
@@ -49,7 +56,7 @@ namespace _58873_IV_
             int btnPositionX = 12;
 
             //inicjalizuję wszystkie groupoxy które będą na ekranie
-            resultBox = MI_58873_ctrl.MI_58873_createGroupBox(15, 10, 775, 450, "Panel Wyników", "GbResult");
+            GroupBox resultBox = MI_58873_ctrl.MI_58873_createGroupBox(15, 10, 775, 450, "Panel Wyników", "GbResult");
             GroupBox buttonBox = MI_58873_ctrl.MI_58873_createGroupBox(800, 10, 170, 450, "Akcje", "GbManagement");
             GroupBox footerBox = MI_58873_ctrl.MI_58873_createGroupBox(15, 465, 955, 80, "Dane studenta", "GbStopka");
 
@@ -158,19 +165,15 @@ namespace _58873_IV_
         //metoda odpowiedzialna za efekt po najechaniu na button myszką
         public static void MI_58873_MouseHover(object sender, EventArgs e)
         {
-            //informuję program że element o którym mowa to button
-            Button MI_58873_button = sender as Button;
-            //po najechaniu na button myszką zmieniamy jego kolor na pomarańczowy
-            if (MI_58873_button != null) MI_58873_button.BackColor = Color.CornflowerBlue;
+            //jeśli element jest buttonem to po najechaniu na button myszką zmieniamy jego kolor na pomarańczowy
+            if (sender is Button MI_58873_button) MI_58873_button.BackColor = Color.CornflowerBlue;
         }
 
         //ta metoda jest odpowiedzialna za efekt po zabraniu kursora myszki z elementu
         public static void MI_58873_MouseLeave(object sender, EventArgs e)
         {
-            //informuję program że element o którym mowa to button
-            Button MI_58873_button = sender as Button;
-            //po zjechaniu myszką z buttona przypisue mu spowrotem inicjalną wartość
-            if (MI_58873_button != null) MI_58873_button.BackColor = Color.FromKnownColor(KnownColor.Control);
+            //jeśli sender jest buttonem to po zjechaniu myszką z buttona przypisue mu spowrotem inicjalną wartość
+            if (sender is Button MI_58873_button) MI_58873_button.BackColor = Color.FromKnownColor(KnownColor.Control);
         }
 
         //metoda odpowiedzialna za 

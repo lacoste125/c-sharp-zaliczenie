@@ -9,9 +9,9 @@ namespace _58873_IV_
     class Matrix
     {
         //instancje elementów
-        MI_58873_Controlls MI_58873_ctrl = new MI_58873_Controlls();
-        Proj MI_58873_workPanel;
-        GroupBox resultBox;
+        readonly MI_58873_Controlls MI_58873_ctrl = new MI_58873_Controlls();
+        readonly Proj MI_58873_workPanel;
+        readonly GroupBox resultBox;
 
         //właściwości klasy
         bool showEmptyTextFieldWarning = true;
@@ -21,10 +21,10 @@ namespace _58873_IV_
         readonly BorderStyle laberBorder = BorderStyle.None;
 
         //konstruktor
-        public Matrix(Proj MI_58873_workPanel, GroupBox resultBox)
+        public Matrix(Proj MI_58873_workPanel)
         {
             this.MI_58873_workPanel = MI_58873_workPanel;
-            this.resultBox = resultBox;
+            resultBox = (GroupBox)MI_58873_workPanel.Controls.Find("GbResult", true)[0];
         }
 
         //metoda wywoływana podczas budowania ekranu po wciśnięciu przycisku ALGORYTM MATEMATYCZNY
@@ -396,10 +396,12 @@ namespace _58873_IV_
             {
                 //jeśli tak to prezentuję userowi odpowiedni tooltip
                 e.Handled = true;
-                ToolTip tool = new ToolTip();
-                tool.ToolTipTitle = "To pole przyjmuje tylko cyfry";
-                tool.ShowAlways = true;
-                tool.InitialDelay = 25;
+                ToolTip tool = new ToolTip
+                {
+                    ToolTipTitle = "To pole przyjmuje tylko cyfry",
+                    ShowAlways = true,
+                    InitialDelay = 25
+                };
                 tool.Show("Wprowadź liczbę typu int", element, 3000);
             }
         }
