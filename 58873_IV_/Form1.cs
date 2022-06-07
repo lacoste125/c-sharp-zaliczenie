@@ -108,6 +108,9 @@ namespace _58873_IV_
 
             //usupełnienie sekcji dane studenta
             footerBox.Controls.Add(personalData);
+
+            //wywołanie metody która printuje na ekran instrukcje dla przycisków
+            printIntroduction();
         }
 
         //to jest metoda która jest wywoływana po kliknięciu w button "ALGORYTM SORTUJĄCY"
@@ -141,6 +144,8 @@ namespace _58873_IV_
             clearResultPanel();
             //przywracamy widoczność buttonów ALGORYTM SORTUJĄCY,MATEMATYCZNY i KOMPRESUJĄCY
             MI_58873_changeVisibilityButtons(true);
+            //wywołujemy metodę printującą instrukcję
+            printIntroduction();
         }
 
         //metoda wywoływana po kliknięciu w przycisk EXIT
@@ -209,6 +214,35 @@ namespace _58873_IV_
             if (MI_58873_mainZipButton != null) MI_58873_mainZipButton.Enabled = MI_58873_isVisible;
             //button CLEAR zawsze będzie miał przeciwną dostępnośc niz pozostałe buttony
             if (clearBtn != null) clearBtn.Enabled = !MI_58873_isVisible;
+        }
+
+        //metoda tworzy i dodaje do ekranu labelki z instrukcją dla buttonów nawigacyjnych
+        private void printIntroduction()
+        {
+            //powtarzające się wartości wrzucone do zmiennych
+            Font introductionFont = new Font("Arial", 17, FontStyle.Regular, GraphicsUnit.Pixel);
+            BorderStyle noBorder = BorderStyle.None;
+            ContentAlignment rightAlign = ContentAlignment.MiddleRight;
+            int height = 25;
+            int weight = 750;
+            int x = 24;
+
+            //tworzę odpowiednie labelki
+            Label sortInfo = MI_58873_ctrl.MI_58873_createLabel("sortInfo", new Point(x, 40), introductionFont, weight, height, "Budowanie ekranu dla algorytmu sortującego >>>>", noBorder, rightAlign);
+            Label mathInfo = MI_58873_ctrl.MI_58873_createLabel("mathInfo", new Point(x, 100), introductionFont, weight, height, "Budowanie ekranu dla algorytmu matematycznego >>>>", noBorder, rightAlign);
+            Label compressInfo = MI_58873_ctrl.MI_58873_createLabel("compressInfo", new Point(x, 154), introductionFont, weight, height, "Budowanie ekranu dla algorytmu kompresującego >>>>", noBorder, rightAlign);
+            Label clearInfo = MI_58873_ctrl.MI_58873_createLabel("clearInfo", new Point(x, 345), introductionFont, weight, height, "Przywrócenie programu do inicjalnego wyglądu >>>>", noBorder, rightAlign);
+            Label exitInfo = MI_58873_ctrl.MI_58873_createLabel("exitInfo", new Point(x, 399), introductionFont, weight, height, "Zakończenie pracy programu >>>>", noBorder, rightAlign);
+
+            //wyszukuje resultPanel w programie
+            GroupBox resultBox = (GroupBox)MI_58873_workPanel.Controls.Find("GbResult", true)[0];
+
+            //dodaję labelki do ekranu
+            resultBox.Controls.Add(sortInfo);
+            resultBox.Controls.Add(mathInfo);
+            resultBox.Controls.Add(compressInfo);
+            resultBox.Controls.Add(clearInfo);
+            resultBox.Controls.Add(exitInfo);
         }
     }
 }

@@ -31,7 +31,7 @@ namespace _58873_IV_
             int tbPositionY = 90;
             int tbMaxlength = 5;
             Font tbFont = new Font("Arial", 25, FontStyle.Bold, GraphicsUnit.Pixel);
-            string description = " - Program wynokonuje sortowanie bąbelkowe na podstawie wprowadzonych lub wylosowanych liczb\n"
+            string description = " - Program wykonuje sortowanie bąbelkowe na podstawie wprowadzonych lub wylosowanych liczb\n"
                 + " - Wylosowane liczby są z zakresu <-9999, 99999>\n"
                 + " - Program nie przyjmuje liter ani innych znaków oprócz \"-\"\n"
                 + " - Każde pole tekstowe przyjmuje maxymalnie 5 znaków\n"
