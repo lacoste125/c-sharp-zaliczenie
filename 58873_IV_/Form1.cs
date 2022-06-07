@@ -181,7 +181,7 @@ namespace _58873_IV_
             if (MI_58873_sender is Button MI_58873_button) MI_58873_button.BackColor = Color.FromKnownColor(KnownColor.Control);
         }
 
-        //metoda odpowiedzialna za 
+        //metoda odpowiedzialna za wyczysczenie kontrolek w panelu wyników
         private void MI_58873_clearResultPanel()
         {
             //wyszukujemy elementy które chcemy przywrócić do stanu inicjalnego

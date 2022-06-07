@@ -23,8 +23,8 @@ namespace _58873_IV_
                 BackColor = Color.FromKnownColor(KnownColor.Control),
                 Text = MI_58873_text,
                 TextAlign = ContentAlignment.MiddleCenter,
-
             };
+
             return MI_58873_element;
         }
 
@@ -68,7 +68,7 @@ namespace _58873_IV_
 
         //metoda tworząca Text box
         //metoda dostarczona przez wykładowcę
-        public TextBox createTextField(string MI_58873_name, Point MI_58873_location, int MI_58873_width, int MI_58873_height, Font MI_58873_font, Color MI_58873_backColor, Color MI_58873_foreColor, int maxLength)
+        public TextBox MI_58873_createTextField(string MI_58873_name, Point MI_58873_location, int MI_58873_width, int MI_58873_height, Font MI_58873_font, Color MI_58873_backColor, Color MI_58873_foreColor, int maxLength)
         {
             TextBox MI_58873_element = new TextBox
             {
@@ -88,7 +88,8 @@ namespace _58873_IV_
             return MI_58873_element;
         }
 
-        public ListBox createListBox(string MI_58873_name, Point MI_58873_location, int MI_58873_width, int MI_58873_height)
+        //metoda tworząca listbox
+        public ListBox MI_58873_createListBox(string MI_58873_name, Point MI_58873_location, int MI_58873_width, int MI_58873_height)
         {
             ListBox MI_58873_element = new ListBox
             {

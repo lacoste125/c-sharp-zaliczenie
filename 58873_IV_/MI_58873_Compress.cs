@@ -49,7 +49,7 @@ namespace _58873_IV_
             Label MI_58873_lblDescription = MI_58873_ctrl.MI_58873_createLabel("lblDescription", new Point(15, 353), MI_58873_footerFont, 746, 90, MI_58873_description, MI_58873_Proj.MI_58873_lblBorderStyleFixed, MI_58873_Proj.MI_58873_labelAlignement);
 
             //textboxy wykorzystywane w ekranie Kompresja
-            TextBox MI_58873_inputText = MI_58873_ctrl.createTextField("inputText", new Point(163, MI_58873_tbPositionY), MI_58873_tbWidth, MI_58873_tbHeight, MI_58873_tbFont, MI_58873_Proj.MI_58873_inputBackColor, MI_58873_Proj.MI_58873_foreColor, MI_58873_tbMaxlength);
+            TextBox MI_58873_inputText = MI_58873_ctrl.MI_58873_createTextField("inputText", new Point(163, MI_58873_tbPositionY), MI_58873_tbWidth, MI_58873_tbHeight, MI_58873_tbFont, MI_58873_Proj.MI_58873_inputBackColor, MI_58873_Proj.MI_58873_foreColor, MI_58873_tbMaxlength);
             MI_58873_inputText.Text = "XADJSOSDAOUAZADXSXOD";
 
             //buttony wykorzystywane w ekranie Kompresja
@@ -226,7 +226,7 @@ namespace _58873_IV_
             MI_58873_resultBox.Controls.Add(MI_58873_lblAfterCompression);
 
             //tworze list box który będzie przehowywał kody binarne
-            ListBox MI_58873_binaryCodes = MI_58873_ctrl.createListBox("binaryCodes", new Point(8, 140), 215, 165);
+            ListBox MI_58873_binaryCodes = MI_58873_ctrl.MI_58873_createListBox("binaryCodes", new Point(8, 140), 215, 165);
             //inicjalnie ten list box jest wyłączony
             MI_58873_binaryCodes.Visible = false;
             //dodaję go do ekranu
@@ -274,7 +274,6 @@ namespace _58873_IV_
 
             //wywołuję sprawdzenie czy dekompresja się udała wywołując poniższą metodę
             MI_58873_checkDecompressionResult();
-
         }
 
         //metoda wywoływana po kliknięciu w przycisk WYCZYŚĆ
@@ -406,8 +405,8 @@ namespace _58873_IV_
     //klasa do kompresji jest zaimplementowana dokładnie w takiej formie jak została dostarczona w trakcie zajęć
     //w klasie dodałem blok try-catch w celu obsłużenia wyjątku w sytuacji gdy kompreowany jest ciąg znaków np "AAAA" lub "BBB" - dzięki temu nie buduje zbędnie ekranu gdy taki błąd wystąpi
     //dodałem też zwracanie wartości po to by ocenić czy kompresja jest ok czy nie i żeby wiedzieć jak budować ekran z rezultatem
-    //w klasie kompresja nie przerabiałem nic więcej bo za co się tylko nie wziąłem to przestawało mi całkowicie działać za co kolwiek się nie brałem to przestawało działać
-    //dodałem też kilka komentarzy ale mam wrażenie że algorytmy sortowania są dla mnie zbyt skąplikowane
+    //w klasie kompresja nie przerabiałem nic więcej bo za co się tylko nie wziąłem to przestawało mi całkowicie działać za co kolwiek się nie brałem
+    //dodałem też kilka komentarzy ale mam wrażenie że algorytmy sortowania są dla mnie zbyt skomplikowane
     public class MI_58873_Kompresja
     {
         public static bool MI_58873_KompresjaHuffmanna(
@@ -597,7 +596,7 @@ namespace _58873_IV_
         }
     }
 
-    //klasa do kompresji jest zaimplementowana dokładnie w takiej formie jak została dostarczona w trakcie zajęć
+    //klasa do kompresji jest zaimplementowana dokładnie w takiej formie jak została dostarczona w trakcie zajęć II
     public class MI_58873_Dekompresja
     {
         public static void MI_58873_DekompresjaHuffmana(List<MI_58873_HuffmanSourceDictionary> MI_58873_sourceDictionary, string MI_58873_source, ref List<string> MI_58873_resultCode, ref bool MI_58873_dictionaryComplete)
