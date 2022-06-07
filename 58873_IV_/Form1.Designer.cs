@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace _58873_IV_
 {
-    partial class Proj
+    partial class MI_58873_Proj
     {
         /// <summary>
         ///  Required designer variable.
@@ -29,7 +29,7 @@ namespace _58873_IV_
         ///  Required method for Designer support - do not modify
         ///  the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
+        private void MI_58873_InitializeComponent()
         {
             this.SuspendLayout();
             // 

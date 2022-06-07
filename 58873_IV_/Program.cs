@@ -17,7 +17,7 @@ namespace _58873_IV_
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Proj());
+            Application.Run(new MI_58873_Proj());
         }
     }
 }
